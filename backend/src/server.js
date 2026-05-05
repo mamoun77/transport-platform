@@ -30,6 +30,7 @@ process.on('unhandledRejection', (reason) => {
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+console.log('🔌 PORT env:', process.env.PORT, '→ using:', PORT);
 
 // Middleware de sécurité
 app.use(helmet());
