@@ -57,18 +57,15 @@ router.post('/login', [
 
     const { email, password } = req.body;
 
-    const { Sequelize } = require('sequelize');
-    const dbUrl = process.env.DATABASE_URL;
-    if (!dbUrl) {
-      return res.status(500).json({ error: 'DATABASE_URL non configurée' });
-    }
-    const sequelize = new Sequelize(dbUrl, { dialect: 'postgres', logging: false, dialectOptions: { ssl: false } });
-
-    const [rows] = await sequelize.query(
-      'SELECT id, email, first_name, last_name, role FROM users WHERE email = :email AND is_active = true',
-      { replacements: { email } }
+    const { Client } = require('pg');
+    const client = new Client({ connectionString: process.env.DATABASE_URL, ssl: false });
+    await client.connect();
+    const result = await client.query(
+      'SELECT id, email, first_name, last_name, role FROM users WHERE email = $1 AND is_active = true',
+      [email]
     );
-    await sequelize.close();
+    await client.end();
+    const rows = result.rows;
 
     const user = rows[0];
 
