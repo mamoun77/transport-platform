@@ -10,7 +10,7 @@ export default function MultiImageUpload({ images = [], onChange, uploadEndpoint
     try {
       const fd = new FormData();
       files.forEach(f => fd.append('images', f));
-      const r = await fetch(`http://localhost:3001/api/upload/${uploadEndpoint}`, {
+      const r = await fetch(`/backend/upload/${uploadEndpoint}`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         body: fd,
