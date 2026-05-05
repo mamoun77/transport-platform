@@ -4,6 +4,33 @@ const { authenticateToken } = require('../middleware/auth');
 const sequelize = require('../config/database');
 const { sendBookingConfirmation } = require('../services/emailService');
 
+async function sendWhatsAppNotification(booking) {
+  try {
+    const twilio = require('twilio');
+    const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+    const msg = `🔔 *Nouvelle Réservation!*
+
+📋 N°: ${booking.bookingNumber}
+🚗 Service: ${booking.serviceName}
+👤 Client: ${booking.name}
+📞 Tél: ${booking.phone}
+📅 Date: ${booking.date} à ${booking.time}
+👥 Passagers: ${booking.passengers}
+📍 Départ: ${booking.pickup}
+📍 Arrivée: ${booking.destination}
+💰 Prix: ${booking.price} MAD`;
+
+    await client.messages.create({
+      from: 'whatsapp:+14155238886',
+      to: 'whatsapp:+212662100714',
+      body: msg
+    });
+    console.log('✅ WhatsApp notification sent');
+  } catch (e) {
+    console.log('⚠️ WhatsApp error:', e.message);
+  }
+}
+
 // Créer une réservation
 router.post('/', async (req, res) => {
   try {
@@ -18,6 +45,9 @@ router.post('/', async (req, res) => {
 
     // Envoyer email de confirmation
     sendBookingConfirmation({ bookingNumber, serviceName, pickup, destination, date, time, passengers, price, name, phone, email, flight_number, notes });
+
+    // Envoyer WhatsApp à l'admin
+    sendWhatsAppNotification({ bookingNumber, serviceName, pickup, destination, date, time, passengers, price, name, phone });
 
     res.status(201).json({ success: true, message: 'Réservation créée avec succès', bookingNumber });
   } catch (error) {
