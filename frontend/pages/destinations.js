@@ -28,7 +28,7 @@ export default function Destinations() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch('/api/destinations')
+    fetch('/backend/destinations')
       .then(r => r.json())
       .then(data => {
         if (data.success && data.destinations.length > 0) {

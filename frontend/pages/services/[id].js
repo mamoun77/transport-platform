@@ -39,14 +39,14 @@ export default function ServiceDetail() {
 
   useEffect(() => {
     if (!id) return;
-    axios.get(`/api/services`)
+    axios.get(`/backend/services`)
       .then(r => {
         const found = r.data.services?.find(s => String(s.id) === String(id));
         setService(found || FALLBACK_SERVICES.default);
       })
       .catch(() => setService(FALLBACK_SERVICES.default));
 
-    axios.get('/api/routes')
+    axios.get('/backend/routes')
       .then(r => setRoutes(Array.isArray(r.data) ? r.data : r.data.routes || []))
       .catch(() => {});
   }, [id]);
@@ -54,7 +54,7 @@ export default function ServiceDetail() {
   const calculatePrice = async (routeId, passengers) => {
     if (!routeId || !passengers) return;
     try {
-      const r = await axios.post('/api/routes/calculate-price', { routeId, passengers: parseInt(passengers) });
+      const r = await axios.post('/backend/routes/calculate-price', { routeId, passengers: parseInt(passengers) });
       setCalculatedPrice(r.data);
     } catch { setCalculatedPrice(null); }
   };

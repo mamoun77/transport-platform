@@ -30,7 +30,7 @@ export default function Services() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch('/api/services')
+    fetch('/backend/services')
       .then(r => r.json())
       .then(d => { if (d.success) setServices(d.services.map((s, i) => ({ ...s, gradient: GRADIENTS[i % GRADIENTS.length] }))); })
       .catch(() => {})

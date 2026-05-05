@@ -19,7 +19,7 @@ export default function AdminExcursions() {
 
   const fetchDestinations = async () => {
     try {
-      const response = await fetch('/api/destinations/admin/all', {
+      const response = await fetch('/backend/destinations/admin/all', {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       });
       const data = await response.json();
@@ -34,7 +34,7 @@ export default function AdminExcursions() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = editingDestination ? `/api/destinations/admin/${editingDestination.id}` : '/api/destinations/admin';
+      const url = editingDestination ? `/backend/destinations/admin/${editingDestination.id}` : '/backend/destinations/admin';
       const method = editingDestination ? 'PUT' : 'POST';
       const payload = {
         ...formData,
@@ -72,7 +72,7 @@ export default function AdminExcursions() {
   const handleDelete = async (id) => {
     if (confirm('Supprimer cette excursion ?')) {
       try {
-        const response = await fetch(`/api/destinations/admin/${id}`, {
+        const response = await fetch(`/backend/destinations/admin/${id}`, {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });

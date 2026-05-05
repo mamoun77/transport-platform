@@ -35,10 +35,10 @@ export default function Home() {
   const { t } = useTranslation(['common', 'home']);
 
   useEffect(() => {
-    fetch('/api/services').then(r => r.json()).then(d => { if (d.success) setServices(d.services.slice(0, 4)); }).catch(() => {});
-    fetch('/api/circuits').then(r => r.json()).then(d => { if (d.success) setCircuits(d.circuits.slice(0, 4)); }).catch(() => {});
-    fetch('/api/destinations').then(r => r.json()).then(d => { if (d.success) setExcursions(d.destinations.slice(0, 4)); }).catch(() => {});
-    fetch('/api/activities').then(r => r.json()).then(d => { if (d.success) setActivities(d.activities.slice(0, 4)); }).catch(() => {});
+    fetch('/backend/services').then(r => r.json()).then(d => { if (d.success) setServices(d.services.slice(0, 4)); }).catch(() => {});
+    fetch('/backend/circuits').then(r => r.json()).then(d => { if (d.success) setCircuits(d.circuits.slice(0, 4)); }).catch(() => {});
+    fetch('/backend/destinations').then(r => r.json()).then(d => { if (d.success) setExcursions(d.destinations.slice(0, 4)); }).catch(() => {});
+    fetch('/backend/activities').then(r => r.json()).then(d => { if (d.success) setActivities(d.activities.slice(0, 4)); }).catch(() => {});
   }, []);
 
   return (

@@ -18,7 +18,7 @@ export default function AdminServices() {
 
   const fetchServices = async () => {
     try {
-      const response = await fetch('/api/services/admin/all', {
+      const response = await fetch('/backend/services/admin/all', {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       });
       const data = await response.json();
@@ -33,7 +33,7 @@ export default function AdminServices() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = editingService ? `/api/services/admin/${editingService.id}` : '/api/services/admin';
+      const url = editingService ? `/backend/services/admin/${editingService.id}` : '/backend/services/admin';
       const method = editingService ? 'PUT' : 'POST';
       const payload = {
         ...formData,
@@ -71,7 +71,7 @@ export default function AdminServices() {
   const handleDelete = async (id) => {
     if (confirm('Supprimer ce service ?')) {
       try {
-        const response = await fetch(`/api/services/admin/${id}`, {
+        const response = await fetch(`/backend/services/admin/${id}`, {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });

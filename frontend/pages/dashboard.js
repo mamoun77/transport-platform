@@ -24,7 +24,7 @@ export default function Dashboard() {
   const fetchBookings = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('/api/bookings/my-bookings', {
+      const res = await fetch('/backend/bookings/my-bookings', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();

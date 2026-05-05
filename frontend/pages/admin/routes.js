@@ -27,7 +27,7 @@ export default function AdminRoutes() {
 
   const fetchRoutes = async () => {
     try {
-      const response = await axios.get('/api/routes');
+      const response = await axios.get('/backend/routes');
       setRoutes(response.data);
     } catch (error) {
       console.error('Erreur lors du chargement des trajets:', error);
@@ -38,9 +38,9 @@ export default function AdminRoutes() {
     e.preventDefault();
     try {
       if (editingRoute) {
-        await axios.put(`/api/routes/${editingRoute.id}`, formData);
+        await axios.put(`/backend/routes/${editingRoute.id}`, formData);
       } else {
-        await axios.post('/api/routes', formData);
+        await axios.post('/backend/routes', formData);
       }
       
       fetchRoutes();
@@ -53,7 +53,7 @@ export default function AdminRoutes() {
   const handleDelete = async (id) => {
     if (confirm('Êtes-vous sûr de vouloir supprimer ce trajet ?')) {
       try {
-        await axios.delete(`/api/routes/${id}`);
+        await axios.delete(`/backend/routes/${id}`);
         fetchRoutes();
       } catch (error) {
         console.error('Erreur lors de la suppression:', error);

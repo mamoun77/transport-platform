@@ -9,7 +9,7 @@ const EMPTY_FORM = {
   luxury_advantages: [], program: [], is_active: true, is_featured: false, sort_order: 0
 };
 
-const API = '/api/circuits';
+const API = '/backend/circuits';
 const token = () => typeof window !== 'undefined' ? localStorage.getItem('token') : '';
 const authHeaders = () => ({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${token()}` });
 
@@ -62,7 +62,7 @@ export default function AdminCircuits() {
     const fd = new FormData();
     fd.append('image', file);
     try {
-      const r = await fetch('/api/upload/circuit-image', { method: 'POST', headers: { 'Authorization': `Bearer ${token()}` }, body: fd });
+      const r = await fetch('/backend/upload/circuit-image', { method: 'POST', headers: { 'Authorization': `Bearer ${token()}` }, body: fd });
       const d = await r.json();
       if (d.success) setForm(p => ({ ...p, image: d.imageUrl }));
     } catch { alert('Erreur upload'); }

@@ -27,7 +27,7 @@ export default function AdminBlog() {
 
   const fetchBlogs = async () => {
     try {
-      const response = await fetch('/api/blog/admin/all', {
+      const response = await fetch('/backend/blog/admin/all', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -47,8 +47,8 @@ export default function AdminBlog() {
     e.preventDefault();
     try {
       const url = editingBlog 
-        ? `/api/blog/admin/${editingBlog.id}`
-        : '/api/blog/admin';
+        ? `/backend/blog/admin/${editingBlog.id}`
+        : '/backend/blog/admin';
       
       const method = editingBlog ? 'PUT' : 'POST';
       
@@ -97,7 +97,7 @@ export default function AdminBlog() {
   const handleDelete = async (id) => {
     if (confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
       try {
-        const response = await fetch(`/api/blog/admin/${id}`, {
+        const response = await fetch(`/backend/blog/admin/${id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -149,7 +149,7 @@ export default function AdminBlog() {
     formDataUpload.append('image', file);
 
     try {
-      const response = await fetch('/api/upload/blog-image', {
+      const response = await fetch('/backend/upload/blog-image', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`

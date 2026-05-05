@@ -30,7 +30,7 @@ export default function AdminDestinations() {
 
   const fetchDestinations = async () => {
     try {
-      const response = await fetch('/api/destinations/admin/all', {
+      const response = await fetch('/backend/destinations/admin/all', {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       });
       const data = await response.json();
@@ -45,7 +45,7 @@ export default function AdminDestinations() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = editingDestination ? `/api/destinations/admin/${editingDestination.id}` : '/api/destinations/admin';
+      const url = editingDestination ? `/backend/destinations/admin/${editingDestination.id}` : '/backend/destinations/admin';
       const method = editingDestination ? 'PUT' : 'POST';
       
       const response = await fetch(url, {
@@ -96,7 +96,7 @@ export default function AdminDestinations() {
   const handleDelete = async (id) => {
     if (confirm('Supprimer cette destination ?')) {
       try {
-        const response = await fetch(`/api/destinations/admin/${id}`, {
+        const response = await fetch(`/backend/destinations/admin/${id}`, {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
@@ -134,7 +134,7 @@ export default function AdminDestinations() {
     formDataUpload.append('image', file);
 
     try {
-      const response = await fetch('/api/upload/destination-image', {
+      const response = await fetch('/backend/upload/destination-image', {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
         body: formDataUpload
