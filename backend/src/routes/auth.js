@@ -60,7 +60,7 @@ router.post('/login', [
     const { Sequelize } = require('sequelize');
     const dbUrl = process.env.DATABASE_URL;
     const sequelize = dbUrl
-      ? new Sequelize(dbUrl, { dialect: 'postgres', logging: false, dialectOptions: { ssl: { require: true, rejectUnauthorized: false } } })
+      ? new Sequelize(dbUrl, { dialect: 'postgres', logging: false })
       : new Sequelize(
           process.env.DB_NAME || 'transport_platform',
           process.env.DB_USER || 'postgres',
