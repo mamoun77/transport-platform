@@ -58,18 +58,15 @@ router.post('/login', [
     const { email, password } = req.body;
 
     const { Sequelize } = require('sequelize');
-    const sequelize = new Sequelize(
-      process.env.DB_NAME || 'transport_platform',
-      process.env.DB_USER || 'postgres',
-      process.env.DB_PASSWORD || 'root',
-      {
-        host: process.env.DB_HOST || 'localhost',
-        dialect: 'postgres',
-        port: parseInt(process.env.DB_PORT || '5432'),
-        logging: false,
-        dialectOptions: process.env.DB_SSL === 'true' ? { ssl: { require: true, rejectUnauthorized: false } } : {}
-      }
-    );
+    const dbUrl = process.env.DATABASE_URL;
+    const sequelize = dbUrl
+      ? new Sequelize(dbUrl, { dialect: 'postgres', logging: false, dialectOptions: { ssl: { require: true, rejectUnauthorized: false } } })
+      : new Sequelize(
+          process.env.DB_NAME || 'transport_platform',
+          process.env.DB_USER || 'postgres',
+          process.env.DB_PASSWORD || 'root',
+          { host: process.env.DB_HOST || 'localhost', dialect: 'postgres', port: parseInt(process.env.DB_PORT || '5432'), logging: false }
+        );
 
     const [rows] = await sequelize.query(
       'SELECT id, email, first_name, last_name, role FROM users WHERE email = :email AND is_active = true',
