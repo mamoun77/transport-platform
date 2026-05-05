@@ -2,57 +2,47 @@ const { Sequelize } = require('sequelize');
 
 // Fonction pour créer la base de données si elle n'existe pas
 async function createDatabaseIfNotExists() {
-  // Connexion à PostgreSQL sans spécifier de base de données
-  const dbUrl = process.env.DATABASE_URL;
-  const sequelizeRoot = dbUrl
-    ? new Sequelize(dbUrl, { dialect: 'postgres', logging: false })
-    : new Sequelize(
-        process.env.DB_NAME_DEFAULT || 'postgres',
-        process.env.DB_USER || 'postgres',
-        process.env.DB_PASSWORD || 'root',
-        { host: process.env.DB_HOST || 'localhost', dialect: 'postgres', port: parseInt(process.env.DB_PORT || '5432'), logging: false }
-      );
-
   try {
-    // Tester la connexion
+    const dbUrl = process.env.DATABASE_URL;
+    if (!dbUrl) {
+      console.log('⚠️  DATABASE_URL non définie, skip DB setup');
+      return false;
+    }
+    
+    const sequelizeRoot = new Sequelize(dbUrl, { 
+      dialect: 'postgres', 
+      logging: false,
+      dialectOptions: {
+        ssl: false
+      }
+    });
+
     await sequelizeRoot.authenticate();
     console.log('✅ Connexion à PostgreSQL réussie');
-
-    // Vérifier si la base de données existe
-    const [results] = await sequelizeRoot.query(
-      "SELECT 1 FROM pg_database WHERE datname = 'transport_platform'"
-    );
-
-    if (results.length === 0) {
-      // Créer la base de données
-      await sequelizeRoot.query('CREATE DATABASE transport_platform');
-      console.log('✅ Base de données "transport_platform" créée');
-    } else {
-      console.log('✅ Base de données "transport_platform" existe déjà');
-    }
-
     await sequelizeRoot.close();
     return true;
   } catch (error) {
     console.log('❌ Erreur lors de la création de la base de données:', error.message);
-    await sequelizeRoot.close();
     return false;
   }
 }
 
 // Fonction pour créer les tables avec des données de test
 async function setupTables() {
-  const dbUrl2 = process.env.DATABASE_URL;
-  const sequelize = dbUrl2
-    ? new Sequelize(dbUrl2, { dialect: 'postgres', logging: false })
-    : new Sequelize(
-        process.env.DB_NAME || 'transport_platform',
-        process.env.DB_USER || 'postgres',
-        process.env.DB_PASSWORD || 'root',
-        { host: process.env.DB_HOST || 'localhost', dialect: 'postgres', port: parseInt(process.env.DB_PORT || '5432'), logging: false }
-      );
-
   try {
+    const dbUrl = process.env.DATABASE_URL;
+    if (!dbUrl) {
+      console.log('⚠️  DATABASE_URL non définie, skip tables setup');
+      return false;
+    }
+
+    const sequelize = new Sequelize(dbUrl, { 
+      dialect: 'postgres', 
+      logging: false,
+      dialectOptions: {
+        ssl: false
+      }
+    });
     await sequelize.authenticate();
     
     // Créer les tables

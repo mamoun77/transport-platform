@@ -59,14 +59,10 @@ router.post('/login', [
 
     const { Sequelize } = require('sequelize');
     const dbUrl = process.env.DATABASE_URL;
-    const sequelize = dbUrl
-      ? new Sequelize(dbUrl, { dialect: 'postgres', logging: false })
-      : new Sequelize(
-          process.env.DB_NAME || 'transport_platform',
-          process.env.DB_USER || 'postgres',
-          process.env.DB_PASSWORD || 'root',
-          { host: process.env.DB_HOST || 'localhost', dialect: 'postgres', port: parseInt(process.env.DB_PORT || '5432'), logging: false }
-        );
+    if (!dbUrl) {
+      return res.status(500).json({ error: 'DATABASE_URL non configurée' });
+    }
+    const sequelize = new Sequelize(dbUrl, { dialect: 'postgres', logging: false, dialectOptions: { ssl: false } });
 
     const [rows] = await sequelize.query(
       'SELECT id, email, first_name, last_name, role FROM users WHERE email = :email AND is_active = true',
