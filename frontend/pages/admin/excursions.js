@@ -97,11 +97,11 @@ export default function AdminExcursions() {
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Gestion des Excursions</h1>
-          <div className="space-x-4">
-            <button onClick={() => router.push('/admin')} className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Retour Admin</button>
-            <button onClick={() => { setShowForm(true); setEditingDestination(null); resetForm(); }} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Nouvelle Excursion</button>
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Gestion des Excursions</h1>
+          <div className="flex gap-2">
+            <button onClick={() => router.push('/admin')} className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 text-sm">Retour Admin</button>
+            <button onClick={() => { setShowForm(true); setEditingDestination(null); resetForm(); }} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-sm">Nouvelle Excursion</button>
           </div>
         </div>
 
@@ -165,7 +165,43 @@ export default function AdminExcursions() {
           </div>
         )}
 
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        {/* Cards mobile */}
+        <div className="md:hidden space-y-4">
+          {destinations.map((destination) => (
+            <div key={destination.id} className="bg-white rounded-lg shadow p-4">
+              <div className="flex justify-between items-start mb-2">
+                <div>
+                  <div className="font-semibold text-gray-900">
+                    {destination.name}
+                    {destination.is_featured && <span className="ml-2 px-2 py-0.5 rounded-full text-xs bg-yellow-100 text-yellow-800">Vedette</span>}
+                  </div>
+                  <div className="text-sm text-gray-500">{destination.short_description}</div>
+                </div>
+                <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${destination.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                  {destination.is_active ? 'Active' : 'Inactive'}
+                </span>
+              </div>
+              <div className="flex gap-1 mb-3">
+                {(destination.images || []).slice(0, 3).map((img, i) => (
+                  <img key={i} src={img} alt="" className="w-12 h-12 object-cover rounded border" />
+                ))}
+                {(destination.images || []).length > 3 && <span className="w-12 h-12 bg-gray-100 rounded border flex items-center justify-center text-xs text-gray-500">+{destination.images.length - 3}</span>}
+                {!(destination.images || []).length && destination.image && <img src={destination.image} alt="" className="w-12 h-12 object-cover rounded border" />}
+              </div>
+              <div className="flex gap-4 text-sm mb-3">
+                {destination.location && <span className="text-gray-600">📍 {destination.location}</span>}
+                {destination.price && <span className="font-semibold text-green-700">{destination.price} MAD</span>}
+              </div>
+              <div className="flex gap-2">
+                <button onClick={() => handleEdit(destination)} className="flex-1 bg-blue-500 text-white py-2 rounded text-sm font-medium hover:bg-blue-600">Modifier</button>
+                <button onClick={() => handleDelete(destination.id)} className="flex-1 bg-red-500 text-white py-2 rounded text-sm font-medium hover:bg-red-600">Supprimer</button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Tableau desktop */}
+        <div className="hidden md:block bg-white rounded-lg shadow-md overflow-hidden">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>

@@ -91,11 +91,11 @@ export default function AdminCircuits() {
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Gestion des Circuits</h1>
-          <div className="space-x-4">
-            <button onClick={() => router.push('/admin')} className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Retour Admin</button>
-            <button onClick={() => { setShowForm(true); setEditing(null); setForm(EMPTY_FORM); }} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Nouveau Circuit</button>
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Gestion des Circuits</h1>
+          <div className="flex gap-2">
+            <button onClick={() => router.push('/admin')} className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 text-sm">Retour Admin</button>
+            <button onClick={() => { setShowForm(true); setEditing(null); setForm(EMPTY_FORM); }} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-sm">Nouveau Circuit</button>
           </div>
         </div>
 
@@ -190,8 +190,47 @@ export default function AdminCircuits() {
           </div>
         )}
 
-        {/* Tableau */}
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        {/* Cards mobile */}
+        <div className="md:hidden space-y-4">
+          {circuits.length === 0 ? (
+            <div className="bg-white rounded-lg shadow p-8 text-center text-gray-400">Aucun circuit. Créez le premier !</div>
+          ) : circuits.map(c => (
+            <div key={c.id} className="bg-white rounded-lg shadow p-4">
+              <div className="flex justify-between items-start mb-2">
+                <div>
+                  <div className="font-semibold text-gray-900 flex items-center gap-2">
+                    {c.name}
+                    {c.is_featured && <span className="px-2 py-0.5 rounded-full text-xs bg-yellow-100 text-yellow-800">Vedette</span>}
+                  </div>
+                  <div className="text-sm text-gray-500">{c.short_description}</div>
+                </div>
+                <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${c.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                  {c.is_active ? 'Actif' : 'Inactif'}
+                </span>
+              </div>
+              <div className="flex gap-1 mb-3">
+                {(c.images || []).slice(0, 3).map((img, i) => (
+                  <img key={i} src={img} alt={c.name} className="w-12 h-12 object-cover rounded" />
+                ))}
+                {(c.images || []).length > 3 && <span className="w-12 h-12 bg-gray-100 rounded flex items-center justify-center text-xs text-gray-500">+{c.images.length - 3}</span>}
+                {!(c.images || []).length && c.image && <img src={c.image} alt={c.name} className="w-12 h-12 object-cover rounded" />}
+              </div>
+              <div className="flex flex-wrap gap-3 text-sm mb-3">
+                {c.price && <span className="font-semibold text-green-700">{c.price}€ std</span>}
+                {c.price_luxury > 0 && <span className="font-semibold text-yellow-600">{c.price_luxury}€ lux</span>}
+                {c.duration && <span className="text-gray-600">⏱ {c.duration}</span>}
+                {c.difficulty && <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${c.difficulty === 'facile' ? 'bg-green-100 text-green-800' : c.difficulty === 'modere' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'}`}>{c.difficulty}</span>}
+              </div>
+              <div className="flex gap-2">
+                <button onClick={() => handleEdit(c)} className="flex-1 bg-blue-500 text-white py-2 rounded text-sm font-medium hover:bg-blue-600">Modifier</button>
+                <button onClick={() => handleDelete(c.id)} className="flex-1 bg-red-500 text-white py-2 rounded text-sm font-medium hover:bg-red-600">Supprimer</button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Tableau desktop */}
+        <div className="hidden md:block bg-white rounded-lg shadow-md overflow-hidden">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>

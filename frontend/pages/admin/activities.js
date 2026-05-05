@@ -88,19 +88,19 @@ export default function AdminActivities() {
 
         {/* Header */}
         <div className="bg-white/80 backdrop-blur-lg shadow-lg border-b border-white/20 sticky top-0 z-10">
-          <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-gradient-to-r from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"/></svg>
+          <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center shrink-0">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"/></svg>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-800">Gestion des Activités</h1>
-                <p className="text-gray-500 text-sm">{activities.length} activité(s)</p>
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-800">Gestion des Activités</h1>
+                <p className="text-gray-500 text-xs sm:text-sm">{activities.length} activité(s)</p>
               </div>
             </div>
-            <div className="flex gap-3">
-              <button onClick={() => router.push('/admin')} className="bg-gray-500 text-white px-4 py-2 rounded-xl hover:bg-gray-600 text-sm font-semibold">← Retour</button>
-              <button onClick={() => { closeForm(); setShowForm(true); }} className="bg-gradient-to-r from-violet-500 to-purple-600 text-white px-4 py-2 rounded-xl hover:scale-105 transition text-sm font-semibold">+ Nouvelle activité</button>
+            <div className="flex gap-2">
+              <button onClick={() => router.push('/admin')} className="bg-gray-500 text-white px-3 py-2 rounded-xl hover:bg-gray-600 text-sm font-semibold">← Retour</button>
+              <button onClick={() => { closeForm(); setShowForm(true); }} className="bg-gradient-to-r from-violet-500 to-purple-600 text-white px-3 py-2 rounded-xl hover:scale-105 transition text-sm font-semibold">+ Nouvelle activité</button>
             </div>
           </div>
         </div>
