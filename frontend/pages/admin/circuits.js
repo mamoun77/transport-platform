@@ -9,7 +9,7 @@ const EMPTY_FORM = {
   luxury_advantages: [], program: [], is_active: true, is_featured: false, sort_order: 0
 };
 
-const API = 'http://localhost:3001/api/circuits';
+const API = '/api/circuits';
 const token = () => typeof window !== 'undefined' ? localStorage.getItem('token') : '';
 const authHeaders = () => ({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${token()}` });
 

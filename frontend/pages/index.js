@@ -35,10 +35,10 @@ export default function Home() {
   const { t } = useTranslation(['common', 'home']);
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/services').then(r => r.json()).then(d => { if (d.success) setServices(d.services.slice(0, 4)); }).catch(() => {});
-    fetch('http://localhost:3001/api/circuits').then(r => r.json()).then(d => { if (d.success) setCircuits(d.circuits.slice(0, 4)); }).catch(() => {});
-    fetch('http://localhost:3001/api/destinations').then(r => r.json()).then(d => { if (d.success) setExcursions(d.destinations.slice(0, 4)); }).catch(() => {});
-    fetch('http://localhost:3001/api/activities').then(r => r.json()).then(d => { if (d.success) setActivities(d.activities.slice(0, 4)); }).catch(() => {});
+    fetch('/api/services').then(r => r.json()).then(d => { if (d.success) setServices(d.services.slice(0, 4)); }).catch(() => {});
+    fetch('/api/circuits').then(r => r.json()).then(d => { if (d.success) setCircuits(d.circuits.slice(0, 4)); }).catch(() => {});
+    fetch('/api/destinations').then(r => r.json()).then(d => { if (d.success) setExcursions(d.destinations.slice(0, 4)); }).catch(() => {});
+    fetch('/api/activities').then(r => r.json()).then(d => { if (d.success) setActivities(d.activities.slice(0, 4)); }).catch(() => {});
   }, []);
 
   return (

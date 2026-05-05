@@ -7,14 +7,14 @@ export default function AdminBookings() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/bookings')
+    fetch('/api/bookings')
       .then(r => r.json())
       .then(d => { if (d.success) setBookings(d.bookings); })
       .catch(err => console.error(err));
   }, []);
 
   const updateStatus = async (id, newStatus) => {
-    await fetch(`http://localhost:3001/api/bookings/${id}/status`, {
+    await fetch(`/api/bookings/${id}/status`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status: newStatus }),
@@ -23,7 +23,7 @@ export default function AdminBookings() {
   };
 
   const deleteBooking = async (id) => {
-    await fetch(`http://localhost:3001/api/bookings/${id}`, { method: 'DELETE' });
+    await fetch(`/api/bookings/${id}`, { method: 'DELETE' });
     setBookings(prev => prev.filter(b => b.id !== id));
   };
 

@@ -34,7 +34,7 @@ export default function Blog() {
         ...(selectedCategory && { category: selectedCategory }),
         ...(searchTerm && { search: searchTerm }),
       });
-      const response = await fetch(`http://localhost:3001/api/blog?${params}`);
+      const response = await fetch(`/api/blog?${params}`);
       const data = await response.json();
       if (data.success) {
         setBlogs(data.blogs);
@@ -49,7 +49,7 @@ export default function Blog() {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/blog/categories');
+      const response = await fetch('/api/blog/categories');
       const data = await response.json();
       if (data.success) setCategories(data.categories);
     } catch (error) {

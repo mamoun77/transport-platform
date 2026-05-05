@@ -32,7 +32,7 @@ export default function Activites() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/activities')
+    fetch('/api/activities')
       .then(r => r.json())
       .then(d => { if (d.success) setActivities(d.activities.map((a, i) => ({ ...a, gradient: GRADIENTS[i % GRADIENTS.length] }))); })
       .catch(() => {})

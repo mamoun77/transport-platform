@@ -32,7 +32,7 @@ export default function Excursions() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/destinations')
+    fetch('/api/destinations')
       .then(r => r.json())
       .then(d => {
         if (d.success && d.destinations.length > 0)

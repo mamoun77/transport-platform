@@ -33,7 +33,7 @@ export default function Transfert() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/services')
+    fetch('/api/services')
       .then(r => r.json())
       .then(d => { if (d.success) setServices(d.services.map((s, i) => ({ ...s, gradient: GRADIENTS[i % GRADIENTS.length] }))); })
       .catch(() => {})

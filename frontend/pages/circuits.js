@@ -32,7 +32,7 @@ export default function Circuits() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/circuits')
+    fetch('/api/circuits')
       .then(r => r.json())
       .then(d => { if (d.success) setCircuits(d.circuits.map((c, i) => ({ ...c, gradient: GRADIENTS[i % GRADIENTS.length] }))); })
       .catch(() => {})

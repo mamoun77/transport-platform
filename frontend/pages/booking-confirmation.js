@@ -12,7 +12,7 @@ export default function BookingConfirmation() {
     if (storedData) {
       const data = JSON.parse(storedData);
       // Envoyer au backend
-      fetch('http://localhost:3001/api/bookings', {
+      fetch('/api/bookings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: storedData,

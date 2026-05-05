@@ -24,7 +24,7 @@ export default function AdminActivities() {
 
   const fetchAll = async () => {
     try {
-      const r = await fetch('http://localhost:3001/api/activities/admin/all', { headers: { Authorization: `Bearer ${token()}` } });
+      const r = await fetch('/api/activities/admin/all', { headers: { Authorization: `Bearer ${token()}` } });
       const d = await r.json();
       if (d.success) setActivities(d.activities);
     } finally { setLoading(false); }
@@ -32,7 +32,7 @@ export default function AdminActivities() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url    = editing ? `http://localhost:3001/api/activities/admin/${editing.id}` : 'http://localhost:3001/api/activities/admin';
+    const url    = editing ? `/api/activities/admin/${editing.id}` : '/api/activities/admin';
     const method = editing ? 'PUT' : 'POST';
     const payload = {
       ...form,
@@ -54,7 +54,7 @@ export default function AdminActivities() {
 
   const handleDelete = async (id) => {
     if (!confirm('Supprimer cette activité ?')) return;
-    await fetch(`http://localhost:3001/api/activities/admin/${id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token()}` } });
+    await fetch(`/api/activities/admin/${id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token()}` } });
     fetchAll();
   };
 

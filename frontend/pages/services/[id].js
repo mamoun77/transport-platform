@@ -39,14 +39,14 @@ export default function ServiceDetail() {
 
   useEffect(() => {
     if (!id) return;
-    axios.get(`http://localhost:3001/api/services`)
+    axios.get(`/api/services`)
       .then(r => {
         const found = r.data.services?.find(s => String(s.id) === String(id));
         setService(found || FALLBACK_SERVICES.default);
       })
       .catch(() => setService(FALLBACK_SERVICES.default));
 
-    axios.get('http://localhost:3001/api/routes')
+    axios.get('/api/routes')
       .then(r => setRoutes(Array.isArray(r.data) ? r.data : r.data.routes || []))
       .catch(() => {});
   }, [id]);
@@ -54,7 +54,7 @@ export default function ServiceDetail() {
   const calculatePrice = async (routeId, passengers) => {
     if (!routeId || !passengers) return;
     try {
-      const r = await axios.post('http://localhost:3001/api/routes/calculate-price', { routeId, passengers: parseInt(passengers) });
+      const r = await axios.post('/api/routes/calculate-price', { routeId, passengers: parseInt(passengers) });
       setCalculatedPrice(r.data);
     } catch { setCalculatedPrice(null); }
   };

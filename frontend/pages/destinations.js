@@ -28,7 +28,7 @@ export default function Destinations() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/destinations')
+    fetch('/api/destinations')
       .then(r => r.json())
       .then(data => {
         if (data.success && data.destinations.length > 0) {

@@ -20,7 +20,7 @@ export default function BlogPost() {
 
   const fetchBlog = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/api/blog/${slug}`);
+      const response = await fetch(`/api/blog/${slug}`);
       const data = await response.json();
       
       if (data.success) {
@@ -39,7 +39,7 @@ export default function BlogPost() {
 
   const fetchRelatedBlogs = async (category) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/blog?category=${category}&limit=3`);
+      const response = await fetch(`/api/blog?category=${category}&limit=3`);
       const data = await response.json();
       
       if (data.success) {

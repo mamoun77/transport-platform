@@ -149,7 +149,7 @@ export default function AdminBlog() {
     formDataUpload.append('image', file);
 
     try {
-      const response = await fetch('http://localhost:3001/api/upload/blog-image', {
+      const response = await fetch('/api/upload/blog-image', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
