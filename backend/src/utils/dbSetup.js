@@ -3,12 +3,18 @@ const { Sequelize } = require('sequelize');
 // Fonction pour créer la base de données si elle n'existe pas
 async function createDatabaseIfNotExists() {
   // Connexion à PostgreSQL sans spécifier de base de données
-  const sequelizeRoot = new Sequelize('postgres', 'postgres', 'root', {
-    host: 'localhost',
-    dialect: 'postgres',
-    port: 5432,
-    logging: false
-  });
+  const sequelizeRoot = new Sequelize(
+    process.env.DB_NAME_DEFAULT || 'postgres',
+    process.env.DB_USER || 'postgres',
+    process.env.DB_PASSWORD || 'root',
+    {
+      host: process.env.DB_HOST || 'localhost',
+      dialect: 'postgres',
+      port: parseInt(process.env.DB_PORT || '5432'),
+      logging: false,
+      dialectOptions: process.env.DB_SSL === 'true' ? { ssl: { require: true, rejectUnauthorized: false } } : {}
+    }
+  );
 
   try {
     // Tester la connexion
@@ -39,12 +45,18 @@ async function createDatabaseIfNotExists() {
 
 // Fonction pour créer les tables avec des données de test
 async function setupTables() {
-  const sequelize = new Sequelize('transport_platform', 'postgres', 'root', {
-    host: 'localhost',
-    dialect: 'postgres',
-    port: 5432,
-    logging: false
-  });
+  const sequelize = new Sequelize(
+    process.env.DB_NAME || 'transport_platform',
+    process.env.DB_USER || 'postgres',
+    process.env.DB_PASSWORD || 'root',
+    {
+      host: process.env.DB_HOST || 'localhost',
+      dialect: 'postgres',
+      port: parseInt(process.env.DB_PORT || '5432'),
+      logging: false,
+      dialectOptions: process.env.DB_SSL === 'true' ? { ssl: { require: true, rejectUnauthorized: false } } : {}
+    }
+  );
 
   try {
     await sequelize.authenticate();

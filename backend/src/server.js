@@ -25,14 +25,23 @@ const PORT = process.env.PORT || 3001;
 // Middleware de sécurité
 app.use(helmet());
 app.use(cors({
-  origin: [
-    process.env.FRONTEND_URL || 'http://localhost:3000',
-    'http://localhost:3000',
-    'http://localhost:3001',
-    'http://localhost:8081',
-    'http://localhost:8082',
-    'http://localhost:19006',
-  ],
+  origin: function(origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    const allowed = [
+      process.env.FRONTEND_URL,
+      'http://localhost:3000',
+      'http://localhost:3001',
+      'http://localhost:8081',
+      'http://localhost:8082',
+      'http://localhost:19006',
+    ].filter(Boolean);
+    // Allow any vercel.app domain
+    if (allowed.includes(origin) || origin.endsWith('.vercel.app')) {
+      return callback(null, true);
+    }
+    return callback(null, true); // permissive for now
+  },
   credentials: true
 }));
 
