@@ -1,27 +1,42 @@
 const { Sequelize } = require('sequelize');
 
-let _sequelize = null;
-
-function getSequelize() {
-  if (_sequelize) return _sequelize;
-  const dbUrl = process.env.DATABASE_URL;
-  if (dbUrl) {
-    _sequelize = new Sequelize(dbUrl, { dialect: 'postgres', logging: false });
-  } else {
-    _sequelize = new Sequelize('transport_platform', 'postgres', 'root', {
-      host: 'localhost', dialect: 'postgres', port: 5432, logging: false
-    });
+function parseDbUrl(url) {
+  try {
+    const u = new URL(url);
+    return {
+      database: u.pathname.slice(1),
+      username: u.username,
+      password: u.password,
+      host: u.hostname,
+      port: parseInt(u.port) || 5432,
+    };
+  } catch {
+    return null;
   }
-  return _sequelize;
 }
 
-// Proxy pour garder la compatibilité avec le code existant
-const handler = {
-  get(target, prop) {
-    const seq = getSequelize();
-    const val = seq[prop];
-    return typeof val === 'function' ? val.bind(seq) : val;
-  }
-};
+const dbUrl = process.env.DATABASE_URL;
+let sequelize;
 
-module.exports = new Proxy({}, handler);
+if (dbUrl) {
+  const parsed = parseDbUrl(dbUrl);
+  if (parsed) {
+    sequelize = new Sequelize(parsed.database, parsed.username, parsed.password, {
+      host: parsed.host,
+      port: parsed.port,
+      dialect: 'postgres',
+      logging: false,
+    });
+  } else {
+    sequelize = new Sequelize(dbUrl, { dialect: 'postgres', logging: false });
+  }
+} else {
+  sequelize = new Sequelize('transport_platform', 'postgres', 'root', {
+    host: 'localhost',
+    dialect: 'postgres',
+    port: 5432,
+    logging: false,
+  });
+}
+
+module.exports = sequelize;
