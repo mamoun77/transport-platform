@@ -90,27 +90,9 @@ app.listen(PORT, async () => {
   console.log('\n🔧 Configuration automatique de la base de données...');
   
   try {
-    // Créer la base de données si elle n'existe pas
-    const dbCreated = await createDatabaseIfNotExists();
-    
-    if (dbCreated) {
-      // Créer les tables et insérer les données de test
-      const tablesCreated = await setupTables();
-      
-      if (tablesCreated) {
-        console.log('\n🎉 Base de données PostgreSQL complètement configurée!');
-        console.log('📋 Données de test disponibles:');
-        console.log('- Utilisateurs: admin@transport.com / root');
-        console.log('- Véhicules: Mercedes Classe S, Vito, Bus');
-        console.log('- Itinéraires: Aéroport, Hôtel, Circuit touristique');
-      }
-    }
+    await setupTables();
+    console.log('\n🎉 Base de données configurée!');
   } catch (error) {
-    console.log('⚠️  Erreur lors de la configuration:');
-    console.log('Erreur:', error.message);
-    console.log('\nVérifiez que:');
-    console.log('- PostgreSQL est installé et démarré');
-    console.log('- L\'utilisateur postgres existe avec le mot de passe "root"');
-    console.log('- Le port 5432 est accessible');
+    console.log('⚠️  DB setup error (non-fatal):', error.message);
   }
 });
