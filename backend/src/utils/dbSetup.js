@@ -8,16 +8,12 @@ async function createDatabaseIfNotExists() {
       console.log('⚠️  DATABASE_URL non définie, skip DB setup');
       return false;
     }
-    console.log('🔍 DATABASE_URL prefix:', dbUrl.substring(0, 20));
-    
+    console.log('🔍 DATABASE_URL prefix:', dbUrl.substring(0, 30));
     const sequelizeRoot = new Sequelize(dbUrl, { 
       dialect: 'postgres', 
       logging: false,
-      dialectOptions: {
-        ssl: false
-      }
+      dialectOptions: { ssl: false }
     });
-
     await sequelizeRoot.authenticate();
     console.log('✅ Connexion à PostgreSQL réussie');
     await sequelizeRoot.close();
