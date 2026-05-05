@@ -2,6 +2,7 @@ const { Sequelize } = require('sequelize');
 
 const dbUrl = process.env.DATABASE_URL;
 console.log('🔧 DATABASE_URL defined:', !!dbUrl);
+console.log('🔧 DATABASE_URL value:', dbUrl ? dbUrl.substring(0, 50) : 'undefined');
 
 let sequelize;
 
