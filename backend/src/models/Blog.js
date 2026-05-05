@@ -30,11 +30,7 @@ const Blog = sequelize.define('Blog', {
   },
   author_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'users',
-      key: 'id'
-    }
+    allowNull: true
   },
   category: {
     type: DataTypes.STRING(100),
