@@ -1,0 +1,73 @@
+{
+  "hero": {
+    "title": "𝕋𝕣𝖊𝖓𝖉𝖞 𝕋𝖗𝖆𝖛𝖊𝖑",
+    "subtitle": "Découvrez le Maroc avec style. Réservation instantanée, service premium, expérience inoubliable.",
+    "instant_booking": "Réservation instantanée",
+    "free_cancellation": "Annulation gratuite",
+    "support_24_7": "Support 24/7"
+  },
+  "services": {
+    "title": "Services Premium",
+    "subtitle": "Découvrez nos services de transport haut de gamme conçus pour transformer chaque trajet en expérience mémorable",
+    "airport_transfer": {
+      "title": "Transfert Aéroport",
+      "description": "Service de transfert confortable et ponctuel depuis/vers tous les aéroports",
+      "price": "À partir de 250 MAD"
+    },
+    "guided_tours": {
+      "title": "Excursions Guidées",
+      "description": "Découvrez les merveilles du Maroc avec nos guides experts locaux",
+      "price": "À partir de 450 MAD"
+    },
+    "private_tours": {
+      "title": "Circuits Privés",
+      "description": "Voyages sur mesure adaptés à vos envies et votre budget",
+      "price": "Sur devis"
+    },
+    "vip_transport": {
+      "title": "Transport VIP",
+      "description": "Service premium avec véhicules de luxe pour vos déplacements",
+      "price": "À partir de 800 MAD"
+    }
+  },
+  "destinations": {
+    "title": "Nos Excursions",
+    "subtitle": "Des villes impériales aux oasis du désert, découvrez la richesse culturelle du royaume",
+    "marrakech": "Ville Rouge",
+    "casablanca": "Métropole Moderne",
+    "essaouira": "Perle de l'Atlantique",
+    "agadir": "Perle du Sud",
+    "tours": "excursions"
+  },
+  "why_choose": {
+    "title": "Pourquoi Choisir Notre Service ?",
+    "reliable_service": {
+      "title": "Service Fiable",
+      "description": "Plus de 10 ans d'expérience dans le transport touristique"
+    },
+    "premium_quality": {
+      "title": "Qualité Premium",
+      "description": "Véhicules de luxe et chauffeurs professionnels"
+    },
+    "support": {
+      "title": "Support 24/7",
+      "description": "Assistance disponible à tout moment"
+    },
+    "book_now": "Réservez Maintenant",
+    "get_quote": "Obtenez un devis gratuit pour votre prochain voyage",
+    "request_quote": "Demander un Devis"
+  },
+  "testimonials": {
+    "title": "Ce Que Disent Nos Clients",
+    "view_all": "Voir tous nos avis sur TripAdvisor"
+  },
+  "contact": {
+    "title": "Prêt pour l'Aventure ?",
+    "subtitle": "Contactez nos experts pour créer votre expérience de voyage sur mesure",
+    "call_us": "Appelez-nous",
+    "available_24_7": "Disponible 24h/24",
+    "write_us": "Écrivez-nous",
+    "quick_response": "Réponse rapide",
+    "book_now": "Réserver Maintenant"
+  }
+}

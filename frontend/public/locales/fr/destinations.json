@@ -1,0 +1,22 @@
+{
+  "title": "Destinations - Trendy Travel",
+  "meta_description": "Explorez toutes nos destinations de rêve au Maroc",
+  "loading": "Chargement des destinations...",
+  "tours_available": "circuits disponibles",
+  "from": "Dès",
+  "tours": "circuits",
+  "explore": "Explorer",
+  "custom_destination": {
+    "title": "Destination personnalisée ?",
+    "description": "Vous ne trouvez pas votre destination idéale ? Contactez-nous pour créer un circuit sur mesure adapté à vos envies.",
+    "cta": "Demander un devis personnalisé"
+  },
+  "cities": {
+    "marrakech": "La Ville Rouge aux mille merveilles, entre tradition et modernité",
+    "casablanca": "Métropole économique du Maroc, entre business et culture",
+    "fes": "Capitale spirituelle et culturelle, patrimoine UNESCO",
+    "agadir": "Perle du Sud, plages dorées et climat ensoleillé",
+    "chefchaouen": "La Perle Bleue du Rif, ville pittoresque aux ruelles bleues",
+    "essaouira": "Cité des Alizés, port historique aux remparts portugais"
+  }
+}

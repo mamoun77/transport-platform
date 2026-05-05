@@ -1,0 +1,22 @@
+{
+  "title": "Destinations - Trendy Travel",
+  "meta_description": "Explore all our dream destinations in Morocco",
+  "loading": "Loading destinations...",
+  "tours_available": "tours available",
+  "from": "From",
+  "tours": "tours",
+  "explore": "Explore",
+  "custom_destination": {
+    "title": "Custom destination?",
+    "description": "Can't find your ideal destination? Contact us to create a tailor-made tour adapted to your desires.",
+    "cta": "Request a personalized quote"
+  },
+  "cities": {
+    "marrakech": "The Red City with a thousand wonders, between tradition and modernity",
+    "casablanca": "Morocco's economic metropolis, between business and culture",
+    "fes": "Spiritual and cultural capital, UNESCO heritage",
+    "agadir": "Pearl of the South, golden beaches and sunny climate",
+    "chefchaouen": "The Blue Pearl of the Rif, picturesque city with blue alleys",
+    "essaouira": "City of Trade Winds, historic port with Portuguese ramparts"
+  }
+}

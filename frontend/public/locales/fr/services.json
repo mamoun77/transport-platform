@@ -1,0 +1,18 @@
+{
+  "title": "Services - Trendy Travel",
+  "loading": "Chargement des services...",
+  "from": "À partir de",
+  "book": "Réserver",
+  "services": {
+    "airport_transfer": "Transfert Aéroport",
+    "city_tour": "Excursion Ville", 
+    "private_tour": "Circuit Privé",
+    "group_shuttle": "Navette Groupe"
+  },
+  "descriptions": {
+    "airport_transfer": "Service de transfert premium avec véhicules Mercedes de luxe",
+    "city_tour": "Découvrez les merveilles de la ville avec nos guides experts",
+    "private_tour": "Voyage sur mesure adapté à vos envies",
+    "group_shuttle": "Transport collectif confortable et économique"
+  }
+}

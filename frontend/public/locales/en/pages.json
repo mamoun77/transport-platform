@@ -1,0 +1,69 @@
+{
+  "transfert": {
+    "badge": "Our Transfers",
+    "title": "Premium Transfer",
+    "subtitle": "Travel experiences carefully designed for every need — comfort, style and punctuality guaranteed.",
+    "empty": "No transfers available",
+    "empty_sub": "Come back soon!",
+    "reserve_btn": "Book this transfer"
+  },
+  "excursions": {
+    "badge": "Our Excursions",
+    "title": "Explore Morocco",
+    "title2": "like never before",
+    "subtitle": "Carefully selected excursions to offer you unforgettable experiences.",
+    "empty": "No excursions available",
+    "empty_sub": "Come back soon, new excursions are coming!",
+    "reserve_btn": "Book this excursion"
+  },
+  "circuits": {
+    "badge": "Our Tours",
+    "title": "Tours & Adventures",
+    "title2": "in Morocco",
+    "subtitle": "Carefully designed tours to let you discover the wonders of Morocco at your own pace.",
+    "empty": "No tours available",
+    "empty_sub": "Come back soon, new tours are coming!",
+    "reserve_btn": "Book this tour",
+    "difficulty": "Difficulty",
+    "program": "Program",
+    "included": "Included",
+    "not_included": "Not included",
+    "luxury_advantages": "Luxury package advantages"
+  },
+  "activites": {
+    "badge": "Our Activities",
+    "title": "Activities & Adventures",
+    "title2": "in Morocco",
+    "subtitle": "Unique activities to live unforgettable experiences in the heart of Morocco.",
+    "empty": "No activities available",
+    "empty_sub": "Come back soon, new activities are coming!",
+    "reserve_btn": "Book this activity"
+  },
+  "booking": {
+    "title": "Book",
+    "standard": "Standard",
+    "luxury": "✨ Luxury",
+    "price_per_person": "Price per person",
+    "on_request": "On request",
+    "passengers": "Passengers:",
+    "total": "Total:",
+    "flight_number": "Flight number (e.g. AT204)",
+    "notes": "Remarks / specific requests...",
+    "confirm": "Confirm booking",
+    "processing": "Processing...",
+    "full_name": "Full name *",
+    "phone": "Phone *",
+    "email": "Email",
+    "std": "std",
+    "luxe": "luxury ✨",
+    "vedette": "⭐ Featured",
+    "details": "Details",
+    "reserve": "Book"
+  },
+  "detail_modal": {
+    "program": "Program",
+    "included": "✅ Included",
+    "not_included": "❌ Not included",
+    "luxury_advantages": "✨ Luxury package advantages"
+  }
+}

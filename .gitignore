@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Environment variables (NE JAMAIS COMMITER)
+.env
+.env.local
+.env.production
+backend/.env
+frontend/.env.local
+
+# Next.js
+frontend/.next/
+frontend/out/
+
+# Uploads (photos uploadées par les utilisateurs)
+frontend/public/uploads/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+build/
+
+# Mobile
+mobile/.expo/
+mobile/android/.gradle/
+mobile/android/app/build/
+mobile/android/.kotlin/

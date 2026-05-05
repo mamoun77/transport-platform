@@ -1,0 +1,73 @@
+{
+  "hero": {
+    "title": "𝕋𝕣𝖊𝖓𝖉𝖞 𝕋𝖗𝖆𝖛𝖊𝖑",
+    "subtitle": "Discover Morocco in style. Instant booking, premium service, unforgettable experience.",
+    "instant_booking": "Instant booking",
+    "free_cancellation": "Free cancellation",
+    "support_24_7": "24/7 Support"
+  },
+  "services": {
+    "title": "Premium Services",
+    "subtitle": "Discover our high-end transport services designed to transform every journey into a memorable experience",
+    "airport_transfer": {
+      "title": "Airport Transfer",
+      "description": "Comfortable and punctual transfer service to/from all airports",
+      "price": "From 250 MAD"
+    },
+    "guided_tours": {
+      "title": "Guided Tours",
+      "description": "Discover the wonders of Morocco with our local expert guides",
+      "price": "From 450 MAD"
+    },
+    "private_tours": {
+      "title": "Private Tours",
+      "description": "Tailor-made trips adapted to your desires and budget",
+      "price": "On quote"
+    },
+    "vip_transport": {
+      "title": "VIP Transport",
+      "description": "Premium service with luxury vehicles for your travels",
+      "price": "From 800 MAD"
+    }
+  },
+  "destinations": {
+    "title": "Our Excursions",
+    "subtitle": "From imperial cities to desert oases, discover the cultural richness of the kingdom",
+    "marrakech": "Red City",
+    "casablanca": "Modern Metropolis",
+    "essaouira": "Atlantic Pearl",
+    "agadir": "Pearl of the South",
+    "tours": "excursions"
+  },
+  "why_choose": {
+    "title": "Why Choose Our Service?",
+    "reliable_service": {
+      "title": "Reliable Service",
+      "description": "Over 10 years of experience in tourist transport"
+    },
+    "premium_quality": {
+      "title": "Premium Quality",
+      "description": "Luxury vehicles and professional drivers"
+    },
+    "support": {
+      "title": "24/7 Support",
+      "description": "Assistance available at any time"
+    },
+    "book_now": "Book Now",
+    "get_quote": "Get a free quote for your next trip",
+    "request_quote": "Request Quote"
+  },
+  "testimonials": {
+    "title": "What Our Clients Say",
+    "view_all": "View all our reviews on TripAdvisor"
+  },
+  "contact": {
+    "title": "Ready for Adventure?",
+    "subtitle": "Contact our experts to create your custom travel experience",
+    "call_us": "Call us",
+    "available_24_7": "Available 24/7",
+    "write_us": "Write to us",
+    "quick_response": "Quick response",
+    "book_now": "Book Now"
+  }
+}

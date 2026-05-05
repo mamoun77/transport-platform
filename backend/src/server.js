@@ -1,0 +1,106 @@
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+require('dotenv').config();
+
+const { createDatabaseIfNotExists, setupTables } = require('./utils/dbSetup');
+
+const authRoutes = require('./routes/auth');
+const bookingRoutes = require('./routes/bookings');
+const vehicleRoutes = require('./routes/vehicles');
+const driverRoutes = require('./routes/drivers');
+const paymentRoutes = require('./routes/payments');
+const routeRoutes = require('./routes/routes');
+const blogRoutes = require('./routes/blog');
+const uploadRoutes = require('./routes/upload');
+const servicesRoutes = require('./routes/services');
+const destinationsRoutes = require('./routes/destinations');
+const circuitsRoutes = require('./routes/circuits');
+const activitiesRoutes = require('./routes/activities');
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+// Middleware de sécurité
+app.use(helmet());
+app.use(cors({
+  origin: [
+    process.env.FRONTEND_URL || 'http://localhost:3000',
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'http://localhost:8081',
+    'http://localhost:8082',
+    'http://localhost:19006',
+  ],
+  credentials: true
+}));
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limite chaque IP à 100 requêtes par fenêtre
+});
+app.use(limiter);
+
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true }));
+
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/bookings', bookingRoutes);
+app.use('/api/vehicles', vehicleRoutes);
+app.use('/api/drivers', driverRoutes);
+app.use('/api/payments', paymentRoutes);
+app.use('/api/routes', routeRoutes);
+app.use('/api/blog', blogRoutes);
+app.use('/api/upload', uploadRoutes);
+app.use('/api/services', servicesRoutes);
+app.use('/api/destinations', destinationsRoutes);
+app.use('/api/circuits', circuitsRoutes);
+app.use('/api/activities', activitiesRoutes);
+
+// Route de santé
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+
+// Gestion des erreurs
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Erreur interne du serveur' });
+});
+
+// Démarrage du serveur avec configuration automatique de PostgreSQL
+app.listen(PORT, async () => {
+  console.log(`🚀 Serveur démarré sur le port ${PORT}`);
+  console.log('🌐 API disponible sur: http://localhost:' + PORT);
+  console.log('❤️  Santé du serveur: http://localhost:' + PORT + '/health');
+  
+  console.log('\n🔧 Configuration automatique de la base de données...');
+  
+  try {
+    // Créer la base de données si elle n'existe pas
+    const dbCreated = await createDatabaseIfNotExists();
+    
+    if (dbCreated) {
+      // Créer les tables et insérer les données de test
+      const tablesCreated = await setupTables();
+      
+      if (tablesCreated) {
+        console.log('\n🎉 Base de données PostgreSQL complètement configurée!');
+        console.log('📋 Données de test disponibles:');
+        console.log('- Utilisateurs: admin@transport.com / root');
+        console.log('- Véhicules: Mercedes Classe S, Vito, Bus');
+        console.log('- Itinéraires: Aéroport, Hôtel, Circuit touristique');
+      }
+    }
+  } catch (error) {
+    console.log('⚠️  Erreur lors de la configuration:');
+    console.log('Erreur:', error.message);
+    console.log('\nVérifiez que:');
+    console.log('- PostgreSQL est installé et démarré');
+    console.log('- L\'utilisateur postgres existe avec le mot de passe "root"');
+    console.log('- Le port 5432 est accessible');
+  }
+});

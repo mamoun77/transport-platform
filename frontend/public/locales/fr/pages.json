@@ -1,0 +1,69 @@
+{
+  "transfert": {
+    "badge": "Nos Transferts",
+    "title": "Transfert Premium",
+    "subtitle": "Des expériences de voyage soigneusement conçues pour chaque besoin — confort, style et ponctualité garantis.",
+    "empty": "Aucun transfert disponible",
+    "empty_sub": "Revenez bientôt !",
+    "reserve_btn": "Réserver ce transfert"
+  },
+  "excursions": {
+    "badge": "Nos Excursions",
+    "title": "Explorez le Maroc",
+    "title2": "comme jamais",
+    "subtitle": "Des excursions soigneusement sélectionnées pour vous offrir des expériences inoubliables.",
+    "empty": "Aucune excursion disponible",
+    "empty_sub": "Revenez bientôt, de nouvelles excursions arrivent !",
+    "reserve_btn": "Réserver cette excursion"
+  },
+  "circuits": {
+    "badge": "Nos Circuits",
+    "title": "Circuits & Aventures",
+    "title2": "au Maroc",
+    "subtitle": "Des circuits soigneusement conçus pour vous faire découvrir les merveilles du Maroc à votre rythme.",
+    "empty": "Aucun circuit disponible",
+    "empty_sub": "Revenez bientôt, de nouveaux circuits arrivent !",
+    "reserve_btn": "Réserver ce circuit",
+    "difficulty": "Difficulté",
+    "program": "Programme",
+    "included": "Inclus",
+    "not_included": "Non inclus",
+    "luxury_advantages": "Avantages formule Luxe"
+  },
+  "activites": {
+    "badge": "Nos Activités",
+    "title": "Activités & Aventures",
+    "title2": "au Maroc",
+    "subtitle": "Des activités uniques pour vivre des expériences inoubliables au cœur du Maroc.",
+    "empty": "Aucune activité disponible",
+    "empty_sub": "Revenez bientôt, de nouvelles activités arrivent !",
+    "reserve_btn": "Réserver cette activité"
+  },
+  "booking": {
+    "title": "Réserver",
+    "standard": "Standard",
+    "luxury": "✨ Luxe",
+    "price_per_person": "Prix par personne",
+    "on_request": "Sur demande",
+    "passengers": "Passagers :",
+    "total": "Total :",
+    "flight_number": "Numéro de vol (ex: AT204)",
+    "notes": "Remarques / demandes spécifiques...",
+    "confirm": "Confirmer la réservation",
+    "processing": "Traitement...",
+    "full_name": "Votre nom complet *",
+    "phone": "Téléphone *",
+    "email": "Email",
+    "std": "std",
+    "luxe": "luxe ✨",
+    "vedette": "⭐ Vedette",
+    "details": "Détails",
+    "reserve": "Réserver"
+  },
+  "detail_modal": {
+    "program": "Programme",
+    "included": "✅ Inclus",
+    "not_included": "❌ Non inclus",
+    "luxury_advantages": "✨ Avantages formule Luxe"
+  }
+}
