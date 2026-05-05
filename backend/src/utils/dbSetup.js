@@ -8,6 +8,7 @@ async function createDatabaseIfNotExists() {
       console.log('⚠️  DATABASE_URL non définie, skip DB setup');
       return false;
     }
+    console.log('🔍 DATABASE_URL prefix:', dbUrl.substring(0, 20));
     
     const sequelizeRoot = new Sequelize(dbUrl, { 
       dialect: 'postgres', 
