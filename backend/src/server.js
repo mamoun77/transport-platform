@@ -19,6 +19,15 @@ const destinationsRoutes = require('./routes/destinations');
 const circuitsRoutes = require('./routes/circuits');
 const activitiesRoutes = require('./routes/activities');
 
+process.on('uncaughtException', (err) => {
+  console.error('💥 UNCAUGHT EXCEPTION:', err.message);
+  console.error(err.stack);
+});
+
+process.on('unhandledRejection', (reason) => {
+  console.error('💥 UNHANDLED REJECTION:', reason);
+});
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
