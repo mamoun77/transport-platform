@@ -92,17 +92,17 @@ app.use((err, req, res, next) => {
 });
 
 // Démarrage du serveur avec configuration automatique de PostgreSQL
-app.listen(PORT, async () => {
+app.listen(PORT, () => {
   console.log(`🚀 Serveur démarré sur le port ${PORT}`);
   console.log('🌐 API disponible sur: http://localhost:' + PORT);
   console.log('❤️  Santé du serveur: http://localhost:' + PORT + '/health');
-  
-  console.log('\n🔧 Configuration automatique de la base de données...');
-  
-  try {
-    await setupTables();
-    console.log('\n🎉 Base de données configurée!');
-  } catch (error) {
-    console.log('⚠️  DB setup error (non-fatal):', error.message);
-  }
+  setTimeout(async () => {
+    console.log('\n🔧 Configuration automatique de la base de données...');
+    try {
+      await setupTables();
+      console.log('\n🎉 Base de données configurée!');
+    } catch (error) {
+      console.log('⚠️  DB setup error (non-fatal):', error.message);
+    }
+  }, 2000);
 });
