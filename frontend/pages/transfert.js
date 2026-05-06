@@ -32,6 +32,13 @@ export default function Transfert() {
   const { t } = useTranslation(['common', 'pages']);
   const router = useRouter();
 
+  const calcPrice = (basePrice, passengers) => {
+    if (!basePrice || passengers <= 3) return basePrice;
+    const supplement = Math.round(basePrice * 0.25);
+    return basePrice + (passengers - 3) * supplement;
+  };
+  const supplement = (basePrice) => Math.round(basePrice * 0.25);
+
   useEffect(() => {
     fetch('/backend/services')
       .then(r => r.json())
@@ -43,7 +50,8 @@ export default function Transfert() {
   const handleBooking = (e) => {
     e.preventDefault();
     setSubmitting(true);
-    const price = form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : (selected.price_from || selected.price);
+    const basePrice = form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : (selected.price_from || selected.price);
+    const price = calcPrice(basePrice, form.passengers);
     localStorage.setItem('bookingData', JSON.stringify({
       serviceName: `${selected.name} (${form.type === 'luxury' ? t('pages:booking.luxury') : t('pages:booking.standard')})`,
       pickup: selected.departure_point || 'Non précisé',
@@ -209,17 +217,24 @@ export default function Transfert() {
               <div className="mb-5 grid grid-cols-2 gap-3">
                 <button type="button" onClick={() => setForm(p => ({ ...p, type: 'standard' }))}
                   className={`p-3 rounded-2xl border text-sm font-bold transition-all ${form.type === 'standard' ? 'bg-blue-500/20 border-blue-500/50 text-white' : 'bg-white/5 border-white/10 text-slate-400 hover:border-white/30'}`}>
-                  <div>{t('pages:booking.standard')}</div><div className="text-lg">{format(selected.price_from || selected.price)}</div>
+                  <div>{t('pages:booking.standard')}</div>
+                  <div className="text-lg">{format(selected.price_from || selected.price)}</div>
+                  <div className="text-xs font-normal text-slate-400">1–3 pers. inclus</div>
                 </button>
                 <button type="button" onClick={() => setForm(p => ({ ...p, type: 'luxury' }))}
                   className={`p-3 rounded-2xl border text-sm font-bold transition-all ${form.type === 'luxury' ? 'bg-yellow-500/20 border-yellow-500/50 text-yellow-300' : 'bg-white/5 border-white/10 text-slate-400 hover:border-white/30'}`}>
-                  <div>{t('pages:booking.luxury')}</div><div className="text-lg">{format(selected.price_luxury)}</div>
+                  <div>{t('pages:booking.luxury')}</div>
+                  <div className="text-lg">{format(selected.price_luxury)}</div>
+                  <div className="text-xs font-normal text-slate-400">1–3 pers. inclus</div>
                 </button>
               </div>
             )}
             {!selected.price_luxury && (
               <div className="mb-5 p-4 rounded-2xl bg-white/5 border border-white/10 flex justify-between items-center">
-                <span className="text-slate-400 text-sm">{t('pages:booking.price_per_person')}</span>
+                <div>
+                  <span className="text-slate-400 text-sm">Prix fixe</span>
+                  <p className="text-xs text-slate-500">1–3 pers. inclus</p>
+                </div>
                 <span className="text-2xl font-extrabold text-white">{(selected.price_from || selected.price) > 0 ? format(selected.price_from || selected.price) : t('pages:booking.on_request')}</span>
               </div>
             )}
@@ -236,8 +251,29 @@ export default function Transfert() {
                 <button type="button" onClick={() => setForm(p => ({ ...p, passengers: Math.max(1, p.passengers - 1) }))} className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition flex items-center justify-center">−</button>
                 <span className="w-8 text-center text-white font-bold">{form.passengers}</span>
                 <button type="button" onClick={() => setForm(p => ({ ...p, passengers: Math.min(selected.capacity || 20, p.passengers + 1) }))} className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition flex items-center justify-center">+</button>
-                {(selected.price_from || selected.price) > 0 && <span className="ml-auto text-slate-400 text-sm">{t('pages:booking.total')} <span className="text-white font-bold">{format((form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : (selected.price_from || selected.price)) * form.passengers)}</span></span>}
               </div>
+              {(selected.price_from || selected.price) > 0 && (() => {
+                const base = form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : (selected.price_from || selected.price);
+                const total = calcPrice(base, form.passengers);
+                return (
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/8 text-xs space-y-1">
+                    <div className="flex justify-between text-slate-400">
+                      <span>Prix fixe (1–3 pers.)</span>
+                      <span className="text-white font-semibold">{format(base)}</span>
+                    </div>
+                    {form.passengers > 3 && (
+                      <div className="flex justify-between text-orange-400">
+                        <span>+{form.passengers - 3} pers. supplémentaire(s)</span>
+                        <span className="font-semibold">+{format((form.passengers - 3) * supplement(base))}</span>
+                      </div>
+                    )}
+                    <div className="flex justify-between text-white font-bold border-t border-white/10 pt-1">
+                      <span>{t('pages:booking.total')}</span>
+                      <span>{format(total)}</span>
+                    </div>
+                  </div>
+                );
+              })()}
               <input type="text" placeholder={t('pages:booking.flight_number')} value={form.flight_number} onChange={e => setForm(p => ({ ...p, flight_number: e.target.value }))} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-slate-600 focus:outline-none focus:border-blue-500 transition" />
               <textarea placeholder={t('pages:booking.notes')} rows={3} value={form.notes} onChange={e => setForm(p => ({ ...p, notes: e.target.value }))} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-slate-600 focus:outline-none focus:border-blue-500 transition resize-none" />
               <button type="submit" disabled={submitting} className={`w-full py-3 rounded-2xl font-bold text-white bg-gradient-to-r ${selected.gradient || 'from-sky-500 to-blue-600'} hover:scale-[1.02] transition-transform disabled:opacity-50`}>
