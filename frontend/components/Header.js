@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import LanguageSwitcherCompact from './LanguageSwitcherCompact';
-import CurrencySwitcher from './CurrencySwitcher';
 
 export default function Header() {
   const [user, setUser] = useState(null);
@@ -78,7 +77,6 @@ export default function Header() {
             {/* Right — desktop */}
             <div className="hidden lg:flex items-center gap-3">
               <LanguageSwitcherCompact />
-              <CurrencySwitcher />
               {user ? (
                 <>
                   <Link href={user.role === 'admin' ? '/admin' : '/dashboard'}
@@ -140,7 +138,6 @@ export default function Header() {
               {/* Langue + Devise */}
               <div className="flex items-center gap-3 px-2 pb-2">
                 <LanguageSwitcherCompact />
-                <CurrencySwitcher />
               </div>
 
               {user ? (
