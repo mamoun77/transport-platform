@@ -74,23 +74,8 @@ export default function BookingConfirmation() {
 • Départ: ${booking.pickup}
 • Destination: ${booking.destination}
 • Véhicule: ${booking.vehicle}
-• Prix: ${booking.price} MAD
-
-Merci pour votre confiance! 🚗`;
-
-    // Message pour l'opérateur
-    const ownerMessage = `🔔 Nouvelle réservation!
-    
-📋 Détails:
-• ID: ${booking.id}
-• Client: ${booking.customerName}
-• Téléphone: ${booking.customerPhone}
-• Service: ${booking.service}
-• Date: ${booking.date} à ${booking.time}
-• Départ: ${booking.pickup}
-• Destination: ${booking.destination}
-• Passagers: ${booking.passengers}
-• Prix: ${booking.price} MAD
+• Prix: ${booking.price} $
+• Prix: ${booking.price} $
 
 Action requise: Assigner chauffeur`;
 
@@ -157,7 +142,7 @@ Action requise: Assigner chauffeur`;
               </div>
               <div>
                 <p className="text-sm text-gray-600">Prix total</p>
-                <p className="font-semibold text-green-600">{booking.price} MAD</p>
+                <p className="font-semibold text-green-600">{booking.price} $</p>
               </div>
             </div>
           </div>

@@ -201,7 +201,7 @@ export default function AdminDestinations() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <input type="text" name="location" value={formData.location} onChange={handleInputChange} placeholder="Localisation" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 <input type="number" name="distance_from_city" value={formData.distance_from_city} onChange={handleInputChange} placeholder="Distance (km)" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                <input type="number" name="price" value={formData.price} onChange={handleInputChange} placeholder="Prix (MAD)" min="0" step="0.01" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <input type="number" name="price" value={formData.price} onChange={handleInputChange} placeholder="Prix ($)" min="0" step="0.01" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
 
               <div>
@@ -242,7 +242,7 @@ export default function AdminDestinations() {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Destination</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Localisation</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Distance</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Prix (MAD)</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Prix ($)</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Statut</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
               </tr>
@@ -263,7 +263,7 @@ export default function AdminDestinations() {
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-900">{destination.location || '-'}</td>
                   <td className="px-6 py-4 text-sm text-gray-900">{destination.distance_from_city ? `${destination.distance_from_city} km` : '-'}</td>
-                  <td className="px-6 py-4 text-sm font-semibold text-green-700">{destination.price ? `${destination.price} MAD` : '-'}</td>
+                  <td className="px-6 py-4 text-sm font-semibold text-green-700">{destination.price ? `${destination.price} $` : '-'}</td>
                   <td className="px-6 py-4">
                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${destination.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                       {destination.is_active ? 'Active' : 'Inactive'}

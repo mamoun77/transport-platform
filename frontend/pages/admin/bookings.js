@@ -188,7 +188,7 @@ export default function AdminBookings() {
                   {/* Price */}
                   <div className="flex justify-between items-center">
                     <span className="text-gray-600 font-medium">Prix:</span>
-                    <span className="text-2xl font-bold text-indigo-600">{booking.total_price} MAD</span>
+                    <span className="text-2xl font-bold text-indigo-600">{booking.total_price} $</span>
                   </div>
 
                   {/* Status Update */}

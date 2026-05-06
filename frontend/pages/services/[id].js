@@ -142,7 +142,7 @@ export default function ServiceDetail() {
                 {service.price_from > 0 && (
                   <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
                     <span className="text-2xl font-extrabold text-white">{service.price_from}</span>
-                    <span className="text-slate-400 text-sm">MAD</span>
+                    <span className="text-slate-400 text-sm">$</span>
                   </div>
                 )}
                 {service.duration && (

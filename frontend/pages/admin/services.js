@@ -179,7 +179,7 @@ export default function AdminServices() {
                 {!(service.images || []).length && service.image && <img src={service.image} alt="" className="w-12 h-12 object-cover rounded border" />}
               </div>
               <div className="flex gap-4 text-sm text-gray-600 mb-3">
-                {service.price_from && <span className="font-semibold text-green-700">{service.price_from} MAD</span>}
+                {service.price_from && <span className="font-semibold text-green-700">{service.price_from} $</span>}
                 {service.duration && <span>⏱ {service.duration}</span>}
               </div>
               <div className="flex gap-2">
@@ -219,7 +219,7 @@ export default function AdminServices() {
                       {!(service.images || []).length && service.image && <img src={service.image} alt="" className="w-10 h-10 object-cover rounded border" />}
                     </div>
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-900">{service.price_from ? `${service.price_from} MAD` : '-'}</td>
+                  <td className="px-6 py-4 text-sm text-gray-900">{service.price_from ? `${service.price_from} $` : '-'}</td>
                   <td className="px-6 py-4 text-sm text-gray-900">{service.duration || '-'}</td>
                   <td className="px-6 py-4">
                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${service.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>

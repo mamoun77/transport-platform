@@ -129,7 +129,7 @@ export default function AdminExcursions() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Prix (MAD) *</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Prix ($) *</label>
                   <input type="number" name="price" value={formData.price} onChange={handleInputChange} placeholder="Ex: 250" min="0" step="0.01" required className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
               </div>
@@ -190,7 +190,7 @@ export default function AdminExcursions() {
               </div>
               <div className="flex gap-4 text-sm mb-3">
                 {destination.location && <span className="text-gray-600">📍 {destination.location}</span>}
-                {destination.price && <span className="font-semibold text-green-700">{destination.price} MAD</span>}
+                {destination.price && <span className="font-semibold text-green-700">{destination.price} $</span>}
               </div>
               <div className="flex gap-2">
                 <button onClick={() => handleEdit(destination)} className="flex-1 bg-blue-500 text-white py-2 rounded text-sm font-medium hover:bg-blue-600">Modifier</button>
@@ -208,7 +208,7 @@ export default function AdminExcursions() {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Excursion</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Photos</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Localisation</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Prix (MAD)</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Prix ($)</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Statut</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
               </tr>
@@ -233,7 +233,7 @@ export default function AdminExcursions() {
                     </div>
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-900">{destination.location || '-'}</td>
-                  <td className="px-6 py-4 text-sm font-semibold text-green-700">{destination.price ? `${destination.price} MAD` : '-'}</td>
+                  <td className="px-6 py-4 text-sm font-semibold text-green-700">{destination.price ? `${destination.price} $` : '-'}</td>
                   <td className="px-6 py-4">
                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${destination.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                       {destination.is_active ? 'Active' : 'Inactive'}
