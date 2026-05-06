@@ -31,6 +31,15 @@ export default function Excursions() {
   const { t } = useTranslation(['common', 'pages']);
   const router = useRouter();
 
+  // Prix fixe jusqu'à 3 personnes, supplément par personne à partir de la 4ème
+  const calcPrice = (basePrice, passengers) => {
+    if (!basePrice || passengers <= 3) return basePrice;
+    const supplement = Math.round(basePrice * 0.25);
+    return basePrice + (passengers - 3) * supplement;
+  };
+
+  const displaySupplement = (basePrice) => Math.round(basePrice * 0.25);
+
   useEffect(() => {
     fetch('/backend/destinations')
       .then(r => r.json())
@@ -45,7 +54,8 @@ export default function Excursions() {
   const handleBooking = (e) => {
     e.preventDefault();
     setSubmitting(true);
-    const price = form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : selected.price;
+    const basePrice = form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : selected.price;
+    const price = calcPrice(basePrice, form.passengers);
     localStorage.setItem('bookingData', JSON.stringify({
       serviceName: `${selected.name} (${form.type === 'luxury' ? t('pages:booking.luxury') : t('pages:booking.standard')})`,
       pickup: selected.location || 'Non précisé',
@@ -232,8 +242,25 @@ export default function Excursions() {
                 <button type="button" onClick={() => setForm(p => ({ ...p, passengers: Math.max(1, p.passengers - 1) }))} className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition flex items-center justify-center">−</button>
                 <span className="w-8 text-center text-white font-bold">{form.passengers}</span>
                 <button type="button" onClick={() => setForm(p => ({ ...p, passengers: Math.min(selected.capacity || 20, p.passengers + 1) }))} className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition flex items-center justify-center">+</button>
-                {selected.price > 0 && <span className="ml-auto text-slate-400 text-sm">{t('pages:booking.total')} <span className="text-white font-bold">{format((form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : selected.price) * form.passengers)}</span></span>}
               </div>
+              {selected.price > 0 && (
+                <div className="p-3 rounded-xl bg-white/5 border border-white/8 text-xs space-y-1">
+                  <div className="flex justify-between text-slate-400">
+                    <span>Prix fixe (1–3 pers.)</span>
+                    <span className="text-white font-semibold">{format(form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : selected.price)}</span>
+                  </div>
+                  {form.passengers > 3 && (
+                    <div className="flex justify-between text-orange-400">
+                      <span>+{form.passengers - 3} pers. supplémentaire(s)</span>
+                      <span className="font-semibold">+{format((form.passengers - 3) * displaySupplement(form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : selected.price))}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between text-white font-bold border-t border-white/10 pt-1">
+                    <span>{t('pages:booking.total')}</span>
+                    <span>{format(calcPrice(form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : selected.price, form.passengers))}</span>
+                  </div>
+                </div>
+              )}
               <button type="submit" disabled={submitting} className={`w-full py-3 rounded-2xl font-bold text-white bg-gradient-to-r ${selected.gradient || 'from-emerald-500 to-teal-600'} hover:scale-[1.02] transition-transform disabled:opacity-50`}>
                 {submitting ? t('pages:booking.processing') : t('pages:booking.confirm')}
               </button>
