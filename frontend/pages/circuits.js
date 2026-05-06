@@ -44,8 +44,8 @@ export default function Circuits() {
     setSubmitting(true);
     const price = form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : selected.price;
     localStorage.setItem('bookingData', JSON.stringify({
-      serviceName: `${selected.name} (${form.type === 'luxury' ? 'Luxe' : 'Standard'})`,
-      pickup: selected.departure_point || 'Non précisé',
+      serviceName: `${selected.name} (${form.type === 'luxury' ? t('pages:booking.luxury') : t('pages:booking.standard')})`,
+      pickup: selected.departure_point || '',
       destination: selected.name,
       date: form.date, time: form.time,
       passengers: form.passengers,
@@ -116,7 +116,7 @@ export default function Circuits() {
                       </span>
                     )}
                     {c.is_featured && (
-                      <span className="absolute bottom-4 left-4 px-2 py-0.5 rounded-full text-xs font-bold bg-yellow-400/20 border border-yellow-400/40 text-yellow-300">⭐ Vedette</span>
+                      <span className="absolute bottom-4 left-4 px-2 py-0.5 rounded-full text-xs font-bold bg-yellow-400/20 border border-yellow-400/40 text-yellow-300">⭐ {t('pages:booking.vedette')}</span>
                     )}
                     {(c.images && c.images.length > 1) && <span className="absolute bottom-4 right-4 px-2 py-0.5 rounded-full text-xs font-semibold bg-black/60 text-white backdrop-blur-sm">📷 {c.images.length}</span>}
                   </div>
@@ -153,11 +153,11 @@ export default function Circuits() {
                     <div className="flex items-center justify-between pt-4 border-t border-white/5">
                       <div>
                         <div className="text-lg font-extrabold text-white">
-                          {c.price > 0 ? <span>{format(c.price)} <span className="text-xs font-normal text-slate-400">std</span></span> : <span className="text-sm text-slate-400">Prix sur demande</span>}
+                          {c.price > 0 ? <span>{format(c.price)} <span className="text-xs font-normal text-slate-400">{t('pages:booking.std')}</span></span> : <span className="text-sm text-slate-400">{t('pages:booking.on_request')}</span>}
                         </div>
                         {c.price_luxury > 0 && (
                           <div className="text-sm font-bold text-yellow-400">
-                            {format(c.price_luxury)} <span className="text-xs font-normal text-yellow-600">luxe ✨</span>
+                            {format(c.price_luxury)} <span className="text-xs font-normal text-yellow-600">{t('pages:booking.luxe')}</span>
                           </div>
                         )}
                       </div>
@@ -193,11 +193,11 @@ export default function Circuits() {
                   {detail.price > 0 && (
                     <div className="flex gap-3 flex-wrap">
                       <span className="px-3 py-1 rounded-full text-sm bg-white/5 border border-white/10 text-white font-bold">
-                        Standard : {format(detail.price)} / pers.
+                        {t('pages:booking.standard')} : {format(detail.price)} {t('common:common.per_person')}
                       </span>
                       {detail.price_luxury > 0 && (
                         <span className="px-3 py-1 rounded-full text-sm bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 font-bold">
-                          ✨ Luxe : {format(detail.price_luxury)} / pers.
+                          ✨ {t('pages:booking.luxury')} : {format(detail.price_luxury)} {t('common:common.per_person')}
                         </span>
                       )}
                     </div>
@@ -282,7 +282,7 @@ export default function Circuits() {
                       ? 'bg-blue-500/20 border-blue-500/50 text-white'
                       : 'bg-white/5 border-white/10 text-slate-400 hover:border-white/30'
                   }`}>
-                  <div>Standard</div>
+                <div>{t('pages:booking.standard')}</div>
                   <div className="text-lg">{format(selected.price)}</div>
                 </button>
                 <button type="button" onClick={() => setForm(p => ({ ...p, type: 'luxury' }))}
@@ -291,7 +291,7 @@ export default function Circuits() {
                       ? 'bg-yellow-500/20 border-yellow-500/50 text-yellow-300'
                       : 'bg-white/5 border-white/10 text-slate-400 hover:border-white/30'
                   }`}>
-                  <div>✨ Luxe</div>
+                <div>{t('pages:booking.luxury')}</div>
                   <div className="text-lg">{format(selected.price_luxury)}</div>
                 </button>
               </div>
@@ -299,7 +299,7 @@ export default function Circuits() {
 
             {!selected.price_luxury && (
               <div className="mb-5 p-4 rounded-2xl bg-white/5 border border-white/10 flex justify-between items-center">
-                <span className="text-slate-400 text-sm">{t('pages:booking.price_per_person')}</span>
+                <span className="text-slate-400 text-sm">{t('pages:booking.fixed_price')}</span>
                 <span className="text-2xl font-extrabold text-white">{selected.price > 0 ? format(selected.price) : t('pages:booking.on_request')}</span>
               </div>
             )}
@@ -325,7 +325,7 @@ export default function Circuits() {
                 <button type="button" onClick={() => setForm(p => ({ ...p, passengers: Math.min(selected.capacity || 20, p.passengers + 1) }))}
                   className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition flex items-center justify-center">+</button>
                 {selected.price > 0 && (
-                  <span className="ml-auto text-slate-400 text-sm">Total : <span className="text-white font-bold">{format((form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : selected.price) * form.passengers)}</span></span>
+                  <span className="ml-auto text-slate-400 text-sm">{t('pages:booking.total')} <span className="text-white font-bold">{format((form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : selected.price))}</span></span>
                 )}
               </div>
               <button type="submit" disabled={submitting}

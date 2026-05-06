@@ -216,20 +216,20 @@ export default function Excursions() {
                 <button type="button" onClick={() => setForm(p => ({ ...p, type: 'standard' }))}
                   className={`p-3 rounded-2xl border text-sm font-bold transition-all ${form.type === 'standard' ? 'bg-blue-500/20 border-blue-500/50 text-white' : 'bg-white/5 border-white/10 text-slate-400 hover:border-white/30'}`}>
                   <div>{t('pages:booking.standard')}</div><div className="text-lg">{format(selected.price)}</div>
-                  <div className="text-xs font-normal text-slate-400">1–3 pers. inclus</div>
+                  <div className="text-xs font-normal text-slate-400">{t('pages:booking.included_1_3')}</div>
                 </button>
                 <button type="button" onClick={() => setForm(p => ({ ...p, type: 'luxury' }))}
                   className={`p-3 rounded-2xl border text-sm font-bold transition-all ${form.type === 'luxury' ? 'bg-yellow-500/20 border-yellow-500/50 text-yellow-300' : 'bg-white/5 border-white/10 text-slate-400 hover:border-white/30'}`}>
                   <div>{t('pages:booking.luxury')}</div><div className="text-lg">{format(selected.price_luxury)}</div>
-                  <div className="text-xs font-normal text-slate-400">1–3 pers. inclus</div>
+                  <div className="text-xs font-normal text-slate-400">{t('pages:booking.included_1_3')}</div>
                 </button>
               </div>
             )}
             {!selected.price_luxury && (
               <div className="mb-5 p-4 rounded-2xl bg-white/5 border border-white/10 flex justify-between items-center">
                 <div>
-                  <span className="text-slate-400 text-sm">{t('pages:booking.price_per_person')}</span>
-                  <p className="text-xs text-slate-500">1–3 pers. inclus</p>
+                  <span className="text-slate-400 text-sm">{t('pages:booking.fixed_price')}</span>
+                  <p className="text-xs text-slate-500">{t('pages:booking.included_1_3')}</p>
                 </div>
                 <span className="text-2xl font-extrabold text-white">{selected.price > 0 ? format(selected.price) : t('pages:booking.on_request')}</span>
               </div>
@@ -255,12 +255,12 @@ export default function Excursions() {
                 return (
                   <div className="p-3 rounded-xl bg-white/5 border border-white/8 text-xs space-y-1">
                     <div className="flex justify-between text-slate-400">
-                      <span>Prix fixe (1–3 pers.)</span>
+                      <span>{t('pages:booking.base_price_1_3')}</span>
                       <span className="text-white font-semibold">{format(base)}</span>
                     </div>
                     {form.passengers > 3 && (
                       <div className="flex justify-between text-orange-400">
-                        <span>+{form.passengers - 3} pers. supplémentaire(s)</span>
+                        <span>+{form.passengers - 3} {t('pages:booking.extra_persons')}</span>
                         <span className="font-semibold">+{format((form.passengers - 3) * supp)}</span>
                       </div>
                     )}

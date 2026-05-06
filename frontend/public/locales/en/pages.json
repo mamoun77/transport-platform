@@ -58,7 +58,11 @@
     "luxe": "luxury ✨",
     "vedette": "⭐ Featured",
     "details": "Details",
-    "reserve": "Book"
+    "reserve": "Book",
+    "fixed_price": "Fixed price",
+    "included_1_3": "1–3 pers. included",
+    "extra_persons": "extra person(s)",
+    "base_price_1_3": "Fixed price (1–3 pers.)"
   },
   "detail_modal": {
     "program": "Program",

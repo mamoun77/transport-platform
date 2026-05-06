@@ -45,7 +45,7 @@ export default function Activites() {
     const price = form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : selected.price;
     localStorage.setItem('bookingData', JSON.stringify({
       serviceName: `${selected.name} (${form.type === 'luxury' ? t('pages:booking.luxury') : t('pages:booking.standard')})`,
-      pickup: selected.location || 'Non précisé',
+      pickup: selected.location || '',
       destination: selected.name,
       date: form.date, time: form.time, passengers: form.passengers,
       price, phone: form.phone, email: form.email, name: form.name, notes: form.notes,
