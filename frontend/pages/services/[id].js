@@ -37,11 +37,14 @@ export default function ServiceDetail() {
   const [activeTab, setActiveTab] = useState('details');
   const { format, currency, convert } = useCurrency();
 
-  // Prix par personne × nombre de personnes
-  const calcPrice = (pricePerPerson, passengers) => {
-    if (!pricePerPerson) return 0;
-    return pricePerPerson * passengers;
+  // Prix fixe jusqu'à 3 personnes, supplément par personne à partir de la 4ème
+  const calcPrice = (basePrice, passengers) => {
+    if (!basePrice || passengers <= 3) return basePrice;
+    const supplement = Math.round(basePrice * 0.25); // 25% du prix de base par personne supplémentaire
+    return basePrice + (passengers - 3) * supplement;
   };
+
+  const displaySupplement = (basePrice) => Math.round(basePrice * 0.25);
 
   useEffect(() => {
     if (!id) return;
@@ -102,7 +105,7 @@ export default function ServiceDetail() {
     );
   }
 
-  const displayPrice = calcPrice(service.price_from, formData.passengers);
+  const displayPrice = calculatedPrice?.total_price || calcPrice(service.price_from, formData.passengers);
 
   return (
     <>
@@ -303,7 +306,10 @@ export default function ServiceDetail() {
                       </span>
                     </div>
                     <p className="text-slate-400 text-sm">
-                      {formData.passengers} personne{formData.passengers > 1 ? 's' : ''} × {format(service.price_from)} / pers.
+                      {formData.passengers <= 3
+                        ? `Prix fixe pour 1 à 3 personnes`
+                        : `Prix de base + ${formData.passengers - 3} × ${format(displaySupplement(service.price_from))} supplément`
+                      }
                     </p>
                   </div>
 
@@ -389,7 +395,22 @@ export default function ServiceDetail() {
                         <button type="button" onClick={() => handlePassengersChange(Math.min(20, formData.passengers + 1))}
                           className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition-all flex items-center justify-center">+</button>
                       </div>
-                      <p className="mt-2 text-xs text-slate-500 text-center">{format(service.price_from)} × {formData.passengers} pers. = <span className="text-white font-bold">{format(calcPrice(service.price_from, formData.passengers))}</span></p>
+                      <div className="mt-2 p-3 rounded-xl bg-white/5 border border-white/8 text-xs space-y-1">
+                        <div className="flex justify-between text-slate-400">
+                          <span>Prix fixe (1–3 pers.)</span>
+                          <span className="text-white font-semibold">{format(service.price_from)}</span>
+                        </div>
+                        {formData.passengers > 3 && (
+                          <div className="flex justify-between text-orange-400">
+                            <span>+{formData.passengers - 3} pers. supplémentaire(s)</span>
+                            <span className="font-semibold">+{format((formData.passengers - 3) * displaySupplement(service.price_from))}</span>
+                          </div>
+                        )}
+                        <div className="flex justify-between text-white font-bold border-t border-white/10 pt-1">
+                          <span>Total</span>
+                          <span>{format(calcPrice(service.price_from, formData.passengers))}</span>
+                        </div>
+                      </div>
                     </div>
 
                     {/* Vol (optionnel) */}
@@ -416,8 +437,10 @@ export default function ServiceDetail() {
 
                     {/* Prix récap */}
                     {calculatedPrice && (
-                      <div className="p-4 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-sm">
-                        <div className="flex justify-between text-white font-bold"><span>Total</span><span>{format(calcPrice(calculatedPrice.base_price, formData.passengers))}</span></div>
+                      <div className="p-4 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-sm space-y-1">
+                        <div className="flex justify-between text-slate-400"><span>Prix fixe (1–3 pers.)</span><span>{format(calculatedPrice.base_price)}</span></div>
+                        {calculatedPrice.passengers > 3 && <div className="flex justify-between text-orange-400"><span>+{calculatedPrice.passengers - 3} pers. supplémentaire(s)</span><span>+{format((calculatedPrice.passengers - 3) * displaySupplement(calculatedPrice.base_price))}</span></div>}
+                        <div className="flex justify-between text-white font-bold pt-1 border-t border-white/10"><span>Total</span><span>{format(calculatedPrice.total_price)}</span></div>
                       </div>
                     )}
 
