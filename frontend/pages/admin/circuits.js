@@ -44,9 +44,11 @@ export default function AdminCircuits() {
     } catch { alert('Erreur lors de la sauvegarde'); }
   };
 
+  const parseArr = (v) => Array.isArray(v) ? v : (typeof v === 'string' ? JSON.parse(v || '[]') : []);
+
   const handleEdit = (c) => {
     setEditing(c);
-    setForm({ name: c.name, short_description: c.short_description || '', description: c.description, image: c.image || '', images: c.images || (c.image ? [c.image] : []), price: c.price || '', price_luxury: c.price_luxury || '', duration: c.duration || '', distance_km: c.distance_km || '', difficulty: c.difficulty || 'facile', departure_point: c.departure_point || '', capacity: c.capacity || '', included: c.included || [], not_included: c.not_included || [], luxury_advantages: c.luxury_advantages || [], program: c.program || [], is_active: c.is_active, is_featured: c.is_featured, sort_order: c.sort_order || 0 });
+    setForm({ name: c.name, short_description: c.short_description || '', description: c.description, image: c.image || '', images: parseArr(c.images).length ? parseArr(c.images) : (c.image ? [c.image] : []), price: c.price || '', price_luxury: c.price_luxury || '', duration: c.duration || '', distance_km: c.distance_km || '', difficulty: c.difficulty || 'facile', departure_point: c.departure_point || '', capacity: c.capacity || '', included: parseArr(c.included), not_included: parseArr(c.not_included), luxury_advantages: parseArr(c.luxury_advantages), program: parseArr(c.program), is_active: c.is_active, is_featured: c.is_featured, sort_order: c.sort_order || 0 });
     setShowForm(true);
   };
 
