@@ -9,6 +9,7 @@ export function CurrencyProvider({ children }) {
   const [currency, setCurrency] = useState('MAD');
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     const saved = localStorage.getItem('currency');
     if (saved === 'USD' || saved === 'MAD') setCurrency(saved);
   }, []);
@@ -16,7 +17,7 @@ export function CurrencyProvider({ children }) {
   const toggle = () => {
     const next = currency === 'MAD' ? 'USD' : 'MAD';
     setCurrency(next);
-    localStorage.setItem('currency', next);
+    if (typeof window !== 'undefined') localStorage.setItem('currency', next);
   };
 
   const convert = (amount) => {
@@ -39,4 +40,14 @@ export function CurrencyProvider({ children }) {
   );
 }
 
-export const useCurrency = () => useContext(CurrencyContext);
+export const useCurrency = () => {
+  const ctx = useContext(CurrencyContext);
+  if (!ctx) return {
+    currency: 'MAD',
+    toggle: () => {},
+    convert: (a) => parseFloat(a) || 0,
+    format: (a) => `${parseFloat(a) || 0} MAD`,
+    symbol: 'MAD',
+  };
+  return ctx;
+};

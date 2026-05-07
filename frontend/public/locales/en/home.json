@@ -69,5 +69,29 @@
     "write_us": "Write to us",
     "quick_response": "Quick response",
     "book_now": "Book Now"
+  },
+  "sections": {
+    "transfers": "Our Transfers",
+    "transfer_title": "Premium Transfer",
+    "circuits": "Tours",
+    "excursions": "Excursions",
+    "excursions_title": "Explore Morocco",
+    "activities": "Activities",
+    "activities_title": "Live the Adventure",
+    "destinations": "Destinations",
+    "why_us": "Why choose us",
+    "reviews": "Client reviews",
+    "see_all_transfers": "See all transfers",
+    "see_all_circuits": "See all tours",
+    "see_all_excursions": "See all excursions",
+    "see_all_activities": "See all activities",
+    "see_all_destinations": "See all destinations",
+    "book": "Book",
+    "from": "from",
+    "copyright": "All rights reserved.",
+    "years_exp": "Years of experience",
+    "premium_vehicles": "Premium vehicles",
+    "happy_clients": "Happy clients",
+    "support": "Support available"
   }
 }

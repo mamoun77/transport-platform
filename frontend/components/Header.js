@@ -12,11 +12,13 @@ export default function Header() {
   const { t } = useTranslation('common');
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     const userData = localStorage.getItem('user');
     if (userData) setUser(JSON.parse(userData));
   }, []);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);

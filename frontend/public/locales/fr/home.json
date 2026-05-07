@@ -69,5 +69,29 @@
     "write_us": "Écrivez-nous",
     "quick_response": "Réponse rapide",
     "book_now": "Réserver Maintenant"
+  },
+  "sections": {
+    "transfers": "Nos Transferts",
+    "transfer_title": "Transfert Premium",
+    "circuits": "Circuits",
+    "excursions": "Excursions",
+    "excursions_title": "Explorez le Maroc",
+    "activities": "Activités",
+    "activities_title": "Vivez l'aventure",
+    "destinations": "Destinations",
+    "why_us": "Pourquoi nous choisir",
+    "reviews": "Avis clients",
+    "see_all_transfers": "Voir tous les transferts",
+    "see_all_circuits": "Voir tous les circuits",
+    "see_all_excursions": "Voir toutes les excursions",
+    "see_all_activities": "Voir toutes les activités",
+    "see_all_destinations": "Voir toutes les destinations",
+    "book": "Réserver",
+    "from": "dès",
+    "copyright": "Tous droits réservés.",
+    "years_exp": "Années d'expérience",
+    "premium_vehicles": "Véhicules premium",
+    "happy_clients": "Clients satisfaits",
+    "support": "Support disponible"
   }
 }
