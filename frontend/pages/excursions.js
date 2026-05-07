@@ -44,7 +44,15 @@ export default function Excursions() {
       .then(r => r.json())
       .then(d => {
         if (d.success && d.destinations.length > 0)
-          setExcursions(d.destinations.map((e, i) => ({ ...e, gradient: GRADIENTS[i % GRADIENTS.length] })));
+          setExcursions(d.destinations.map((e, i) => ({
+            ...e,
+            gradient: GRADIENTS[i % GRADIENTS.length],
+            program: Array.isArray(e.program) ? e.program : (typeof e.program === 'string' ? JSON.parse(e.program || '[]') : []),
+            included: Array.isArray(e.included) ? e.included : (typeof e.included === 'string' ? JSON.parse(e.included || '[]') : []),
+            not_included: Array.isArray(e.not_included) ? e.not_included : (typeof e.not_included === 'string' ? JSON.parse(e.not_included || '[]') : []),
+            luxury_advantages: Array.isArray(e.luxury_advantages) ? e.luxury_advantages : (typeof e.luxury_advantages === 'string' ? JSON.parse(e.luxury_advantages || '[]') : []),
+            images: Array.isArray(e.images) ? e.images : (typeof e.images === 'string' ? JSON.parse(e.images || '[]') : []),
+          })));
       })
       .catch(() => {})
       .finally(() => setLoading(false));

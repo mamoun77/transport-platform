@@ -41,7 +41,15 @@ export default function Transfert() {
   useEffect(() => {
     fetch('/backend/services')
       .then(r => r.json())
-      .then(d => { if (d.success) setServices(d.services.map((s, i) => ({ ...s, gradient: GRADIENTS[i % GRADIENTS.length] }))); })
+      .then(d => { if (d.success) setServices(d.services.map((s, i) => ({
+        ...s,
+        gradient: GRADIENTS[i % GRADIENTS.length],
+        program: Array.isArray(s.program) ? s.program : (typeof s.program === 'string' ? JSON.parse(s.program || '[]') : []),
+        included: Array.isArray(s.included) ? s.included : (typeof s.included === 'string' ? JSON.parse(s.included || '[]') : []),
+        not_included: Array.isArray(s.not_included) ? s.not_included : (typeof s.not_included === 'string' ? JSON.parse(s.not_included || '[]') : []),
+        luxury_advantages: Array.isArray(s.luxury_advantages) ? s.luxury_advantages : (typeof s.luxury_advantages === 'string' ? JSON.parse(s.luxury_advantages || '[]') : []),
+        images: Array.isArray(s.images) ? s.images : (typeof s.images === 'string' ? JSON.parse(s.images || '[]') : []),
+      }))); })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);

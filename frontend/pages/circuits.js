@@ -33,7 +33,15 @@ export default function Circuits() {
   useEffect(() => {
     fetch('/backend/circuits')
       .then(r => r.json())
-      .then(d => { if (d.success) setCircuits(d.circuits.map((c, i) => ({ ...c, gradient: GRADIENTS[i % GRADIENTS.length] }))); })
+      .then(d => { if (d.success) setCircuits(d.circuits.map((c, i) => ({
+        ...c,
+        gradient: GRADIENTS[i % GRADIENTS.length],
+        program: Array.isArray(c.program) ? c.program : (typeof c.program === 'string' ? JSON.parse(c.program || '[]') : []),
+        included: Array.isArray(c.included) ? c.included : (typeof c.included === 'string' ? JSON.parse(c.included || '[]') : []),
+        not_included: Array.isArray(c.not_included) ? c.not_included : (typeof c.not_included === 'string' ? JSON.parse(c.not_included || '[]') : []),
+        luxury_advantages: Array.isArray(c.luxury_advantages) ? c.luxury_advantages : (typeof c.luxury_advantages === 'string' ? JSON.parse(c.luxury_advantages || '[]') : []),
+        images: Array.isArray(c.images) ? c.images : (typeof c.images === 'string' ? JSON.parse(c.images || '[]') : []),
+      }))); })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);

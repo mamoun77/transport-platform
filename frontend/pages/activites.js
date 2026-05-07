@@ -33,7 +33,15 @@ export default function Activites() {
   useEffect(() => {
     fetch('/backend/activities')
       .then(r => r.json())
-      .then(d => { if (d.success) setActivities(d.activities.map((a, i) => ({ ...a, gradient: GRADIENTS[i % GRADIENTS.length] }))); })
+      .then(d => { if (d.success) setActivities(d.activities.map((a, i) => ({
+        ...a,
+        gradient: GRADIENTS[i % GRADIENTS.length],
+        program: Array.isArray(a.program) ? a.program : (typeof a.program === 'string' ? JSON.parse(a.program || '[]') : []),
+        included: Array.isArray(a.included) ? a.included : (typeof a.included === 'string' ? JSON.parse(a.included || '[]') : []),
+        not_included: Array.isArray(a.not_included) ? a.not_included : (typeof a.not_included === 'string' ? JSON.parse(a.not_included || '[]') : []),
+        luxury_advantages: Array.isArray(a.luxury_advantages) ? a.luxury_advantages : (typeof a.luxury_advantages === 'string' ? JSON.parse(a.luxury_advantages || '[]') : []),
+        images: Array.isArray(a.images) ? a.images : (typeof a.images === 'string' ? JSON.parse(a.images || '[]') : []),
+      }))); })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
