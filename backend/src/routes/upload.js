@@ -2,18 +2,36 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const { v2: cloudinary } = require('cloudinary');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const router = express.Router();
 const { authenticateToken } = require('../middleware/auth');
 
+// Config Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const useCloudinary = !!(process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY);
+
 const getFolder = (routePath) => {
   if (routePath.includes('circuit')) return 'circuits';
-  if (routePath.includes('service')) return 'services';
-  if (routePath.includes('destination')) return 'destinations';
+  if (routePath.includes('service') || routePath.includes('activity')) return 'services';
+  if (routePath.includes('destination') || routePath.includes('excursion')) return 'destinations';
   if (routePath.includes('blog')) return 'blog';
   return 'misc';
 };
 
-const storage = multer.diskStorage({
+// Storage Cloudinary
+const cloudinaryStorage = (folder) => new CloudinaryStorage({
+  cloudinary,
+  params: { folder: `transport/${folder}`, allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp'] },
+});
+
+// Storage local (fallback)
+const localStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     const folder = getFolder(req.path);
     const uploadPath = path.join(__dirname, `../../../frontend/public/uploads/${folder}`);
@@ -21,36 +39,41 @@ const storage = multer.diskStorage({
     cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
-    const prefix = getFolder(req.path).slice(0, -1); // retire le 's' final
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, `${prefix}-${uniqueSuffix}${path.extname(file.originalname).toLowerCase()}`);
+    const prefix = getFolder(req.path).slice(0, -1);
+    cb(null, `${prefix}-${Date.now()}-${Math.round(Math.random() * 1e9)}${path.extname(file.originalname).toLowerCase()}`);
   }
 });
 
-const upload = multer({
-  storage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+const makeUpload = (folder) => multer({
+  storage: useCloudinary ? cloudinaryStorage(folder) : localStorage,
+  limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     if (/jpeg|jpg|png|gif|webp/.test(file.mimetype)) cb(null, true);
-    else cb(new Error('Seules les images sont autorisées (jpg, png, gif, webp)'));
+    else cb(new Error('Seules les images sont autorisées'));
   }
 });
+
+const getUrl = (req, file) => {
+  if (useCloudinary) return file.path;
+  const folder = getFolder(req.path);
+  return `/uploads/${folder}/${file.filename}`;
+};
 
 const handleUpload = (folder) => [
   authenticateToken,
-  upload.single('image'),
+  makeUpload(folder).single('image'),
   (req, res) => {
     if (!req.file) return res.status(400).json({ success: false, error: 'Aucune image fournie' });
-    res.json({ success: true, imageUrl: `/uploads/${folder}/${req.file.filename}` });
+    res.json({ success: true, imageUrl: getUrl(req, req.file) });
   }
 ];
 
 const handleMultiUpload = (folder) => [
   authenticateToken,
-  upload.array('images', 20),
+  makeUpload(folder).array('images', 20),
   (req, res) => {
     if (!req.files || req.files.length === 0) return res.status(400).json({ success: false, error: 'Aucune image fournie' });
-    const imageUrls = req.files.map(f => `/uploads/${folder}/${f.filename}`);
+    const imageUrls = req.files.map(f => getUrl(req, f));
     res.json({ success: true, imageUrls });
   }
 ];
