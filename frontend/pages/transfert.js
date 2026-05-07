@@ -165,7 +165,7 @@ export default function Transfert() {
                   <h2 className="text-2xl font-bold text-white">{detail.name}</h2>
                   {(detail.price_from || detail.price) > 0 && (
                     <div className="flex gap-3 flex-wrap mt-1">
-                      <span className="px-3 py-1 rounded-full text-sm bg-white/5 border border-white/10 text-white font-bold">Privé : {format(detail.price_from || detail.price)} / jusqu'à 4 pers.</span>
+                      <span className="px-3 py-1 rounded-full text-sm bg-white/5 border border-white/10 text-white font-bold">Privé : {format(detail.price_from || detail.price)}</span>
                       {detail.price_luxury > 0 && <span className="px-3 py-1 rounded-full text-sm bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 font-bold">✨ {t('pages:booking.luxury')} : {format(detail.price_luxury)} {t('common:common.per_person')}</span>}
                     </div>
                   )}
