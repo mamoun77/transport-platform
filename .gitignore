@@ -14,7 +14,7 @@ frontend/.next/
 frontend/out/
 
 # Uploads (photos uploadées par les utilisateurs)
-frontend/public/uploads/
+# frontend/public/uploads/
 
 # Logs
 *.log
