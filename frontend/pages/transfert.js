@@ -5,7 +5,6 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Header from '../components/Header';
 import { useCurrency } from '../hooks/useCurrency';
-import CurrencySwitcher from '../components/CurrencySwitcher';
 import ImageGallery from '../components/ImageGallery';
 
 const GRADIENTS = [
@@ -88,7 +87,6 @@ export default function Transfert() {
               {t('pages:transfert.title')}
             </h1>
             <p className="text-lg text-slate-400 max-w-xl mx-auto">{t('pages:transfert.subtitle')}</p>
-            <div className="mt-4 flex justify-center"><CurrencySwitcher /></div>
           </div>
         </section>
 
