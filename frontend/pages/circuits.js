@@ -216,7 +216,7 @@ export default function Circuits() {
                 {detail.duration && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">⏱ {detail.duration}</span>}
                 {detail.distance_km && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">📍 {detail.distance_km} km</span>}
                 {detail.difficulty && <span className={`px-3 py-1 rounded-full text-xs border ${DIFFICULTY_COLORS[detail.difficulty]}`}>{detail.difficulty}</span>}
-                {detail.capacity && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">👥 max {detail.capacity} pers.</span>}
+                {detail.capacity && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">👥 min 2 pers.</span>}
                 {detail.departure_point && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">🚌 {detail.departure_point}</span>}
               </div>
 
