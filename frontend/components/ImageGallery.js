@@ -1,11 +1,9 @@
 import { useState } from 'react';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-
 const resolveUrl = (url) => {
   if (!url) return null;
   if (url.startsWith('http')) return url;
-  return `${API_URL}${url}`;
+  return url; // relative URLs served by Vercel from public/
 };
 
 export default function ImageGallery({ images = [], mainImage, alt = '', height = 'h-64' }) {

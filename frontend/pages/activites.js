@@ -19,9 +19,6 @@ const DIFFICULTY_COLORS = {
   difficile: 'bg-red-500/20 border-red-500/40 text-red-400',
 };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-const img = (url) => !url ? null : url.startsWith('http') ? url : `${API_URL}${url}`;
-
 export default function Activites() {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading]       = useState(true);
@@ -102,7 +99,7 @@ export default function Activites() {
               {activities.map(a => (
                 <div key={a.id} className="group relative flex flex-col rounded-3xl overflow-hidden border border-white/5 bg-white/[0.03] hover:bg-white/[0.07] transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-violet-900/20 h-full">
                   <div className="relative h-52 overflow-hidden">
-                    <img src={img((a.images && a.images[0]) || a.image) || 'https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=800&q=80'}
+                    <img src={(a.images && a.images[0]) || a.image || 'https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=800&q=80'}
                       alt={a.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#080d1a] via-[#080d1a]/20 to-transparent" />
                     {a.difficulty && <span className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold border ${DIFFICULTY_COLORS[a.difficulty] || DIFFICULTY_COLORS.facile}`}>{a.difficulty}</span>}

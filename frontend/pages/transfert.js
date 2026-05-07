@@ -20,9 +20,6 @@ const TYPE_CONFIG = {
   shuttle:      { label: 'Navette',    color: 'bg-orange-500/20 border-orange-500/40 text-orange-400' },
 };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-const img = (url) => !url ? null : url.startsWith('http') ? url : `${API_URL}${url}`;
-
 export default function Transfert() {
   const [services, setServices]     = useState([]);
   const [loading, setLoading]       = useState(true);
@@ -114,7 +111,7 @@ export default function Transfert() {
                 return (
                   <div key={s.id} className="group relative flex flex-col rounded-3xl overflow-hidden border border-white/5 bg-white/[0.03] hover:bg-white/[0.07] transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-900/20 h-full">
                     <div className="relative h-52 overflow-hidden">
-                      <img src={img((s.images && s.images[0]) || s.image) || 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'}
+                      <img src={(s.images && s.images[0]) || s.image || 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'}
                         alt={s.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#080d1a] via-[#080d1a]/20 to-transparent" />
                       {s.type && <span className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold border ${cfg.color}`}>{cfg.label}</span>}
