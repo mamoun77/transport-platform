@@ -121,6 +121,61 @@ function bookingEmailTemplate(booking) {
 </html>`;
 }
 
+function adminEmailTemplate(booking) {
+  const { bookingNumber, serviceName, pickup, destination, date, time, passengers, price, name, phone, email, flight_number, notes } = booking;
+  return `
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="UTF-8" /><title>Nouvelle Réservation</title></head>
+<body style="margin:0;padding:0;background:#0f172a;font-family:'Segoe UI',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0f172a;padding:40px 0;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#1e293b;border-radius:16px;overflow:hidden;border:1px solid #334155;">
+        <tr>
+          <td style="background:linear-gradient(135deg,#f59e0b,#d97706);padding:24px 40px;text-align:center;">
+            <h1 style="color:#fff;margin:0;font-size:22px;">🔔 Nouvelle Réservation!</h1>
+            <p style="color:#fef3c7;margin:4px 0 0;font-size:13px;">${bookingNumber}</p>
+          </td>
+        </tr>
+        <tr><td style="padding:32px 40px;">
+          <table width="100%" cellpadding="0" cellspacing="0" style="border-radius:10px;overflow:hidden;border:1px solid #334155;">
+            ${adminRow('👤 Client', name)}
+            ${adminRow('📞 Téléphone', phone)}
+            ${email ? adminRow('📧 Email', email) : ''}
+            ${adminRow('🚗 Service', serviceName)}
+            ${adminRow('📍 Départ', pickup)}
+            ${adminRow('🏁 Destination', destination)}
+            ${adminRow('📅 Date', date)}
+            ${adminRow('⏰ Heure', time)}
+            ${adminRow('👥 Passagers', passengers)}
+            ${flight_number ? adminRow('✈️ Vol', flight_number) : ''}
+            ${notes ? adminRow('📝 Notes', notes) : ''}
+            <tr style="background:#064e3b;">
+              <td style="padding:14px 20px;color:#6ee7b7;font-size:13px;font-weight:600;">💰 Prix total</td>
+              <td style="padding:14px 20px;color:#10b981;font-size:20px;font-weight:800;text-align:right;">$${price}</td>
+            </tr>
+          </table>
+          <div style="background:#1e3a5f;border-radius:10px;padding:16px 20px;margin-top:24px;text-align:center;">
+            <p style="margin:0;color:#93c5fd;font-size:13px;font-weight:600;">⚡ Action requise : Assigner un chauffeur</p>
+          </div>
+        </td></tr>
+        <tr><td style="background:#0f172a;padding:20px 40px;text-align:center;">
+          <p style="margin:0;color:#475569;font-size:12px;">© ${new Date().getFullYear()} Trendy Travel — Admin Panel</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>`;
+}
+
+function adminRow(label, value) {
+  if (!value) return '';
+  return `<tr style="border-top:1px solid #334155;">
+    <td style="padding:11px 20px;color:#94a3b8;font-size:13px;width:40%;">${label}</td>
+    <td style="padding:11px 20px;color:#e2e8f0;font-size:13px;font-weight:600;text-align:right;">${value}</td>
+  </tr>`;
+}
+
 function row(label, value) {
   if (!value) return '';
   return `
@@ -135,16 +190,29 @@ async function sendBookingConfirmation(booking) {
     console.log('⚠️  Email non configuré — SMTP_USER/SMTP_PASS manquants dans .env');
     return;
   }
-  if (!booking.email) return;
 
   try {
+    // Email au client
+    if (booking.email) {
+      await transporter.sendMail({
+        from: process.env.EMAIL_FROM || `Trendy Travel <${process.env.SMTP_USER}>`,
+        to: booking.email,
+        subject: `✅ Confirmation réservation ${booking.bookingNumber} — Trendy Travel`,
+        html: bookingEmailTemplate(booking),
+      });
+      console.log(`📧 Email client envoyé à ${booking.email}`);
+    }
+
+    // Email à l'admin
+    const adminEmail = process.env.ADMIN_EMAIL || process.env.SMTP_USER;
     await transporter.sendMail({
       from: process.env.EMAIL_FROM || `Trendy Travel <${process.env.SMTP_USER}>`,
-      to: booking.email,
-      subject: `✅ Confirmation réservation ${booking.bookingNumber} — Trendy Travel`,
-      html: bookingEmailTemplate(booking),
+      to: adminEmail,
+      subject: `🔔 Nouvelle réservation ${booking.bookingNumber} — ${booking.name}`,
+      html: adminEmailTemplate(booking),
     });
-    console.log(`📧 Email envoyé à ${booking.email}`);
+    console.log(`📧 Email admin envoyé à ${adminEmail}`);
+
   } catch (err) {
     console.error('❌ Erreur envoi email:', err.message);
   }

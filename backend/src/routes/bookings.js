@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { authenticateToken } = require('../middleware/auth');
 const sequelize = require('../config/database');
+const { sendBookingConfirmation } = require('../services/emailService');
 
 // POST / — Créer une réservation (public)
 router.post('/', async (req, res) => {
@@ -24,6 +25,9 @@ router.post('/', async (req, res) => {
     );
 
     res.status(201).json({ success: true, bookingNumber });
+
+    // Envoyer emails (client + admin) en arrière-plan
+    sendBookingConfirmation({ bookingNumber, serviceName, pickup, destination, date, time, passengers, price, name, phone, email, flight_number, notes });
   } catch (error) {
     console.error('Booking error:', error);
     res.status(500).json({ error: 'Erreur lors de la création de la réservation' });
