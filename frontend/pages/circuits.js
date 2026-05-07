@@ -19,6 +19,9 @@ const DIFFICULTY_COLORS = {
   difficile: 'bg-red-500/20 border-red-500/40 text-red-400',
 };
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const img = (url) => !url ? null : url.startsWith('http') ? url : `${API_URL}${url}`;
+
 export default function Circuits() {
   const [circuits, setCircuits] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -108,7 +111,7 @@ export default function Circuits() {
 
                   {/* Image */}
                   <div className="relative h-52 overflow-hidden">
-                    <img src={(c.images && c.images[0]) || c.image || 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80'}
+                    <img src={img((c.images && c.images[0]) || c.image) || 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80'}
                       alt={c.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#080d1a] via-[#080d1a]/20 to-transparent" />
                     {c.difficulty && (

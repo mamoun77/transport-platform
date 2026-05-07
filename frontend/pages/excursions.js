@@ -19,6 +19,9 @@ const DIFFICULTY_COLORS = {
   difficile: 'bg-red-500/20 border-red-500/40 text-red-400',
 };
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const img = (url) => !url ? null : url.startsWith('http') ? url : `${API_URL}${url}`;
+
 export default function Excursions() {
   const [excursions, setExcursions] = useState([]);
   const [loading, setLoading]       = useState(true);
@@ -112,7 +115,7 @@ export default function Excursions() {
               {excursions.map(e => (
                 <div key={e.id} className="group relative flex flex-col rounded-3xl overflow-hidden border border-white/5 bg-white/[0.03] hover:bg-white/[0.07] transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-emerald-900/20 h-full">
                   <div className="relative h-52 overflow-hidden">
-                    <img src={(e.images && e.images[0]) || e.image || 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=800&q=80'}
+                    <img src={img((e.images && e.images[0]) || e.image) || 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=800&q=80'}
                       alt={e.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#080d1a] via-[#080d1a]/20 to-transparent" />
                     {e.difficulty && <span className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold border ${DIFFICULTY_COLORS[e.difficulty] || DIFFICULTY_COLORS.facile}`}>{e.difficulty}</span>}

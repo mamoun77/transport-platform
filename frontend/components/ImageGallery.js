@@ -1,9 +1,18 @@
 import { useState } from 'react';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+
+const resolveUrl = (url) => {
+  if (!url) return null;
+  if (url.startsWith('http')) return url;
+  return `${API_URL}${url}`;
+};
+
 export default function ImageGallery({ images = [], mainImage, alt = '', height = 'h-64' }) {
   const [active, setActive] = useState(0);
 
-  const all = images.length > 0 ? images : (mainImage ? [mainImage] : []);
+  const raw = images.length > 0 ? images : (mainImage ? [mainImage] : []);
+  const all = raw.map(resolveUrl).filter(Boolean);
   if (all.length === 0) return null;
 
   return (
