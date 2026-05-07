@@ -33,7 +33,10 @@ const PORT = process.env.PORT || 3001;
 console.log('🔌 PORT env:', process.env.PORT, '→ using:', PORT);
 
 // Middleware de sécurité
-app.use(helmet());
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
+  crossOriginEmbedderPolicy: false,
+}));
 app.use(cors({
   origin: function(origin, callback) {
     // Allow requests with no origin (mobile apps, curl, etc.)
@@ -65,6 +68,13 @@ app.use(limiter);
 app.set('trust proxy', 1);
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
+
+// Servir les fichiers uploadés avec headers CORS
+app.use('/uploads', (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+  next();
+}, express.static(require('path').join(__dirname, '../../frontend/public/uploads')));
 
 // Routes
 app.use('/api/auth', authRoutes);
