@@ -6,7 +6,7 @@ const RATE_USD_TO_MAD = 10.1;
 export const CurrencyContext = createContext(null);
 
 export function CurrencyProvider({ children }) {
-  const [currency, setCurrency] = useState('MAD');
+  const [currency, setCurrency] = useState('USD');
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -23,12 +23,12 @@ export function CurrencyProvider({ children }) {
   const convert = (amount) => {
     if (!amount) return 0;
     const n = parseFloat(amount);
-    return currency === 'USD' ? +(n * RATE_MAD_TO_USD).toFixed(2) : n;
+    return currency === 'MAD' ? +(n * RATE_USD_TO_MAD).toFixed(2) : n;
   };
 
   const format = (amount) => {
     const val = convert(amount);
-    return currency === 'USD' ? `$${val}` : `${val} MAD`;
+    return currency === 'MAD' ? `${val} MAD` : `$${val}`;
   };
 
   const symbol = currency === 'USD' ? '$' : 'MAD';
