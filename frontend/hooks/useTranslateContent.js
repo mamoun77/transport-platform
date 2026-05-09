@@ -25,32 +25,8 @@ async function translateText(text, targetLang) {
   }
 }
 
-export function useTranslateContent(items, fields = ['name', 'short_description', 'description']) {
-  const { locale } = useRouter();
-  const [translated, setTranslated] = useState(items);
-
-  useEffect(() => {
-    if (!items || items.length === 0) { setTranslated(items); return; }
-    if (locale === 'fr') { setTranslated(items); return; }
-
-    let cancelled = false;
-    async function run() {
-      const result = await Promise.all(
-        items.map(async (item) => {
-          const updates = {};
-          await Promise.all(
-            fields.map(async (field) => {
-              if (item[field]) updates[field] = await translateText(item[field], locale);
-            })
-          );
-          return { ...item, ...updates };
-        })
-      );
-      if (!cancelled) setTranslated(result);
-    }
-    run();
-    return () => { cancelled = true; };
-  }, [items.length, locale]);
-
-  return translated;
+export function useTranslateContent(items) {
+  // Traduction automatique désactivée (quota API dépassé)
+  // Le contenu s'affiche dans la langue originale (français)
+  return items;
 }
