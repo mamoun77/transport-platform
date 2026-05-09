@@ -57,7 +57,12 @@ exports.updateService = async (req, res) => {
   try {
     const updateData = { ...req.body };
     if (updateData.name) {
-      updateData.slug = generateSlug(updateData.name);
+      const newSlug = generateSlug(updateData.name);
+      // Vérifier si le slug existe déjà sur un autre service
+      const existing = await Service.findOne({ where: { slug: newSlug } });
+      if (!existing || existing.id == req.params.id) {
+        updateData.slug = newSlug;
+      }
     }
     
     const [updated] = await Service.update(updateData, {
