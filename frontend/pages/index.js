@@ -27,18 +27,25 @@ const REVIEWS = [
   { name: 'Maria J.', flag: '🇪🇸', rating: 5, comment: 'Excursion fantastique dans l\'Atlas ! Guide compétent et véhicule confortable. Inoubliable.' },
 ];
 
-const GALLERY = [
-  { src: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80', alt: 'Transfert aéroport', span: 'col-span-2 row-span-2' },
-  { src: 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=800&q=80', alt: 'Marrakech' },
-  { src: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80', alt: 'Fès médina' },
-  { src: 'https://images.unsplash.com/photo-1570829460005-c840387bb1ca?auto=format&fit=crop&w=800&q=80', alt: 'Essaouira' },
-  { src: 'https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=800&q=80', alt: 'Aventure désert' },
-  { src: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80', alt: 'Circuit montagne' },
-  { src: 'https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?auto=format&fit=crop&w=800&q=80', alt: 'Voyage luxe' },
+const FALLBACK_GALLERY = [
+  { url: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80', alt: 'Transfert aéroport' },
+  { url: 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=800&q=80', alt: 'Marrakech' },
+  { url: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80', alt: 'Fès médina' },
+  { url: 'https://images.unsplash.com/photo-1570829460005-c840387bb1ca?auto=format&fit=crop&w=800&q=80', alt: 'Essaouira' },
+  { url: 'https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=800&q=80', alt: 'Aventure désert' },
+  { url: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80', alt: 'Circuit montagne' },
+  { url: 'https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?auto=format&fit=crop&w=800&q=80', alt: 'Voyage luxe' },
 ];
 
 function GallerySection() {
   const [lightbox, setLightbox] = useState(null);
+  const [list, setList] = useState(FALLBACK_GALLERY);
+  useEffect(() => {
+    fetch('/backend/gallery')
+      .then(r => r.json())
+      .then(d => { if (d.success && d.photos.length > 0) setList(d.photos); })
+      .catch(() => {});
+  }, []);
   return (
     <section className="py-24 px-6">
       <div className="max-w-7xl mx-auto">
