@@ -50,6 +50,43 @@ const Service = sequelize.define('Service', {
     allowNull: true,
     defaultValue: []
   },
+  type: {
+    type: DataTypes.ENUM('transfer', 'excursion', 'private_tour', 'shuttle'),
+    allowNull: true,
+    defaultValue: 'transfer'
+  },
+  price_luxury: {
+    type: DataTypes.DECIMAL(10,2),
+    allowNull: true
+  },
+  departure_point: {
+    type: DataTypes.STRING(300),
+    allowNull: true
+  },
+  program: {
+    type: DataTypes.JSON,
+    allowNull: true,
+    defaultValue: []
+  },
+  included: {
+    type: DataTypes.JSON,
+    allowNull: true,
+    defaultValue: []
+  },
+  not_included: {
+    type: DataTypes.JSON,
+    allowNull: true,
+    defaultValue: []
+  },
+  luxury_advantages: {
+    type: DataTypes.JSON,
+    allowNull: true,
+    defaultValue: []
+  },
+  is_featured: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  },
   is_active: {
     type: DataTypes.BOOLEAN,
     defaultValue: true

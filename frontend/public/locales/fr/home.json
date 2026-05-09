@@ -70,6 +70,9 @@
     "quick_response": "Réponse rapide",
     "book_now": "Réserver Maintenant"
   },
+  "reviews": {
+    "badge": "Avis clients"
+  },
   "sections": {
     "transfers": "Nos Transferts",
     "transfer_title": "Transfert Premium",
@@ -86,9 +89,12 @@
     "see_all_excursions": "Voir toutes les excursions",
     "see_all_activities": "Voir toutes les activités",
     "see_all_destinations": "Voir toutes les destinations",
+    "circuits_title": "Circuits & Aventures",
     "book": "Réserver",
     "from": "dès",
     "copyright": "Tous droits réservés.",
+    "about": "À propos",
+    "hero_badge": "Transport Premium au Maroc",
     "years_exp": "Années d'expérience",
     "premium_vehicles": "Véhicules premium",
     "happy_clients": "Clients satisfaits",
