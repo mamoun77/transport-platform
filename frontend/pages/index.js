@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Header from '../components/Header';
+import { useTranslateContent } from '../hooks/useTranslateContent';
 
 const STATS = [
   { value: '10+', label: 'Années d\'expérience' },
@@ -33,6 +34,11 @@ export default function Home() {
   const [activities, setActivities] = useState([]);
   const router = useRouter();
   const { t } = useTranslation(['common', 'home']);
+
+  const tServices = useTranslateContent(services);
+  const tCircuits = useTranslateContent(circuits);
+  const tExcursions = useTranslateContent(excursions);
+  const tActivities = useTranslateContent(activities);
 
   useEffect(() => {
     fetch('/backend/services').then(r => r.json()).then(d => { if (d.success) setServices(d.services.slice(0, 4)); }).catch(() => {});
@@ -103,7 +109,7 @@ export default function Home() {
               <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-white to-sky-300 bg-clip-text text-transparent mb-4">Transfert Premium</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {services.map((s, i) => (
+              {tServices.map((s, i) => (
                 <a key={s.id} href="/transfert" className="group flex flex-col rounded-3xl overflow-hidden border border-white/8 bg-white/[0.03] hover:bg-white/[0.07] hover:-translate-y-2 transition-all duration-300">
                   <div className="relative h-40 overflow-hidden">
                     <img src={s.image || 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'} alt={s.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -132,7 +138,7 @@ export default function Home() {
               <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-white to-amber-300 bg-clip-text text-transparent mb-4">Circuits & Aventures</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {circuits.map((c, i) => (
+              {tCircuits.map((c, i) => (
                 <a key={c.id} href="/circuits" className="group flex flex-col rounded-3xl overflow-hidden border border-white/8 bg-white/[0.03] hover:bg-white/[0.07] hover:-translate-y-2 transition-all duration-300">
                   <div className="relative h-40 overflow-hidden">
                     <img src={c.image || 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80'} alt={c.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -161,7 +167,7 @@ export default function Home() {
               <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-white to-emerald-300 bg-clip-text text-transparent mb-4">Explorez le Maroc</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {excursions.map((e, i) => (
+              {tExcursions.map((e, i) => (
                 <a key={e.id} href="/excursions" className="group flex flex-col rounded-3xl overflow-hidden border border-white/8 bg-white/[0.03] hover:bg-white/[0.07] hover:-translate-y-2 transition-all duration-300">
                   <div className="relative h-40 overflow-hidden">
                     <img src={e.image || 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=800&q=80'} alt={e.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -190,7 +196,7 @@ export default function Home() {
               <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-white to-violet-300 bg-clip-text text-transparent mb-4">Vivez l’aventure</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {activities.map((a) => (
+              {tActivities.map((a) => (
                 <a key={a.id} href="/activites" className="group flex flex-col rounded-3xl overflow-hidden border border-white/8 bg-white/[0.03] hover:bg-white/[0.07] hover:-translate-y-2 transition-all duration-300">
                   <div className="relative h-40 overflow-hidden">
                     <img src={a.image || 'https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=800&q=80'} alt={a.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />

@@ -23,7 +23,6 @@ async function translateText(text, targetLang) {
 export function useTranslateContent(items, fields = ['name', 'short_description', 'description']) {
   const { locale } = useRouter();
   const [translated, setTranslated] = useState(items);
-  const prevLocale = useRef(locale);
 
   useEffect(() => {
     if (!items || items.length === 0) { setTranslated(items); return; }
@@ -46,7 +45,7 @@ export function useTranslateContent(items, fields = ['name', 'short_description'
     }
     run();
     return () => { cancelled = true; };
-  }, [items, locale]);
+  }, [items.length, locale]);
 
   return translated;
 }
