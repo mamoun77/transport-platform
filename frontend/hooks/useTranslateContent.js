@@ -13,6 +13,11 @@ async function translateText(text, targetLang) {
     );
     const data = await res.json();
     const translated = data?.responseData?.translatedText || text;
+    // Ignorer si MyMemory retourne un message d'erreur
+    if (translated.includes('MYMEMORY WARNING') || translated.includes('NEXT AVAILABLE')) {
+      cache[key] = text;
+      return text;
+    }
     cache[key] = translated;
     return translated;
   } catch {
