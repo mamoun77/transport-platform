@@ -85,7 +85,7 @@ export default function Home() {
               {/* Départ depuis */}
               <div className="flex flex-wrap items-center gap-3 text-sm">
                 <span className="text-slate-500 font-medium">{t('home:sections.depart_from')}</span>
-                {['Marrakech', 'Agadir', 'Fès', 'Casablanca'].map(city => (
+                {['Marrakech', 'Essaouira', 'Casablanca', 'Agadir'].map(city => (
                   <span key={city} className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300 hover:border-blue-500/40 hover:text-white transition-colors">
                     📍 {city}
                   </span>
