@@ -27,6 +27,50 @@ const REVIEWS = [
   { name: 'Maria J.', flag: '🇪🇸', rating: 5, comment: 'Excursion fantastique dans l\'Atlas ! Guide compétent et véhicule confortable. Inoubliable.' },
 ];
 
+const GALLERY = [
+  { src: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80', alt: 'Transfert aéroport', span: 'col-span-2 row-span-2' },
+  { src: 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=800&q=80', alt: 'Marrakech' },
+  { src: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80', alt: 'Fès médina' },
+  { src: 'https://images.unsplash.com/photo-1570829460005-c840387bb1ca?auto=format&fit=crop&w=800&q=80', alt: 'Essaouira' },
+  { src: 'https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=800&q=80', alt: 'Aventure désert' },
+  { src: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80', alt: 'Circuit montagne' },
+  { src: 'https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?auto=format&fit=crop&w=800&q=80', alt: 'Voyage luxe' },
+];
+
+function GallerySection() {
+  const [lightbox, setLightbox] = useState(null);
+  return (
+    <section className="py-24 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-14">
+          <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-400">Galerie</span>
+          <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-white to-pink-300 bg-clip-text text-transparent">Nos Moments</h2>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 auto-rows-[180px]">
+          {GALLERY.map((photo, i) => (
+            <div key={i} onClick={() => setLightbox(photo.src)}
+              className={`relative overflow-hidden rounded-2xl cursor-pointer group border border-white/8 ${photo.span || ''}`}>
+              <img src={photo.src} alt={photo.alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity text-white text-3xl">🔍</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Lightbox */}
+      {lightbox && (
+        <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4" onClick={() => setLightbox(null)}>
+          <button className="absolute top-4 right-4 text-white text-4xl hover:text-gray-300" onClick={() => setLightbox(null)}>×</button>
+          <img src={lightbox} alt="" className="max-w-full max-h-[90vh] rounded-2xl shadow-2xl" onClick={e => e.stopPropagation()} />
+        </div>
+      )}
+    </section>
+  );
+}
+
 export default function Home() {
   const [services, setServices]     = useState([]);
   const [circuits, setCircuits]     = useState([]);
@@ -253,45 +297,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── WHY US ── */}
-        <section className="py-24 px-6">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold tracking-widest uppercase rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400">Pourquoi nous choisir</span>
-                <h2 className="text-4xl font-extrabold text-white mb-8">{t('home:why_choose.title')}</h2>
-                <div className="space-y-6">
-                  {[
-                    { icon: '🛡️', title: t('home:why_choose.reliable_service.title'), desc: t('home:why_choose.reliable_service.description') },
-                    { icon: '⭐', title: t('home:why_choose.premium_quality.title'), desc: t('home:why_choose.premium_quality.description') },
-                    { icon: '🎧', title: t('home:why_choose.support.title'), desc: t('home:why_choose.support.description') },
-                  ].map((item, i) => (
-                    <div key={i} className="flex gap-4 p-5 rounded-2xl border border-white/8 bg-white/[0.03] hover:border-blue-500/30 transition-colors">
-                      <span className="text-2xl flex-shrink-0">{item.icon}</span>
-                      <div>
-                        <h3 className="font-bold text-white mb-1">{item.title}</h3>
-                        <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="relative rounded-3xl overflow-hidden border border-white/8">
-                <img src="/images/mercedes-fleet.png" alt="fleet" className="w-full h-80 object-cover" style={{ filter: 'brightness(0.6)' }} />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#080d1a] via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <h3 className="text-2xl font-bold text-white mb-2">{t('home:why_choose.book_now')}</h3>
-                  <p className="text-slate-300 text-sm mb-5">{t('home:why_choose.get_quote')}</p>
-                  <Link href="/services">
-                    <span className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg hover:scale-105 transition-transform text-sm">
-                      {t('home:why_choose.request_quote')}
-                    </span>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* ── GALERIE ── */}
+        <GallerySection />
 
         {/* ── REVIEWS ── */}
         <section className="py-24 px-6 bg-white/[0.02]">
