@@ -47,10 +47,15 @@ exports.createService = async (req, res) => {
       if (serviceData[field] && typeof serviceData[field] === 'string') {
         try { serviceData[field] = JSON.parse(serviceData[field]); } catch { serviceData[field] = []; }
       }
+      if (!serviceData[field]) serviceData[field] = [];
+    });
+    ['price_from', 'price_luxury', 'capacity', 'sort_order'].forEach(field => {
+      if (serviceData[field] === '' || serviceData[field] === undefined) serviceData[field] = null;
     });
     const service = await Service.create(serviceData);
     res.status(201).json({ success: true, service });
   } catch (error) {
+    console.error('createService error:', error.message);
     res.status(400).json({ success: false, error: error.message });
   }
 };
@@ -58,12 +63,18 @@ exports.createService = async (req, res) => {
 exports.updateService = async (req, res) => {
   try {
     const updateData = { ...req.body };
-    
+
     // Nettoyer les champs JSON
     ['features', 'program', 'included', 'not_included', 'luxury_advantages', 'images'].forEach(field => {
       if (updateData[field] && typeof updateData[field] === 'string') {
         try { updateData[field] = JSON.parse(updateData[field]); } catch { updateData[field] = []; }
       }
+      if (!updateData[field]) updateData[field] = [];
+    });
+
+    // Convertir les champs numériques — string vide → null
+    ['price_from', 'price_luxury', 'capacity', 'sort_order'].forEach(field => {
+      if (updateData[field] === '' || updateData[field] === undefined) updateData[field] = null;
     });
 
     // Ne pas mettre à jour le slug pour éviter les conflits
@@ -88,7 +99,8 @@ exports.updateService = async (req, res) => {
     const service = await Service.findByPk(req.params.id);
     res.json({ success: true, service });
   } catch (error) {
-    console.error('updateService error:', error.message, error.stack);
+    console.error('updateService error:', error.message);
+    console.error('updateService data:', JSON.stringify(updateData));
     res.status(400).json({ success: false, error: error.message });
   }
 };
