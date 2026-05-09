@@ -42,10 +42,12 @@ exports.getAllServices = async (req, res) => {
 
 exports.createService = async (req, res) => {
   try {
-    const serviceData = {
-      ...req.body,
-      slug: generateSlug(req.body.name)
-    };
+    const serviceData = { ...req.body, slug: generateSlug(req.body.name) };
+    ['features', 'program', 'included', 'not_included', 'luxury_advantages', 'images'].forEach(field => {
+      if (serviceData[field] && typeof serviceData[field] === 'string') {
+        try { serviceData[field] = JSON.parse(serviceData[field]); } catch { serviceData[field] = []; }
+      }
+    });
     const service = await Service.create(serviceData);
     res.status(201).json({ success: true, service });
   } catch (error) {
@@ -56,9 +58,16 @@ exports.createService = async (req, res) => {
 exports.updateService = async (req, res) => {
   try {
     const updateData = { ...req.body };
+    
+    // Nettoyer les champs JSON
+    ['features', 'program', 'included', 'not_included', 'luxury_advantages', 'images'].forEach(field => {
+      if (updateData[field] && typeof updateData[field] === 'string') {
+        try { updateData[field] = JSON.parse(updateData[field]); } catch { updateData[field] = []; }
+      }
+    });
+
     if (updateData.name) {
       const newSlug = generateSlug(updateData.name);
-      // Vérifier si le slug existe déjà sur un autre service
       const existing = await Service.findOne({ where: { slug: newSlug } });
       if (!existing || existing.id == req.params.id) {
         updateData.slug = newSlug;
