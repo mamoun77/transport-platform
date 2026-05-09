@@ -14,7 +14,8 @@
     "logout": "Déconnexion",
     "dashboard": "Mon compte",
     "admin": "Administration",
-    "blog": "Blog"
+    "blog": "Blog",
+    "galerie": "Galerie"
   },
   "common": {
     "hello": "Bonjour",

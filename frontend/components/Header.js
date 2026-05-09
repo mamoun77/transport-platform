@@ -41,7 +41,7 @@ export default function Header() {
     { href: '/excursions', label: t('nav.excursions') },
     { href: '/circuits', label: t('nav.circuits') },
     { href: '/activites', label: t('nav.activites') },
-    { href: '/galerie', label: 'Galerie' },
+    { href: '/galerie', label: t('nav.galerie') },
     { href: '/contact', label: t('nav.contact') },
   ];
 
