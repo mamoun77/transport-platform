@@ -62,6 +62,12 @@ async function setupTables() {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )`);
 
+    await sequelize.query(`CREATE TABLE IF NOT EXISTS gallery (
+      id SERIAL PRIMARY KEY, url VARCHAR(500) NOT NULL, alt VARCHAR(200) DEFAULT '',
+      sort_order INTEGER DEFAULT 0, is_active BOOLEAN DEFAULT true,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )`);
+
     await sequelize.query(`CREATE TABLE IF NOT EXISTS activities (
       id SERIAL PRIMARY KEY, name VARCHAR(200) NOT NULL, slug VARCHAR(250) UNIQUE NOT NULL,
       description TEXT DEFAULT '', short_description VARCHAR(500), image VARCHAR(500),

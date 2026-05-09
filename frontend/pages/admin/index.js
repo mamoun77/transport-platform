@@ -323,6 +323,22 @@ export default function AdminDashboard() {
               </div>
             </div>
 
+            <div className="group bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 cursor-pointer" onClick={() => router.push('/admin/gallery')}>
+              <div className="flex items-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                </div>
+                <div className="ml-6">
+                  <h3 className="text-2xl font-bold text-gray-800 group-hover:text-pink-600 transition-colors">Galerie</h3>
+                  <p className="text-gray-600 mt-1">Gérer les photos de la galerie</p>
+                </div>
+              </div>
+              <div className="flex items-center text-pink-600 font-semibold">
+                <span>Gérer galerie</span>
+                <svg className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"/></svg>
+              </div>
+            </div>
+
             <div className="group bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 cursor-pointer" onClick={() => router.push('/admin/blog')}>
               <div className="flex items-center mb-6">
                 <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">

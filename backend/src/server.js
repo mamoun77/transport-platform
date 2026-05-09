@@ -18,6 +18,7 @@ const servicesRoutes = require('./routes/services');
 const destinationsRoutes = require('./routes/destinations');
 const circuitsRoutes = require('./routes/circuits');
 const activitiesRoutes = require('./routes/activities');
+const galleryRoutes = require('./routes/gallery');
 
 process.on('uncaughtException', (err) => {
   console.error('💥 UNCAUGHT EXCEPTION:', err.message);
@@ -89,6 +90,7 @@ app.use('/api/services', servicesRoutes);
 app.use('/api/destinations', destinationsRoutes);
 app.use('/api/circuits', circuitsRoutes);
 app.use('/api/activities', activitiesRoutes);
+app.use('/api/gallery', galleryRoutes);
 
 // Route de santé
 app.get('/health', (req, res) => {

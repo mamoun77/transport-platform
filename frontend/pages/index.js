@@ -48,10 +48,10 @@ function GallerySection() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 auto-rows-[180px]">
-          {GALLERY.map((photo, i) => (
-            <div key={i} onClick={() => setLightbox(photo.src)}
-              className={`relative overflow-hidden rounded-2xl cursor-pointer group border border-white/8 ${photo.span || ''}`}>
-              <img src={photo.src} alt={photo.alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+          {list.map((photo, i) => (
+            <div key={i} onClick={() => setLightbox(photo.url)}
+              className={`relative overflow-hidden rounded-2xl cursor-pointer group border border-white/8 ${i === 0 ? 'col-span-2 row-span-2' : ''}`}>
+              <img src={photo.url} alt={photo.alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
                 <span className="opacity-0 group-hover:opacity-100 transition-opacity text-white text-3xl">🔍</span>
               </div>

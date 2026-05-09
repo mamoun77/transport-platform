@@ -2,7 +2,13 @@ require('dotenv').config({ path: '../.env' });
 const { v2: cloudinary } = require('cloudinary');
 const path = require('path');
 const fs = require('fs');
-const sequelize = require('../src/config/database');
+const { Sequelize } = require('sequelize');
+
+// Connexion directe Railway
+const DB_URL = process.env.RAILWAY_DB_URL || require('../src/config/database');
+const sequelize = process.env.RAILWAY_DB_URL
+  ? new Sequelize(process.env.RAILWAY_DB_URL, { dialect: 'postgres', logging: false, dialectOptions: { ssl: { require: true, rejectUnauthorized: false } } })
+  : require('../src/config/database');
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME || 'dcu2kzg02',

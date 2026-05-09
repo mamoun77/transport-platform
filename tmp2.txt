@@ -1,0 +1,2 @@
+        {['✓ Réservation instantanée', '✓ Annulation gratuite', '✓ Support 24h/24'].map(b => (
+                  <span 

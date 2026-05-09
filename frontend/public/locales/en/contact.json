@@ -1,6 +1,20 @@
 {
-  "title": "Contact - Trendy Travel",
+  "title": "Contact — Trendy Travel",
   "heading": "Contact Us",
   "phone": "Phone",
-  "email": "Email"
+  "email": "Email",
+  "address": "Address",
+  "whatsapp": "WhatsApp",
+  "send_message": "Send a message",
+  "name_label": "Name",
+  "phone_label": "Phone",
+  "email_label": "Email",
+  "message_label": "Message",
+  "message_placeholder": "How can we help you?",
+  "send_button": "Send message",
+  "success_title": "Message sent!",
+  "success_subtitle": "We will get back to you as soon as possible.",
+  "available_24": "Available 24/7",
+  "response_2h": "Response within 2h",
+  "instant_response": "Instant response"
 }
