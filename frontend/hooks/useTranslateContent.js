@@ -26,7 +26,5 @@ async function translateText(text, targetLang) {
 }
 
 export function useTranslateContent(items) {
-  // Traduction automatique désactivée (quota API dépassé)
-  // Le contenu s'affiche dans la langue originale (français)
-  return items;
+  return items || [];
 }
