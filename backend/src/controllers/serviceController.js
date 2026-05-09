@@ -66,10 +66,13 @@ exports.updateService = async (req, res) => {
       }
     });
 
+    // Ne pas mettre à jour le slug pour éviter les conflits
+    delete updateData.slug;
+
     if (updateData.name) {
       const newSlug = generateSlug(updateData.name);
       const existing = await Service.findOne({ where: { slug: newSlug } });
-      if (!existing || existing.id == req.params.id) {
+      if (!existing || String(existing.id) === String(req.params.id)) {
         updateData.slug = newSlug;
       }
     }
@@ -85,6 +88,7 @@ exports.updateService = async (req, res) => {
     const service = await Service.findByPk(req.params.id);
     res.json({ success: true, service });
   } catch (error) {
+    console.error('updateService error:', error.message, error.stack);
     res.status(400).json({ success: false, error: error.message });
   }
 };

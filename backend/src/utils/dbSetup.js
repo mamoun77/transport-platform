@@ -62,6 +62,18 @@ async function setupTables() {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )`);
 
+    await sequelize.query(`CREATE TABLE IF NOT EXISTS activities (
+      id SERIAL PRIMARY KEY, name VARCHAR(200) NOT NULL, slug VARCHAR(250) UNIQUE NOT NULL,
+      description TEXT DEFAULT '', short_description VARCHAR(500), image VARCHAR(500),
+      images JSON DEFAULT '[]', price DECIMAL(10,2) DEFAULT 0, price_luxury DECIMAL(10,2),
+      duration VARCHAR(100), capacity INTEGER, location VARCHAR(200),
+      difficulty VARCHAR(50) DEFAULT 'facile', included JSON DEFAULT '[]',
+      not_included JSON DEFAULT '[]', program JSON DEFAULT '[]',
+      luxury_advantages JSON DEFAULT '[]', is_active BOOLEAN DEFAULT true,
+      is_featured BOOLEAN DEFAULT false, sort_order INTEGER DEFAULT 0,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )`);
+
     await sequelize.query(`INSERT INTO users (email, password, first_name, last_name, role)
       VALUES ('admin@transport.com', 'root', 'Admin', 'System', 'admin')
       ON CONFLICT (email) DO NOTHING`);
