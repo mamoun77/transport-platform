@@ -51,7 +51,7 @@ const Service = sequelize.define('Service', {
     defaultValue: []
   },
   type: {
-    type: DataTypes.ENUM('transfer', 'excursion', 'private_tour', 'shuttle'),
+    type: DataTypes.STRING(50),
     allowNull: true,
     defaultValue: 'transfer'
   },
