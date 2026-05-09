@@ -132,7 +132,7 @@ export default function Transfert() {
                         <div>
                           <div className="text-lg font-extrabold text-white">
                             {(s.price_from || s.price) > 0
-                              ? <span>{format(s.price_from || s.price)} <span className="text-xs font-normal text-slate-400">{t('common:common.per_person')}</span></span>
+                              ? <span>{format(s.price_from || s.price)}</span>
                               : <span className="text-sm text-slate-400">{t('common:common.on_request')}</span>}
                           </div>
                           {s.price_luxury > 0 && <div className="text-sm font-bold text-yellow-400">{format(s.price_luxury)} <span className="text-xs font-normal text-yellow-600">{t('pages:booking.luxe')}</span></div>}

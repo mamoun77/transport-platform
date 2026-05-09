@@ -132,7 +132,7 @@ export default function Excursions() {
                     <div className="flex items-center justify-between pt-4 border-t border-white/5">
                       <div>
                         <div className="text-lg font-extrabold text-white">
-                          {e.price > 0 ? <span>{format(e.price)}<span className="text-xs font-normal text-slate-400">/pers.</span></span> : <span className="text-sm text-slate-400">{t('common:common.on_request')}</span>}
+                          {e.price > 0 ? <span>{format(e.price)}</span> : <span className="text-sm text-slate-400">{t('common:common.on_request')}</span>}
                         </div>
                         {e.price_luxury > 0 && <div className="text-sm font-bold text-yellow-400">{format(e.price_luxury)} <span className="text-xs font-normal text-yellow-600">{t('pages:booking.luxe')}</span></div>}
                       </div>
