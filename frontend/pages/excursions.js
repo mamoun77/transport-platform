@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Header from '../components/Header';
 import { useCurrency } from '../hooks/useCurrency';
+import { useTranslateContent } from '../hooks/useTranslateContent';
 import ImageGallery from '../components/ImageGallery';
 
 const GRADIENTS = [
@@ -27,6 +28,7 @@ export default function Excursions() {
   const [form, setForm]             = useState({ name: '', phone: '', email: '', date: '', time: '', passengers: 1, type: 'standard' });
   const [submitting, setSubmitting] = useState(false);
   const { format } = useCurrency();
+  const translatedExcursions = useTranslateContent(excursions);
   const { t } = useTranslation(['common', 'pages']);
   const router = useRouter();
 
@@ -109,7 +111,7 @@ export default function Excursions() {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-              {excursions.map(e => (
+              {translatedExcursions.map(e => (
                 <div key={e.id} className="group relative flex flex-col rounded-3xl overflow-hidden border border-white/5 bg-white/[0.03] hover:bg-white/[0.07] transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-emerald-900/20 h-full">
                   <div className="relative h-52 overflow-hidden">
                     <img src={(e.images && e.images[0]) || e.image || 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=800&q=80'}
