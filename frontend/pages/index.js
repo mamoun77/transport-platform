@@ -73,9 +73,22 @@ export default function Home() {
               </p>
 
               {/* Badges */}
-              <div className="flex flex-wrap gap-4 text-sm text-slate-400">
-                {['✓ Réservation instantanée', '✓ Annulation gratuite', '✓ Support 24h/24'].map(b => (
+              <div className="flex flex-wrap gap-4 text-sm text-slate-400 mb-6">
+                {[
+                  `✓ ${t('home:hero.instant_booking')}`,
+                  `✓ ${t('home:hero.free_cancellation')}`,
+                  `✓ ${t('home:hero.support_24_7')}`,
+                ].map(b => (
                   <span key={b} className="flex items-center gap-1">{b}</span>
+                ))}
+              </div>
+              {/* Départ depuis */}
+              <div className="flex flex-wrap items-center gap-3 text-sm">
+                <span className="text-slate-500 font-medium">Départ depuis :</span>
+                {['Marrakech', 'Agadir', 'Fès', 'Casablanca'].map(city => (
+                  <span key={city} className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300 hover:border-blue-500/40 hover:text-white transition-colors">
+                    📍 {city}
+                  </span>
                 ))}
               </div>
             </div>
