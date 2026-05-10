@@ -173,11 +173,11 @@ export default function AdminDestinations() {
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Gestion des Destinations</h1>
-          <div className="space-x-4">
-            <button onClick={() => router.push('/admin')} className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Retour Admin</button>
-            <button onClick={() => { setShowForm(true); setEditingDestination(null); resetForm(); }} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Nouvelle Destination</button>
+        <div className="flex justify-between items-center gap-4 mb-8">
+          <h1 className="text-xl sm:text-3xl font-bold text-gray-800">Gestion des Destinations</h1>
+          <div className="flex flex-col sm:flex-row gap-2 shrink-0">
+            <button onClick={() => router.push('/admin')} className="bg-gray-500 text-white px-3 py-2 rounded hover:bg-gray-600 text-sm whitespace-nowrap">Retour Admin</button>
+            <button onClick={() => { setShowForm(true); setEditingDestination(null); resetForm(); }} className="bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600 text-sm whitespace-nowrap">Nouvelle Destination</button>
           </div>
         </div>
 
@@ -235,7 +235,36 @@ export default function AdminDestinations() {
           </div>
         )}
 
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        {/* Cards mobile */}
+        <div className="lg:hidden space-y-4">
+          {destinations.map((d) => (
+            <div key={d.id} className="bg-white rounded-lg shadow p-4">
+              <div className="flex justify-between items-start mb-2">
+                <div>
+                  <div className="font-semibold text-gray-900">{d.name}{d.is_featured && <span className="ml-2 px-2 py-0.5 rounded-full text-xs bg-yellow-100 text-yellow-800">Vedette</span>}</div>
+                  <div className="text-sm text-gray-500">{d.short_description}</div>
+                </div>
+                <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${d.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>{d.is_active ? 'Active' : 'Inactive'}</span>
+              </div>
+              <div className="flex gap-1 mb-3">
+                {(d.images || []).slice(0, 3).map((img, i) => <img key={i} src={img} alt="" className="w-12 h-12 object-cover rounded border" />)}
+                {!(d.images || []).length && d.image && <img src={d.image} alt="" className="w-12 h-12 object-cover rounded border" />}
+              </div>
+              <div className="flex flex-wrap gap-3 text-sm text-gray-600 mb-3">
+                {d.location && <span>📍 {d.location}</span>}
+                {d.distance_from_city && <span>🛣 {d.distance_from_city} km</span>}
+                {d.price && <span className="font-semibold text-green-700">{d.price} $</span>}
+              </div>
+              <div className="flex gap-2">
+                <button onClick={() => handleEdit(d)} className="flex-1 bg-blue-500 text-white py-2 rounded text-sm font-medium hover:bg-blue-600">Modifier</button>
+                <button onClick={() => handleDelete(d.id)} className="flex-1 bg-red-500 text-white py-2 rounded text-sm font-medium hover:bg-red-600">Supprimer</button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Tableau desktop */}
+        <div className="hidden lg:block bg-white rounded-lg shadow-md overflow-hidden">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
@@ -248,30 +277,19 @@ export default function AdminDestinations() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {destinations.map((destination) => (
-                <tr key={destination.id}>
+              {destinations.map((d) => (
+                <tr key={d.id}>
                   <td className="px-6 py-4">
-                    <div className="flex items-center">
-                      <div>
-                        <div className="text-sm font-medium text-gray-900">
-                          {destination.name}
-                          {destination.is_featured && <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Vedette</span>}
-                        </div>
-                        <div className="text-sm text-gray-500">{destination.short_description}</div>
-                      </div>
-                    </div>
+                    <div className="text-sm font-medium text-gray-900">{d.name}{d.is_featured && <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Vedette</span>}</div>
+                    <div className="text-sm text-gray-500">{d.short_description}</div>
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-900">{destination.location || '-'}</td>
-                  <td className="px-6 py-4 text-sm text-gray-900">{destination.distance_from_city ? `${destination.distance_from_city} km` : '-'}</td>
-                  <td className="px-6 py-4 text-sm font-semibold text-green-700">{destination.price ? `${destination.price} $` : '-'}</td>
-                  <td className="px-6 py-4">
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${destination.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                      {destination.is_active ? 'Active' : 'Inactive'}
-                    </span>
-                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-900">{d.location || '-'}</td>
+                  <td className="px-6 py-4 text-sm text-gray-900">{d.distance_from_city ? `${d.distance_from_city} km` : '-'}</td>
+                  <td className="px-6 py-4 text-sm font-semibold text-green-700">{d.price ? `${d.price} $` : '-'}</td>
+                  <td className="px-6 py-4"><span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${d.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>{d.is_active ? 'Active' : 'Inactive'}</span></td>
                   <td className="px-6 py-4 text-sm font-medium space-x-2">
-                    <button onClick={() => handleEdit(destination)} className="text-blue-600 hover:text-blue-900">Modifier</button>
-                    <button onClick={() => handleDelete(destination.id)} className="text-red-600 hover:text-red-900">Supprimer</button>
+                    <button onClick={() => handleEdit(d)} className="text-blue-600 hover:text-blue-900">Modifier</button>
+                    <button onClick={() => handleDelete(d.id)} className="text-red-600 hover:text-red-900">Supprimer</button>
                   </td>
                 </tr>
               ))}
