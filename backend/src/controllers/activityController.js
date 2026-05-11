@@ -35,9 +35,26 @@ exports.getAllActivities = async (req, res) => {
   }
 };
 
+const normalizeNumber = (value, fallback = null) => {
+  if (value === undefined || value === null || value === '') return fallback;
+  const number = Number(value);
+  return Number.isNaN(number) ? fallback : number;
+};
+
+const sanitizeActivityData = (data) => ({
+  ...data,
+  price: normalizeNumber(data.price, null),
+  price_luxury: normalizeNumber(data.price_luxury, null),
+  capacity: normalizeNumber(data.capacity, null),
+  sort_order: normalizeNumber(data.sort_order, 0),
+  is_active: data.is_active === undefined ? true : data.is_active,
+  is_featured: data.is_featured === undefined ? false : data.is_featured,
+});
+
 exports.createActivity = async (req, res) => {
   try {
-    const activity = await Activity.create({ ...req.body, slug: generateSlug(req.body.name) });
+    const payload = sanitizeActivityData(req.body);
+    const activity = await Activity.create({ ...payload, slug: generateSlug(payload.name) });
     res.status(201).json({ success: true, activity });
   } catch (error) {
     res.status(400).json({ success: false, error: error.message });
@@ -46,7 +63,7 @@ exports.createActivity = async (req, res) => {
 
 exports.updateActivity = async (req, res) => {
   try {
-    const updateData = { ...req.body };
+    const updateData = sanitizeActivityData(req.body);
     if (updateData.name) updateData.slug = generateSlug(updateData.name);
     const [updated] = await Activity.update(updateData, { where: { id: req.params.id } });
     if (!updated) return res.status(404).json({ success: false, message: 'Activité non trouvée' });

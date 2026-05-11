@@ -39,6 +39,10 @@ export default function AdminActivities() {
     const payload = {
       ...form,
       image: form.images[0] || form.image || '',
+      price: form.price !== '' ? parseFloat(form.price) : null,
+      price_luxury: form.price_luxury !== '' ? parseFloat(form.price_luxury) : null,
+      capacity: form.capacity !== '' ? parseInt(form.capacity, 10) : null,
+      sort_order: form.sort_order !== '' ? parseInt(form.sort_order, 10) : 0,
       included: form.included.filter(x => x.trim()),
       not_included: form.not_included.filter(x => x.trim()),
       program: form.program.filter(x => x.trim()),
