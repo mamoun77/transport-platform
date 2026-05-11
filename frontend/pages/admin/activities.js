@@ -32,6 +32,8 @@ export default function AdminActivities() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!form.name.trim()) { alert('Le nom de l\'activité est requis'); return; }
+    if (!form.description.trim()) { alert('La description est requise'); return; }
     const url    = editing ? `/backend/activities/admin/${editing.id}` : '/backend/activities/admin';
     const method = editing ? 'PUT' : 'POST';
     const payload = {
