@@ -37,7 +37,19 @@ export default function AdminCircuits() {
     const url = editing ? `${API}/admin/${editing.id}` : `${API}/admin`;
     const method = editing ? 'PUT' : 'POST';
     try {
-      const r = await fetch(url, { method, headers: authHeaders(), body: JSON.stringify({ ...form, image: form.images[0] || form.image || '', included: form.included.filter(x => x.trim()), not_included: form.not_included.filter(x => x.trim()), program: form.program.filter(x => x.trim()) }) });
+      const payload = {
+        ...form,
+        image: form.images[0] || form.image || '',
+        price: form.price === '' ? null : Number(form.price),
+        price_luxury: form.price_luxury === '' ? null : Number(form.price_luxury),
+        distance_km: form.distance_km === '' ? null : Number(form.distance_km),
+        capacity: form.capacity === '' ? null : Number(form.capacity),
+        sort_order: form.sort_order === '' ? 0 : Number(form.sort_order),
+        included: form.included.filter(x => x.trim()),
+        not_included: form.not_included.filter(x => x.trim()),
+        program: form.program.filter(x => x.trim()),
+      };
+      const r = await fetch(url, { method, headers: authHeaders(), body: JSON.stringify(payload) });
       const d = await r.json();
       if (d.success) { alert('Circuit sauvegardé !'); setShowForm(false); setEditing(null); setForm(EMPTY_FORM); fetchCircuits(); }
       else alert(d.error || 'Erreur');
