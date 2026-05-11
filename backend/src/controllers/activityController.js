@@ -3,7 +3,7 @@ const Activity = require('../models/Activity');
 const generateSlug = (name) => name.toLowerCase()
   .replace(/[àáâãäå]/g, 'a').replace(/[èéêë]/g, 'e').replace(/[ìíîï]/g, 'i')
   .replace(/[òóôõö]/g, 'o').replace(/[ùúûü]/g, 'u').replace(/[ç]/g, 'c')
-  .replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim('-');
+  .replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim('-') + '-' + Date.now();
 
 exports.getActivities = async (req, res) => {
   try {
