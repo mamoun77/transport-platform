@@ -16,7 +16,7 @@ export default function BookingConfirmation() {
     const data = JSON.parse(stored);
     const b = {
       id: 'BK-' + Date.now(),
-      service: data.serviceName || 'Service',
+      serviceName: data.serviceName || 'Service',
       pickup: data.pickup || '',
       destination: data.destination || '',
       date: data.date || '',
