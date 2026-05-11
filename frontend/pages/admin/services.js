@@ -165,8 +165,8 @@ export default function AdminServices() {
 
               {/* Prix & infos */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input type="number" name="price_from" value={formData.price_from} onChange={handleInput} placeholder="Prix standard ($/pers.) *" step="0.01" required className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                <input type="number" name="price_luxury" value={formData.price_luxury} onChange={handleInput} placeholder="Prix luxe ($/pers.) — optionnel" step="0.01" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <input type="number" name="price_from" value={formData.price_from} onChange={handleInput} placeholder="Prix standard (€/pers.) *" step="0.01" required className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <input type="number" name="price_luxury" value={formData.price_luxury} onChange={handleInput} placeholder="Prix luxe (€/pers.) — optionnel" step="0.01" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <input type="text" name="duration" value={formData.duration} onChange={handleInput} placeholder="Durée (ex: 3h)" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
@@ -226,8 +226,8 @@ export default function AdminServices() {
                 {!(service.images || []).length && service.image && <img src={service.image} alt="" className="w-12 h-12 object-cover rounded border" />}
               </div>
               <div className="flex gap-4 text-sm text-gray-600 mb-3">
-                {service.price_from && <span className="font-semibold text-green-700">{service.price_from} $/pers.</span>}
-                {service.price_luxury && <span className="font-semibold text-yellow-600">✨ {service.price_luxury} $</span>}
+                {service.price_from && <span className="font-semibold text-green-700">{service.price_from} €/pers.</span>}
+                {service.price_luxury && <span className="font-semibold text-yellow-600">✨ {service.price_luxury} €</span>}
                 {service.duration && <span>⏱ {service.duration}</span>}
               </div>
               <div className="flex gap-2">
@@ -271,8 +271,8 @@ export default function AdminServices() {
                       {!(service.images || []).length && service.image && <img src={service.image} alt="" className="w-10 h-10 object-cover rounded border" />}
                     </div>
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-900">{service.price_from ? `${service.price_from} $` : '-'}</td>
-                  <td className="px-6 py-4 text-sm text-yellow-600">{service.price_luxury ? `${service.price_luxury} $` : '-'}</td>
+                  <td className="px-6 py-4 text-sm text-gray-900">{service.price_from ? `${service.price_from} €` : '-'}</td>
+                  <td className="px-6 py-4 text-sm text-yellow-600">{service.price_luxury ? `${service.price_luxury} €` : '-'}</td>
                   <td className="px-6 py-4 text-sm text-gray-900">{service.duration || '-'}</td>
                   <td className="px-6 py-4">
                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${service.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
