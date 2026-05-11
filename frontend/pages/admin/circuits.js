@@ -76,6 +76,10 @@ export default function AdminCircuits() {
         <div key={i} className="flex gap-2 mb-2">
           <input type="text" value={item} onChange={e => { const a = [...value]; a[i] = e.target.value; setForm(p => ({ ...p, [key]: a })); }}
             placeholder={placeholder} className="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          {key === 'program' && (
+            <button type="button" onClick={() => setForm(p => ({ ...p, [key]: [...value.slice(0, i + 1), item, ...value.slice(i + 1)] }))}
+              className="bg-indigo-500 text-white px-3 py-2 rounded hover:bg-indigo-600">Dupliquer</button>
+          )}
           <button type="button" onClick={() => setForm(p => ({ ...p, [key]: value.filter((_, j) => j !== i) }))} className="bg-red-500 text-white px-3 py-2 rounded hover:bg-red-600">×</button>
         </div>
       ))}
