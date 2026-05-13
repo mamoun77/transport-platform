@@ -167,7 +167,7 @@ export default function Home() {
                   <div className="relative h-40 overflow-hidden">
                     <img src={s.image || 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'} alt={s.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#080d1a] via-transparent to-transparent" />
-                    <span className="absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-bold bg-black/50 border border-white/10">dès {format(s.price_from)} pour transfert</span>
+                    <span className="absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-bold bg-black/50 border border-white/10">dès {format(s.price_from)} par pers.</span>
                   </div>
                   <div className="p-5 flex-1 flex flex-col">
                     <h3 className="font-bold text-white mb-1 group-hover:text-sky-300 transition-colors">{s.name}</h3>
@@ -225,7 +225,7 @@ export default function Home() {
                   <div className="relative h-40 overflow-hidden">
                     <img src={e.image || 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=800&q=80'} alt={e.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#080d1a] via-transparent to-transparent" />
-                    {e.price > 0 && <span className="absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-bold bg-black/50 border border-white/10">{format(e.price)} pour excursion</span>}
+                    {e.price > 0 && <span className="absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-bold bg-black/50 border border-white/10">{format(e.price)} par pers.</span>}
                   </div>
                   <div className="p-5 flex-1 flex flex-col">
                     <h3 className="font-bold text-white mb-1 group-hover:text-emerald-300 transition-colors">{e.name}</h3>
