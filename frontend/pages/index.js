@@ -158,8 +158,8 @@ export default function Home() {
         <section className="py-24 px-6">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-14">
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400">Nos Transferts</span>
-              <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-white to-sky-300 bg-clip-text text-transparent mb-4">Transfert Premium</h2>
+              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400">{t('home:sections.transfers')}</span>
+              <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-white to-sky-300 bg-clip-text text-transparent mb-4">{t('home:sections.transfer_title')}</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {tServices.map((s, i) => (
@@ -178,7 +178,7 @@ export default function Home() {
               ))}
             </div>
             <div className="text-center mt-10">
-              <a href="/transfert" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold bg-gradient-to-r from-sky-500 to-blue-600 shadow-lg hover:scale-105 transition-transform">Voir tous les transferts →</a>
+              <a href="/transfert" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold bg-gradient-to-r from-sky-500 to-blue-600 shadow-lg hover:scale-105 transition-transform">{t('home:sections.see_all_transfers')} →</a>
             </div>
           </div>
         </section>
@@ -187,8 +187,8 @@ export default function Home() {
         <section className="py-24 px-6 bg-white/[0.02]">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-14">
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400">Circuits</span>
-              <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-white to-amber-300 bg-clip-text text-transparent mb-4">Circuits & Aventures</h2>
+              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400">{t('home:sections.circuits')}</span>
+              <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-white to-amber-300 bg-clip-text text-transparent mb-4">{t('home:sections.circuits_title')}</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {tCircuits.map((c, i) => (
@@ -207,7 +207,7 @@ export default function Home() {
               ))}
             </div>
             <div className="text-center mt-10">
-              <a href="/circuits" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold bg-gradient-to-r from-amber-500 to-orange-600 shadow-lg hover:scale-105 transition-transform">Voir tous les circuits →</a>
+              <a href="/circuits" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold bg-gradient-to-r from-amber-500 to-orange-600 shadow-lg hover:scale-105 transition-transform">{t('home:sections.see_all_circuits')} →</a>
             </div>
           </div>
         </section>
@@ -216,8 +216,8 @@ export default function Home() {
         <section className="py-24 px-6">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-14">
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">Excursions</span>
-              <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-white to-emerald-300 bg-clip-text text-transparent mb-4">Explorez le Maroc</h2>
+              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">{t('home:sections.excursions')}</span>
+              <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-white to-emerald-300 bg-clip-text text-transparent mb-4">{t('home:sections.excursions_title')}</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {tExcursions.map((e, i) => (
@@ -236,7 +236,7 @@ export default function Home() {
               ))}
             </div>
             <div className="text-center mt-10">
-              <a href="/excursions" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold bg-gradient-to-r from-emerald-500 to-teal-600 shadow-lg hover:scale-105 transition-transform">Voir toutes les excursions →</a>
+              <a href="/excursions" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold bg-gradient-to-r from-emerald-500 to-teal-600 shadow-lg hover:scale-105 transition-transform">{t('home:sections.see_all_excursions')} →</a>
             </div>
           </div>
         </section>
@@ -245,8 +245,8 @@ export default function Home() {
         <section className="py-24 px-6 bg-white/[0.02]">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-14">
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase rounded-full bg-violet-500/10 border border-violet-500/30 text-violet-400">Activités</span>
-              <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-white to-violet-300 bg-clip-text text-transparent mb-4">Vivez l’aventure</h2>
+              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase rounded-full bg-violet-500/10 border border-violet-500/30 text-violet-400">{t('home:sections.activities')}</span>
+              <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-white to-violet-300 bg-clip-text text-transparent mb-4">{t('home:sections.activities_title')}</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {tActivities.map((a) => (
@@ -265,7 +265,7 @@ export default function Home() {
               ))}
             </div>
             <div className="text-center mt-10">
-              <a href="/activites" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold bg-gradient-to-r from-violet-500 to-purple-600 shadow-lg hover:scale-105 transition-transform">Voir toutes les activités →</a>
+              <a href="/activites" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold bg-gradient-to-r from-violet-500 to-purple-600 shadow-lg hover:scale-105 transition-transform">{t('home:sections.see_all_activities')} →</a>
             </div>
           </div>
         </section>
