@@ -21,7 +21,7 @@ const translations = {
   '1 Jour Ouarzazate & Aït Benhaddou': { en: '1 Day Ouarzazate & Aït Benhaddou', fr: '1 Jour Ouarzazate & Aït Benhaddou' },
   'Hollywood du Maroc et ksar UNESCO en une journée.': { en: 'Morocco\'s Hollywood and UNESCO kasar in one day.', fr: 'Hollywood du Maroc et ksar UNESCO en une journée.' },
   
-  // Excursions
+  // Excursions (Destinations)
   'Vallée de l\'Ourika': { en: 'Ourika Valley', fr: 'Vallée de l\'Ourika' },
   'Oasis de verdure et cascades au pied de l\'Atlas.': { en: 'Green oasis and waterfalls at the foot of the Atlas.', fr: 'Oasis de verdure et cascades au pied de l\'Atlas.' },
   'Imlil & Toubkal': { en: 'Imlil & Toubkal', fr: 'Imlil & Toubkal' },
@@ -40,6 +40,10 @@ const translations = {
   'Circuit panoramique à travers trois vallées berbères de l\'Atlas.': { en: 'Panoramic circuit through three Berber valleys of the Atlas.', fr: 'Circuit panoramique à travers trois vallées berbères de l\'Atlas.' },
   'Oukaimeden': { en: 'Oukaimeden', fr: 'Oukaimeden' },
   'Station de ski et gravures rupestres à 2600 m d\'altitude.': { en: 'Ski resort and rock carvings at 2600 m altitude.', fr: 'Station de ski et gravures rupestres à 2600 m d\'altitude.' },
+  
+  // Activities
+  'Quad Bike in the Palmeraie': { en: 'Quad Bike in the Palmeraie', fr: 'Quad Bike in the Palmeraie' },
+  'Thrilling quad adventure through palm groves, desert tracks and Berber villages just outside Marrakech.': { en: 'Thrilling quad adventure through palm groves, desert tracks and Berber villages just outside Marrakech.', fr: 'Thrilling quad adventure through palm groves, desert tracks and Berber villages just outside Marrakech.' },
 };
 
 export function useTranslateContent(items) {
