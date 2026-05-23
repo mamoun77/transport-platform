@@ -117,7 +117,16 @@ export default function Transfert() {
                         alt={s.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#080d1a] via-[#080d1a]/20 to-transparent" />
                       {s.type && <span className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold border ${cfg.color}`}>{cfg.label}</span>}
-                      {(s.price_from || s.price) > 0 && <span className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold bg-black/50 border border-white/10 backdrop-blur-sm">dès {format(s.price_from || s.price)}</span>}
+                      {(s.price_from || s.price) > 0 && (
+                        <div className="absolute top-4 right-4 rounded-full bg-black/55 border border-white/10 backdrop-blur-sm px-3 py-2 flex items-center gap-2 text-[0.72rem] font-semibold text-white">
+                          <span>dès {format(s.price_from || s.price)}</span>
+                          {s.capacity > 0 && (
+                            <span className="rounded-full bg-white/10 px-2 py-0.5 text-[0.65rem]">
+                              👥 {s.capacity} pers.
+                            </span>
+                          )}
+                        </div>
+                      )}
                       {s.is_featured && <span className="absolute bottom-4 left-4 px-2 py-0.5 rounded-full text-xs font-bold bg-yellow-400/20 border border-yellow-400/40 text-yellow-300">⭐ {t('pages:booking.vedette')}</span>}
                       {(s.images && s.images.length > 1) && <span className="absolute bottom-4 right-4 px-2 py-0.5 rounded-full text-xs font-semibold bg-black/60 text-white backdrop-blur-sm">📷 {s.images.length}</span>}
                     </div>
