@@ -1,17 +1,23 @@
 const nodemailer = require('nodemailer');
 
-const transporter = nodemailer.createTransport({
+const transportOptions = {
   host: process.env.SMTP_HOST || 'smtp-mail.outlook.com',
   port: parseInt(process.env.SMTP_PORT) || 587,
-  secure: false,
+  secure: process.env.SMTP_SECURE === 'true',
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
   tls: {
-    ciphers: 'SSLv3'
-  }
-});
+    rejectUnauthorized: false,
+  },
+};
+
+if (process.env.SMTP_SERVICE) {
+  transportOptions.service = process.env.SMTP_SERVICE;
+}
+
+const transporter = nodemailer.createTransport(transportOptions);
 
 function bookingEmailTemplate(booking) {
   const { bookingNumber, serviceName, pickup, destination, date, time, passengers, price, name, phone, email, flight_number, notes } = booking;

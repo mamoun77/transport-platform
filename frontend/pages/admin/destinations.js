@@ -57,18 +57,24 @@ export default function AdminDestinations() {
         body: JSON.stringify({
           ...formData,
           image: formData.images[0] || formData.image || '',
+          distance_from_city: formData.distance_from_city !== '' ? parseInt(formData.distance_from_city, 10) : null,
+          price: formData.price !== '' ? parseFloat(formData.price) : null,
+          sort_order: formData.sort_order !== '' ? parseInt(formData.sort_order, 10) : 0,
           attractions: formData.attractions.filter(a => a.trim())
         })
       });
 
       const data = await response.json();
-      if (data.success) {
-        alert('Destination sauvegardée avec succès');
-        setShowForm(false);
-        setEditingDestination(null);
-        resetForm();
-        fetchDestinations();
+      if (!data.success) {
+        alert('Erreur lors de la sauvegarde : ' + (data.error || data.message || 'Requête invalide'));
+        return;
       }
+
+      alert('Destination sauvegardée avec succès');
+      setShowForm(false);
+      setEditingDestination(null);
+      resetForm();
+      fetchDestinations();
     } catch (error) {
       alert('Erreur lors de la sauvegarde');
     }
