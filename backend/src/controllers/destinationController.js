@@ -46,10 +46,19 @@ exports.getAllDestinations = async (req, res) => {
 
 exports.createDestination = async (req, res) => {
   try {
+    const { name, description } = req.body;
+    if (!name || !description) {
+      return res.status(400).json({ success: false, error: 'Le nom et la description sont requis.' });
+    }
+
     const destinationData = {
       ...req.body,
-      slug: generateSlug(req.body.name)
+      distance_from_city: req.body.distance_from_city === '' || req.body.distance_from_city === null ? null : parseInt(req.body.distance_from_city, 10),
+      price: req.body.price === '' || req.body.price === null ? null : parseFloat(req.body.price),
+      sort_order: req.body.sort_order === '' || req.body.sort_order === null ? 0 : parseInt(req.body.sort_order, 10),
+      slug: generateSlug(name)
     };
+
     const destination = await Destination.create(destinationData);
     res.status(201).json({ success: true, destination });
   } catch (error) {
@@ -63,7 +72,17 @@ exports.updateDestination = async (req, res) => {
     if (updateData.name) {
       updateData.slug = generateSlug(updateData.name);
     }
-    
+    // normalize numeric fields if present
+    if (Object.prototype.hasOwnProperty.call(updateData, 'distance_from_city')) {
+      updateData.distance_from_city = updateData.distance_from_city === '' || updateData.distance_from_city === null ? null : parseInt(updateData.distance_from_city, 10);
+    }
+    if (Object.prototype.hasOwnProperty.call(updateData, 'price')) {
+      updateData.price = updateData.price === '' || updateData.price === null ? null : parseFloat(updateData.price);
+    }
+    if (Object.prototype.hasOwnProperty.call(updateData, 'sort_order')) {
+      updateData.sort_order = updateData.sort_order === '' || updateData.sort_order === null ? 0 : parseInt(updateData.sort_order, 10);
+    }
+
     const [updated] = await Destination.update(updateData, {
       where: { id: req.params.id }
     });
