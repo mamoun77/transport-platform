@@ -380,7 +380,7 @@ export default function Home() {
                     <span className="text-2xl">✉️</span>
                     <div className="text-left">
                       <p className="text-xs text-slate-400">{t('home:contact.write_us')}</p>
-                      <p className="font-bold text-white text-sm">contact@trendytravel.ma</p>
+                      <a href="mailto:contact@trendytravel.ma" className="font-bold text-white text-sm hover:text-blue-400 transition">contact@trendytravel.ma</a>
                     </div>
                   </div>
                 </div>
