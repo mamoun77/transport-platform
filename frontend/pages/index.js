@@ -135,24 +135,7 @@ export default function Home() {
                 ))}
               </div>
 
-              {/* Partner logos */}
-              <div className="flex items-center gap-4 mt-4">
-                <a href="https://www.getyourguide.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100">
-                  <div className="w-14 h-14 rounded-full bg-white/5 border border-white/20 flex items-center justify-center p-1">
-                    <img src="/images/getyourguide.png" alt="GetYourGuide" className="h-10 w-10 object-contain rounded-full" />
-                  </div>
-                </a>
-                <a href="https://www.viator.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100">
-                  <div className="w-14 h-14 rounded-full bg-white/5 border border-white/20 flex items-center justify-center p-1">
-                    <img src="/images/viator.png" alt="Viator" className="h-10 w-10 object-contain rounded-full" />
-                  </div>
-                </a>
-                <a href="https://www.tripadvisor.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100">
-                  <div className="w-14 h-14 rounded-full bg-white/5 border border-white/20 flex items-center justify-center p-1">
-                    <img src="/images/tripadvisor.png" alt="TripAdvisor" className="h-10 w-10 object-contain rounded-full" />
-                  </div>
-                </a>
-              </div>
+              {/* Partner logos (moved below) */}
               {/* Départ depuis */}
               <div className="flex flex-wrap items-center gap-3 text-sm">
                 <span className="text-slate-500 font-medium">{t('home:sections.depart_from')}</span>
@@ -161,6 +144,26 @@ export default function Home() {
                     📍 {city}
                   </span>
                 ))}
+              </div>
+              {/* Partner logos centered under 'Départ depuis' */}
+              <div className="flex justify-center mt-6">
+                <div className="flex items-center gap-4">
+                  <a href="https://www.getyourguide.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100">
+                    <div className="w-14 h-14 rounded-full bg-white/5 border border-white/20 flex items-center justify-center p-1">
+                      <img src="/images/getyourguide.png" alt="GetYourGuide" className="h-10 w-10 object-contain rounded-full" />
+                    </div>
+                  </a>
+                  <a href="https://www.viator.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100">
+                    <div className="w-14 h-14 rounded-full bg-white/5 border border-white/20 flex items-center justify-center p-1">
+                      <img src="/images/viator.png" alt="Viator" className="h-10 w-10 object-contain rounded-full" />
+                    </div>
+                  </a>
+                  <a href="https://www.tripadvisor.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100">
+                    <div className="w-14 h-14 rounded-full bg-white/5 border border-white/20 flex items-center justify-center p-1">
+                      <img src="/images/tripadvisor.png" alt="TripAdvisor" className="h-10 w-10 object-contain rounded-full" />
+                    </div>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
