@@ -134,6 +134,19 @@ export default function Home() {
                   <span key={b} className="flex items-center gap-1">{b}</span>
                 ))}
               </div>
+
+              {/* Partner logos */}
+              <div className="flex items-center gap-4 mt-4">
+                <a href="https://www.getyourguide.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100">
+                  <img src="/images/getyourguide.svg" alt="GetYourGuide" className="h-10" />
+                </a>
+                <a href="https://www.viator.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100">
+                  <img src="/images/viator.svg" alt="Viator" className="h-10" />
+                </a>
+                <a href="https://www.tripadvisor.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100">
+                  <img src="/images/tripadvisor.svg" alt="TripAdvisor" className="h-10" />
+                </a>
+              </div>
               {/* Départ depuis */}
               <div className="flex flex-wrap items-center gap-3 text-sm">
                 <span className="text-slate-500 font-medium">{t('home:sections.depart_from')}</span>
