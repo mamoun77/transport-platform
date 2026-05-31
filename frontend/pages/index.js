@@ -183,7 +183,7 @@ export default function Home() {
                     <img src={s.image || 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'} alt={s.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#080d1a] via-transparent to-transparent" />
                     <div className="absolute top-2 left-2 sm:top-3 sm:left-3 flex flex-col items-start gap-1 sm:gap-2">
-                      <span className="px-2 py-0.5 sm:py-1 rounded-full text-[13px] sm:text-xs font-bold bg-amber-300/95 text-black border border-amber-400/60">{t('home:sections.from')} {format(s.price_from)} {t('home:sections.per_person_home')}</span>
+                      <span className="px-2 py-0.5 sm:py-1 rounded-full text-[13px] sm:text-xs font-bold bg-amber-300/95 text-black border border-amber-400/60">{t('home:sections.from')} {format(s.price_from)}</span>
                       <span className="px-2 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-black/40 border border-white/10 text-slate-200">👥 {s.capacity ? (s.capacity > 3 ? '1-3 pers.' : s.capacity + ' pers.') : '1-3 pers.'}</span>
                     </div>
                   </div>
@@ -243,7 +243,7 @@ export default function Home() {
                   <div className="relative h-40 overflow-hidden">
                     <img src={e.image || 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=800&q=80'} alt={e.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#080d1a] via-transparent to-transparent" />
-                    {e.price > 0 && <span className="absolute top-2 left-2 px-2 py-1 rounded-full text-xs font-bold bg-black/50 border border-white/10">{format(e.price)} {t('home:sections.per_person_home')}</span>}
+                    {e.price > 0 && <span className="absolute top-2 left-2 px-2 py-1 rounded-full text-xs font-bold bg-black/50 border border-white/10">{format(e.price)}</span>}
                   </div>
                   <div className="p-5 flex-1 flex flex-col">
                     <h3 className="font-bold text-white mb-1 group-hover:text-emerald-300 transition-colors">{e.name}</h3>
