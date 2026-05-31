@@ -49,11 +49,27 @@ const translations = {
 export function useTranslateContent(items) {
   const { locale = 'fr' } = useRouter();
   if (!items || !Array.isArray(items)) return [];
-  
-  return items.map(item => ({
-    ...item,
-    name: translations[item.name]?.[locale] || item.name,
-    description: translations[item.description]?.[locale] || item.description,
-    short_description: translations[item.short_description]?.[locale] || item.short_description,
-  }));
+  // Build a normalized lookup to tolerate small differences (arrows, punctuation)
+  const normalize = str => ('' + (str || '')).toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/[^a-z0-9]+/g, ' ').trim();
+  const normalizedMap = {};
+  Object.keys(translations).forEach(k => {
+    normalizedMap[normalize(k)] = translations[k];
+  });
+
+  return items.map(item => {
+    const nName = normalize(item.name);
+    const nDesc = normalize(item.description);
+    const nShort = normalize(item.short_description);
+
+    const tName = normalizedMap[nName]?.[locale] || translations[item.name]?.[locale] || item.name;
+    const tDesc = normalizedMap[nDesc]?.[locale] || translations[item.description]?.[locale] || item.description;
+    const tShort = normalizedMap[nShort]?.[locale] || translations[item.short_description]?.[locale] || item.short_description;
+
+    return {
+      ...item,
+      name: tName,
+      description: tDesc,
+      short_description: tShort,
+    };
+  });
 }
