@@ -39,16 +39,27 @@ export default function Contact() {
             {/* Info */}
             <div className="space-y-5">
               {[
-                { icon: '📞', label: t('contact:phone'), value: '+212 6 62 10 07 14', sub: 'Disponible 24h/24' },
-                { icon: '✉️', label: t('contact:email'), value: 'contact@trendytravel.ma', sub: 'Réponse sous 2h' },
+                { icon: '📞', label: t('contact:phone'), value: '+212 6 62 10 07 14', sub: 'Disponible 24h/24', href: 'tel:+212662100714' },
+                { icon: '✉️', label: t('contact:email'), value: 'contact@trendytravel.ma', sub: 'Réponse sous 2h', href: 'mailto:contact@trendytravel.ma' },
                 { icon: '📍', label: 'Adresse', value: 'Marrakech, Maroc', sub: 'Médina, Guéliz' },
-                { icon: '💬', label: 'WhatsApp', value: '+212 6 62 10 07 14', sub: 'Réponse instantanée' },
+                { icon: '💬', label: 'WhatsApp', value: '+212 6 62 10 07 14', sub: 'Réponse instantanée', href: 'https://wa.me/212662100714' },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-4 p-5 rounded-2xl border border-white/8 bg-white/[0.03] hover:border-blue-500/30 transition-colors">
                   <span className="text-2xl w-10 text-center flex-shrink-0">{item.icon}</span>
                   <div>
                     <p className="text-xs text-slate-500 uppercase tracking-wider mb-0.5">{item.label}</p>
-                    <p className="font-bold text-white">{item.value}</p>
+                    {item.href ? (
+                      <a
+                        href={item.href}
+                        className="font-bold text-white hover:text-blue-400 transition"
+                        target={item.href.startsWith('http') ? '_blank' : undefined}
+                        rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      >
+                        {item.value}
+                      </a>
+                    ) : (
+                      <p className="font-bold text-white">{item.value}</p>
+                    )}
                     <p className="text-xs text-slate-400">{item.sub}</p>
                   </div>
                 </div>
