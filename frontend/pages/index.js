@@ -146,7 +146,6 @@ export default function Home() {
                 ))}
               </div>
               {/* Partner logos moved out to full-width row (centered) */}
-              </div>
               <div className="w-full flex justify-center mt-4">
                 <div className="flex items-center gap-4">
                   <a href="https://www.getyourguide.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100 transform transition-transform duration-200 hover:scale-105">
