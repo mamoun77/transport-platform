@@ -368,7 +368,7 @@ export default function Home() {
               <div className="relative">
                 <h2 className="text-4xl font-extrabold text-white mb-4">{t('home:contact.title')}</h2>
                 <p className="text-slate-300 mb-10 max-w-xl mx-auto">{t('home:contact.subtitle')}</p>
-                <div className="grid sm:grid-cols-2 gap-4 max-w-lg mx-auto mb-10">
+                <div className="grid sm:grid-cols-3 gap-4 max-w-xl mx-auto mb-10">
                   <div className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/10">
                     <span className="text-2xl">📞</span>
                     <div className="text-left">
@@ -381,6 +381,13 @@ export default function Home() {
                     <div className="text-left">
                       <p className="text-xs text-slate-400">{t('home:contact.write_us')}</p>
                       <a href="mailto:contact@trendytravel.ma" className="font-bold text-white text-sm hover:text-blue-400 transition">contact@trendytravel.ma</a>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/10">
+                    <span className="text-2xl">💬</span>
+                    <div className="text-left">
+                      <p className="text-xs text-slate-400">{t('home:contact.message_us')}</p>
+                      <a href="https://wa.me/212662100714" target="_blank" rel="noopener noreferrer" className="font-bold text-white text-sm hover:text-blue-400 transition">{t('home:contact.whatsapp')}</a>
                     </div>
                   </div>
                 </div>
