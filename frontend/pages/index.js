@@ -145,20 +145,21 @@ export default function Home() {
                   </span>
                 ))}
               </div>
-              {/* Partner logos centered under 'Départ depuis' */}
-              <div className="flex justify-center mt-8">
+              {/* Partner logos moved out to full-width row (centered) */}
+              </div>
+              <div className="w-full flex justify-center mt-4">
                 <div className="flex items-center gap-4">
-                  <a href="https://www.getyourguide.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100">
+                  <a href="https://www.getyourguide.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100 transform transition-transform duration-200 hover:scale-105">
                     <div className="w-16 h-16 rounded-full bg-white/5 border border-white/20 flex items-center justify-center p-1 shadow-sm">
                       <img src="/images/getyourguide.png" alt="GetYourGuide" className="h-12 w-12 object-contain rounded-full" />
                     </div>
                   </a>
-                  <a href="https://www.viator.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100">
+                  <a href="https://www.viator.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100 transform transition-transform duration-200 hover:scale-105">
                     <div className="w-16 h-16 rounded-full bg-white/5 border border-white/20 flex items-center justify-center p-1 shadow-sm">
                       <img src="/images/viator.png" alt="Viator" className="h-12 w-12 object-contain rounded-full" />
                     </div>
                   </a>
-                  <a href="https://www.tripadvisor.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100">
+                  <a href="https://www.tripadvisor.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100 transform transition-transform duration-200 hover:scale-105">
                     <div className="w-16 h-16 rounded-full bg-white/5 border border-white/20 flex items-center justify-center p-1 shadow-sm">
                       <img src="/images/tripadvisor.png" alt="TripAdvisor" className="h-12 w-12 object-contain rounded-full" />
                     </div>
