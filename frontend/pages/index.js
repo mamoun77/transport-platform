@@ -146,21 +146,21 @@ export default function Home() {
                 ))}
               </div>
               {/* Partner logos centered under 'Départ depuis' */}
-              <div className="flex justify-center mt-6">
+              <div className="flex justify-center mt-8">
                 <div className="flex items-center gap-4">
                   <a href="https://www.getyourguide.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100">
-                    <div className="w-14 h-14 rounded-full bg-white/5 border border-white/20 flex items-center justify-center p-1">
-                      <img src="/images/getyourguide.png" alt="GetYourGuide" className="h-10 w-10 object-contain rounded-full" />
+                    <div className="w-16 h-16 rounded-full bg-white/5 border border-white/20 flex items-center justify-center p-1 shadow-sm">
+                      <img src="/images/getyourguide.png" alt="GetYourGuide" className="h-12 w-12 object-contain rounded-full" />
                     </div>
                   </a>
                   <a href="https://www.viator.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100">
-                    <div className="w-14 h-14 rounded-full bg-white/5 border border-white/20 flex items-center justify-center p-1">
-                      <img src="/images/viator.png" alt="Viator" className="h-10 w-10 object-contain rounded-full" />
+                    <div className="w-16 h-16 rounded-full bg-white/5 border border-white/20 flex items-center justify-center p-1 shadow-sm">
+                      <img src="/images/viator.png" alt="Viator" className="h-12 w-12 object-contain rounded-full" />
                     </div>
                   </a>
                   <a href="https://www.tripadvisor.com" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100">
-                    <div className="w-14 h-14 rounded-full bg-white/5 border border-white/20 flex items-center justify-center p-1">
-                      <img src="/images/tripadvisor.png" alt="TripAdvisor" className="h-10 w-10 object-contain rounded-full" />
+                    <div className="w-16 h-16 rounded-full bg-white/5 border border-white/20 flex items-center justify-center p-1 shadow-sm">
+                      <img src="/images/tripadvisor.png" alt="TripAdvisor" className="h-12 w-12 object-contain rounded-full" />
                     </div>
                   </a>
                 </div>
