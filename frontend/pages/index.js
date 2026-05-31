@@ -401,5 +401,6 @@ export default function Home() {
 }
 
 export async function getServerSideProps({ locale }) {
-  return { props: { ...(await serverSideTranslations(locale, ['common', 'home'])) } };
+  const usedLocale = locale || 'en';
+  return { props: { ...(await serverSideTranslations(usedLocale, ['common', 'home'])) } };
 }
