@@ -15,13 +15,6 @@ const STATS = [
   { value: '24/7', label: 'Support disponible' },
 ];
 
-const DESTINATIONS = [
-  { name: 'Marrakech', desc: 'Ville impériale aux mille couleurs', image: 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=800&q=80', gradient: 'from-rose-500 to-pink-600' },
-  { name: 'Essaouira', desc: 'Cité portuaire de l\'Atlantique', image: 'https://images.unsplash.com/photo-1570829460005-c840387bb1ca?auto=format&fit=crop&w=800&q=80', gradient: 'from-sky-500 to-blue-600' },
-  { name: 'Fès', desc: 'Capitale spirituelle du Maroc', image: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80', gradient: 'from-amber-500 to-orange-600' },
-  { name: 'Agadir', desc: 'Perle du Souss', image: 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=800&q=80', gradient: 'from-emerald-500 to-teal-600' },
-];
-
 const REVIEWS = [
   { name: 'Sarah M.', flag: '🇫🇷', rating: 5, comment: 'Service exceptionnel ! Véhicule impeccable et chauffeur très professionnel. Je recommande vivement.' },
   { name: 'Ahmed K.', flag: '🇲🇦', rating: 5, comment: 'Parfait pour nos transferts. Ponctuel et confortable, Trendy Travel est notre référence.' },
@@ -266,42 +259,6 @@ export default function Home() {
             </div>
             <div className="text-center mt-10">
               <a href="/activites" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold bg-gradient-to-r from-violet-500 to-purple-600 shadow-lg hover:scale-105 transition-transform">{t('home:sections.see_all_activities')} →</a>
-            </div>
-          </div>
-        </section>
-
-        {/* ── DESTINATIONS ── */}
-        <section className="py-24 px-6 bg-white/[0.02]">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-14">
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400">Destinations</span>
-              <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent mb-4">
-                {t('home:destinations.title')}
-              </h2>
-              <p className="text-slate-400 max-w-xl mx-auto">{t('home:destinations.subtitle')}</p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {DESTINATIONS.map((d, i) => (
-                <Link key={i} href="/destinations">
-                  <div className="group relative rounded-3xl overflow-hidden border border-white/8 cursor-pointer h-64">
-                    <img src={d.image} alt={d.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" style={{ filter: 'brightness(0.5)' }} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    <div className={`absolute inset-0 bg-gradient-to-br ${d.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
-                    <div className="absolute bottom-0 left-0 right-0 p-5">
-                      <h3 className="text-xl font-bold text-white mb-1">{d.name}</h3>
-                      <p className="text-slate-300 text-sm">{d.desc}</p>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-            <div className="text-center mt-10">
-              <Link href="/destinations">
-                <span className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg shadow-blue-500/20 hover:scale-105 transition-transform">
-                  Voir toutes les destinations
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                </span>
-              </Link>
             </div>
           </div>
         </section>
