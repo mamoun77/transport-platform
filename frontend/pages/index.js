@@ -371,23 +371,23 @@ export default function Home() {
                 <div className="grid sm:grid-cols-3 gap-4 max-w-xl mx-auto mb-10">
                   <div className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/10">
                     <span className="text-2xl">📞</span>
-                    <div className="text-left">
+                    <div className="text-left min-w-0">
                       <p className="text-xs text-slate-400">{t('home:contact.call_us')}</p>
-                      <a href="tel:+212662100714" className="font-bold text-white hover:text-blue-400 transition">+212662100714</a>
+                      <a href="tel:+212662100714" className="block max-w-full text-sm font-bold text-white hover:text-blue-400 transition truncate">+212662100714</a>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/10">
                     <span className="text-2xl">✉️</span>
-                    <div className="text-left">
+                    <div className="text-left min-w-0">
                       <p className="text-xs text-slate-400">{t('home:contact.write_us')}</p>
-                      <a href="mailto:contact@trendytravel.ma" className="font-bold text-white text-sm hover:text-blue-400 transition">contact@trendytravel.ma</a>
+                      <a href="mailto:contact@trendytravel.ma" className="block max-w-full text-sm font-bold text-white hover:text-blue-400 transition truncate">contact@trendytravel.ma</a>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/10">
                     <span className="text-2xl">💬</span>
-                    <div className="text-left">
+                    <div className="text-left min-w-0">
                       <p className="text-xs text-slate-400">{t('home:contact.message_us')}</p>
-                      <a href="https://wa.me/212662100714" target="_blank" rel="noopener noreferrer" className="font-bold text-white text-sm hover:text-blue-400 transition">{t('home:contact.whatsapp')}</a>
+                      <a href="https://wa.me/212662100714" target="_blank" rel="noopener noreferrer" className="block max-w-full text-sm font-bold text-white hover:text-blue-400 transition truncate">{t('home:contact.whatsapp')}</a>
                     </div>
                   </div>
                 </div>
