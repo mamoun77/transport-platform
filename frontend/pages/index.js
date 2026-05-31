@@ -373,7 +373,7 @@ export default function Home() {
                     <span className="text-2xl">📞</span>
                     <div className="text-left">
                       <p className="text-xs text-slate-400">{t('home:contact.call_us')}</p>
-                      <p className="font-bold text-white">+212662100714</p>
+                      <a href="tel:+212662100714" className="font-bold text-white hover:text-blue-400 transition">+212662100714</a>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/10">
