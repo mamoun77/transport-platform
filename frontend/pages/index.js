@@ -103,7 +103,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Trendy Travel — Transport Premium au Maroc</title>
+        <title>Trendy Travel — {t('home:sections.hero_badge')}</title>
         <meta name="description" content="Réservez vos transferts et excursions touristiques en ligne" />
       </Head>
 
@@ -122,7 +122,7 @@ export default function Home() {
             <div className="max-w-3xl">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full text-xs font-semibold tracking-widest uppercase bg-blue-500/10 border border-blue-500/30 text-blue-400">
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-                Transport Premium au Maroc
+                {t('home:sections.hero_badge')}
               </span>
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 bg-gradient-to-r from-white via-blue-100 to-blue-400 bg-clip-text text-transparent">
                 𝕋𝕣𝖊𝖓𝖉𝖞 𝕋𝖗𝖆𝖛𝖊𝖑
