@@ -163,7 +163,7 @@ export default function Activites() {
                 {detail.location && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">📍 {detail.location}</span>}
                 {detail.difficulty && <span className={`px-3 py-1 rounded-full text-xs border ${DIFFICULTY_COLORS[detail.difficulty]}`}>{detail.difficulty}</span>}
               </div>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6">{detail.description}</p>
+              <p className="text-slate-400 text-sm leading-relaxed mb-6">{detail.description || detail.short_description}</p>
               {detail.program?.length > 0 && (
                 <div className="mb-5">
                   <h3 className="font-bold text-white mb-3">{t('pages:detail_modal.program')}</h3>

@@ -222,7 +222,7 @@ export default function Circuits() {
                 {detail.departure_point && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">🚌 {detail.departure_point}</span>}
               </div>
 
-              <p className="text-slate-400 text-sm leading-relaxed mb-6">{detail.description}</p>
+              <p className="text-slate-400 text-sm leading-relaxed mb-6">{detail.description || detail.short_description}</p>
 
               {detail.program?.length > 0 && (
                 <div className="mb-5">
