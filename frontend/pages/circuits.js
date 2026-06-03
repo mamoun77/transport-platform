@@ -6,6 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Header from '../components/Header';
 import { useCurrency } from '../hooks/useCurrency';
 import { useTranslateContent } from '../hooks/useTranslateContent';
+import { formatDescription } from '../utils/formatDescription';
 import ImageGallery from '../components/ImageGallery';
 
 const GRADIENTS = [
@@ -222,7 +223,7 @@ export default function Circuits() {
                 {detail.departure_point && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">🚌 {detail.departure_point}</span>}
               </div>
 
-              <p className="text-slate-400 text-sm leading-relaxed mb-6">{detail.description || detail.short_description}</p>
+              <p className="text-slate-400 text-sm leading-relaxed mb-6 whitespace-pre-wrap">{formatDescription(detail.description || detail.short_description)}</p>
 
               {detail.program?.length > 0 && (
                 <div className="mb-5">

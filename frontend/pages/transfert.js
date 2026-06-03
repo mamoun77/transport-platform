@@ -6,6 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Header from '../components/Header';
 import { useCurrency } from '../hooks/useCurrency';
 import { useTranslateContent } from '../hooks/useTranslateContent';
+import { formatDescription } from '../utils/formatDescription';
 import ImageGallery from '../components/ImageGallery';
 
 const GRADIENTS = [
@@ -189,7 +190,7 @@ export default function Transfert() {
                 {detail.departure_point && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">🚌 {detail.departure_point}</span>}
                 {detail.type && <span className={`px-3 py-1 rounded-full text-xs border ${TYPE_CONFIG[detail.type]?.color || 'bg-slate-500/20 border-slate-500/40 text-slate-400'}`}>{TYPE_CONFIG[detail.type]?.label || detail.type}</span>}
               </div>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6">{detail.description || detail.short_description}</p>
+              <p className="text-slate-400 text-sm leading-relaxed mb-6 whitespace-pre-wrap">{formatDescription(detail.description || detail.short_description)}</p>
               {detail.program?.length > 0 && (
                 <div className="mb-5">
                   <h3 className="font-bold text-white mb-3">{t('pages:detail_modal.program')}</h3>
