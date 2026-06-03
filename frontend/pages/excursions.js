@@ -67,7 +67,7 @@ export default function Excursions() {
     const price = calcPrice(basePrice, form.passengers);
     localStorage.setItem('bookingData', JSON.stringify({
       serviceName: `${selected.name} (${form.type === 'luxury' ? t('pages:booking.luxury') : t('pages:booking.standard')})`,
-      pickup: selected.location || 'Non précisé',
+      pickup: selected.location || t('common:common.not_specified'),
       destination: selected.name,
       date: form.date, time: form.time, passengers: form.passengers,
       price, phone: form.phone, email: form.email, name: form.name,
@@ -86,7 +86,7 @@ export default function Excursions() {
 
   return (
     <>
-      <Head><title>Excursions — Trendy Travel</title></Head>
+      <Head><title>{t('pages:excursions.title')} — Trendy Travel</title></Head>
       <div className="min-h-screen bg-[#080d1a] text-white">
         <Header />
         <section className="relative overflow-hidden pt-32 pb-20 px-6">

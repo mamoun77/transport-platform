@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Header from '../components/Header';
 import { useCurrency } from '../hooks/useCurrency';
+import { useTranslateContent } from '../hooks/useTranslateContent';
 import ImageGallery from '../components/ImageGallery';
 
 const GRADIENTS = [
@@ -27,6 +28,7 @@ export default function Circuits() {
   const [form, setForm] = useState({ name: '', phone: '', email: '', date: '', time: '', passengers: 1, type: 'standard' });
   const [submitting, setSubmitting] = useState(false);
   const { format } = useCurrency();
+  const translatedCircuits = useTranslateContent(circuits);
   const { t } = useTranslation(['common', 'pages']);
   const router = useRouter();
 
@@ -74,7 +76,7 @@ export default function Circuits() {
 
   return (
     <>
-      <Head><title>Circuits — Trendy Travel</title></Head>
+      <Head><title>{t('pages:circuits.title')} — Trendy Travel</title></Head>
       <div className="min-h-screen bg-[#080d1a] text-white">
         <Header />
 
@@ -96,14 +98,14 @@ export default function Circuits() {
         </section>
 
         <main className="max-w-7xl mx-auto px-6 pb-24">
-          {circuits.length === 0 ? (
+          {translatedCircuits.length === 0 ? (
             <div className="text-center py-20 text-slate-400">
               <p className="text-xl mb-2">{t('pages:circuits.empty')}</p>
               <p className="text-sm">{t('pages:circuits.empty_sub')}</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-              {circuits.map(c => (
+              {translatedCircuits.map(c => (
                 <div key={c.id} className="group relative flex flex-col rounded-3xl overflow-hidden border border-white/5 bg-white/[0.03] hover:bg-white/[0.07] transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-900/20 h-full">
 
                   {/* Image */}
@@ -216,7 +218,7 @@ export default function Circuits() {
                 {detail.duration && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">⏱ {detail.duration}</span>}
                 {detail.distance_km && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">📍 {detail.distance_km} km</span>}
                 {detail.difficulty && <span className={`px-3 py-1 rounded-full text-xs border ${DIFFICULTY_COLORS[detail.difficulty]}`}>{detail.difficulty}</span>}
-                {detail.capacity && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">👥 min 2 pers.</span>}
+                {detail.capacity && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">👥 {t('common:common.min_2_people')}</span>}
                 {detail.departure_point && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">🚌 {detail.departure_point}</span>}
               </div>
 
