@@ -15,10 +15,10 @@ const GRADIENTS = [
 ];
 
 const TYPE_CONFIG = {
-  transfer:     { label: 'Transfert',  color: 'bg-sky-500/20 border-sky-500/40 text-sky-400' },
-  excursion:    { label: 'Excursion',  color: 'bg-emerald-500/20 border-emerald-500/40 text-emerald-400' },
-  private_tour: { label: 'Privé',      color: 'bg-violet-500/20 border-violet-500/40 text-violet-400' },
-  shuttle:      { label: 'Navette',    color: 'bg-orange-500/20 border-orange-500/40 text-orange-400' },
+  transfer:     { labelKey: 'pages:types.transfer',  color: 'bg-sky-500/20 border-sky-500/40 text-sky-400' },
+  excursion:    { labelKey: 'pages:types.excursion', color: 'bg-emerald-500/20 border-emerald-500/40 text-emerald-400' },
+  private_tour: { labelKey: 'pages:types.private',   color: 'bg-violet-500/20 border-violet-500/40 text-violet-400' },
+  shuttle:      { labelKey: 'pages:types.shuttle',   color: 'bg-orange-500/20 border-orange-500/40 text-orange-400' },
 };
 
 export default function Transfert() {
@@ -63,7 +63,7 @@ export default function Transfert() {
     const price = calcPrice(basePrice, form.passengers);
     localStorage.setItem('bookingData', JSON.stringify({
       serviceName: `${selected.name} (${form.type === 'luxury' ? t('pages:booking.luxury') : t('pages:booking.standard')})`,
-      pickup: selected.departure_point || 'Non précisé',
+      pickup: selected.departure_point || t('common:common.not_specified'),
       destination: selected.name,
       date: form.date, time: form.time, passengers: form.passengers,
       price, phone: form.phone, email: form.email, name: form.name,
@@ -116,13 +116,13 @@ export default function Transfert() {
                       <img src={(s.images && s.images[0]) || s.image || 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'}
                         alt={s.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#080d1a] via-[#080d1a]/20 to-transparent" />
-                      {s.type && <span className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold border ${cfg.color}`}>{cfg.label}</span>}
+                      {s.type && <span className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold border ${cfg.color}`}>{t(cfg.labelKey)}</span>}
                       {(s.price_from || s.price) > 0 && (
                         <div className="absolute top-4 right-4 rounded-full bg-black/55 border border-white/10 backdrop-blur-sm px-3 py-2 flex items-center gap-2 text-[0.72rem] font-semibold text-white">
-                          <span>dès {format(s.price_from || s.price)}</span>
+                          <span>{t('common:common.from')} {format(s.price_from || s.price)}</span>
                           {s.capacity > 0 && (
                             <span className="rounded-full bg-white/10 px-2 py-0.5 text-[0.65rem]">
-                              👥 {s.capacity > 3 ? "jusqu'à 3 pers." : `${s.capacity} pers.`}
+                              👥 {s.capacity > 3 ? t('common:common.max_3_people') : `${s.capacity} ${s.capacity === 1 ? t('common:common.person') : t('common:common.people')}`}
                             </span>
                           )}
                         </div>
@@ -176,7 +176,7 @@ export default function Transfert() {
                   <h2 className="text-2xl font-bold text-white">{detail.name}</h2>
                   {(detail.price_from || detail.price) > 0 && (
                     <div className="flex gap-3 flex-wrap mt-1">
-                      <span className="px-3 py-1 rounded-full text-sm bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 font-bold">Privé : {format(detail.price_from || detail.price)}</span>
+                      <span className="px-3 py-1 rounded-full text-sm bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 font-bold">{t('pages:detail_modal.private')} : {format(detail.price_from || detail.price)}</span>
                       {detail.price_luxury > 0 && <span className="px-3 py-1 rounded-full text-sm bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 font-bold">✨ {t('pages:booking.luxury')} : {format(detail.price_luxury)} {t('common:common.per_person')}</span>}
                     </div>
                   )}
@@ -185,7 +185,7 @@ export default function Transfert() {
               </div>
               <div className="flex flex-wrap gap-3 mb-5">
                 {detail.duration && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">⏱ {detail.duration}</span>}
-                {detail.capacity && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">👥 jusqu'à 3 pers.</span>}
+                {detail.capacity && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">👥 {t('common:common.max_3_people')}</span>}
                 {detail.departure_point && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">🚌 {detail.departure_point}</span>}
                 {detail.type && <span className={`px-3 py-1 rounded-full text-xs border ${TYPE_CONFIG[detail.type]?.color || 'bg-slate-500/20 border-slate-500/40 text-slate-400'}`}>{TYPE_CONFIG[detail.type]?.label || detail.type}</span>}
               </div>

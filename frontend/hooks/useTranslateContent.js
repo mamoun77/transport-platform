@@ -2,14 +2,26 @@ import { useRouter } from 'next/router';
 
 const translations = {
   // Transfers
-  'Transfer Aéroport': { en: 'Airport Transfer', fr: 'Transfer Aéroport' },
+  'Transfert Aéroport': { en: 'Airport Transfer', fr: 'Transfert Aéroport' },
   'Transfert rapide depuis/vers l\'aéroport de Marrakech-Menara.': { en: 'Fast transfer to/from Marrakech-Menara airport.', fr: 'Transfert rapide depuis/vers l\'aéroport de Marrakech-Menara.' },
-  'Transfer Agadir': { en: 'Agadir Transfer', fr: 'Transfer Agadir' },
-  'Transfert privé Marrakech ↔ Agadir, la station balnéaire.': { en: 'Private transfer Marrakech ↔ Agadir, the seaside resort.', fr: 'Transfert privé Marrakech ↔ Agadir, la station balnéaire.' },
-  'Transfer Agafay': { en: 'Agafay Transfer', fr: 'Transfer Agafay' },
-  'Transfert privé vers le désert d\'Agafay, à 30 min de Marrakech.': { en: 'Private transfer to Agafay desert, 30 min from Marrakech.', fr: 'Transfert privé vers le désert d\'Agafay, à 30 min de Marrakech.' },
-  'Transfer Casablanca Aéroport': { en: 'Casablanca Airport Transfer', fr: 'Transfer Casablanca Aéroport' },
+  'Transfert Essaouira': { en: 'Essaouira Transfer', fr: 'Transfert Essaouira' },
+  'Transfert privé Marrakech ↔ Essaouira, la cité des vents.': { en: 'Private transfer Marrakech ↔ Essaouira, the windy city.', fr: 'Transfert privé Marrakech ↔ Essaouira, la cité des vents.' },
+  'Transfert Casablanca Centre': { en: 'Casablanca Downtown Transfer', fr: 'Transfert Casablanca Centre' },
+  'Transfert privé Marrakech ↔ Casablanca centre-ville.': { en: 'Private transfer Marrakech ↔ Casablanca city center.', fr: 'Transfert privé Marrakech ↔ Casablanca centre-ville.' },
+  'Transfert Casablanca Aéroport': { en: 'Casablanca Airport Transfer', fr: 'Transfert Casablanca Aéroport' },
   'Transfert privé Marrakech → Aéroport Mohammed V Casablanca.': { en: 'Private transfer Marrakech → Mohammed V Airport Casablanca.', fr: 'Transfert privé Marrakech → Aéroport Mohammed V Casablanca.' },
+  'Transfert Agadir': { en: 'Agadir Transfer', fr: 'Transfert Agadir' },
+  'Transfert privé Marrakech ↔ Agadir, la station balnéaire.': { en: 'Private transfer Marrakech ↔ Agadir, the seaside resort.', fr: 'Transfert privé Marrakech ↔ Agadir, la station balnéaire.' },
+  'Transfert Ouirgane': { en: 'Ouirgane Transfer', fr: 'Transfert Ouirgane' },
+  'Transfert privé vers Ouirgane, oasis de verdure au pied de l\'Atlas.': { en: 'Private transfer to Ouirgane, a green oasis at the foot of the Atlas.', fr: 'Transfert privé vers Ouirgane, oasis de verdure au pied de l\'Atlas.' },
+  'Transfert Agafay': { en: 'Agafay Transfer', fr: 'Transfert Agafay' },
+  'Transfert privé vers le désert d\'Agafay, à 30 min de Marrakech.': { en: 'Private transfer to Agafay desert, 30 min from Marrakech.', fr: 'Transfert privé vers le désert d\'Agafay, à 30 min de Marrakech.' },
+  'Transfert Imlil': { en: 'Imlil Transfer', fr: 'Transfert Imlil' },
+  'Transfert privé vers Imlil, porte du Toubkal et des randonnées.': { en: 'Private transfer to Imlil, gateway to Toubkal and hiking.', fr: 'Transfert privé vers Imlil, porte du Toubkal et des randonnées.' },
+  'Transfert Taghazout': { en: 'Taghazout Transfer', fr: 'Transfert Taghazout' },
+  'Transfert privé vers Taghazout, paradis des surfeurs sur l\'Atlantique.': { en: 'Private transfer to Taghazout, the surfer\'s paradise on the Atlantic.', fr: 'Transfert privé vers Taghazout, paradis des surfeurs sur l\'Atlantique.' },
+  'Transfert Palmeraie': { en: 'Palmeraie Transfer', fr: 'Transfert Palmeraie' },
+  'Transfert privé vers la Palmeraie de Marrakech.': { en: 'Private transfer to Marrakech Palmeraie.', fr: 'Transfert privé vers la Palmeraie de Marrakech.' },
   
   // Circuits (Tours)
   '4 Jours Merzouga & Sahara': { en: '4 Days Merzouga & Sahara', fr: '4 Jours Merzouga & Sahara' },
@@ -61,9 +73,19 @@ export function useTranslateContent(items) {
     const nDesc = normalize(item.description);
     const nShort = normalize(item.short_description);
 
-    const tName = normalizedMap[nName]?.[locale] || translations[item.name]?.[locale] || item.name;
-    const tDesc = normalizedMap[nDesc]?.[locale] || translations[item.description]?.[locale] || item.description;
-    const tShort = normalizedMap[nShort]?.[locale] || translations[item.short_description]?.[locale] || item.short_description;
+      const findFuzzy = nKey => {
+        if (!nKey) return null;
+        if (normalizedMap[nKey]) return normalizedMap[nKey];
+        // try contains match
+        for (const k of Object.keys(normalizedMap)) {
+          if (k.includes(nKey) || nKey.includes(k)) return normalizedMap[k];
+        }
+        return null;
+      };
+
+      const tName = (findFuzzy(nName)?.[locale]) || translations[item.name]?.[locale] || item.name;
+      const tDesc = (findFuzzy(nDesc)?.[locale]) || translations[item.description]?.[locale] || item.description;
+      const tShort = (findFuzzy(nShort)?.[locale]) || translations[item.short_description]?.[locale] || item.short_description;
 
     return {
       ...item,
