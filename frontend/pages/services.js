@@ -5,6 +5,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Header from '../components/Header';
 import { useCurrency } from '../hooks/useCurrency';
 import CurrencySwitcher from '../components/CurrencySwitcher';
+import useTranslateContent from '../hooks/useTranslateContent';
 
 const GRADIENTS = [
   'from-sky-500 to-blue-600', 'from-emerald-500 to-teal-600',
@@ -28,6 +29,8 @@ export default function Services() {
   const [submitting, setSubmitting] = useState(false);
   const { format } = useCurrency();
   const router = useRouter();
+
+  const translatedServices = useTranslateContent(services);
 
   useEffect(() => {
     fetch('/backend/services')
@@ -90,14 +93,14 @@ export default function Services() {
         </section>
 
         <main className="max-w-7xl mx-auto px-6 pb-24">
-          {services.length === 0 ? (
+          {translatedServices.length === 0 ? (
             <div className="text-center py-20 text-slate-400">
               <p className="text-xl mb-2">Aucun service disponible</p>
               <p className="text-sm">Revenez bientôt !</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-              {services.map(s => {
+              {translatedServices.map(s => {
                 const cfg = TYPE_CONFIG[s.type] ?? { label: s.type, color: 'bg-slate-500/20 border-slate-500/40 text-slate-400' };
                 return (
                   <div key={s.id} className="group relative flex flex-col rounded-3xl overflow-hidden border border-white/5 bg-white/[0.03] hover:bg-white/[0.07] transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-900/20 h-full">
