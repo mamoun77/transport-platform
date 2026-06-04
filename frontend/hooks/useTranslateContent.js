@@ -33,6 +33,8 @@ const translations = {
   '1 Jour Ouarzazate & Aït Benhaddou': { en: '1 Day Ouarzazate & Aït Benhaddou', fr: '1 Jour Ouarzazate & Aït Benhaddou' },
   'Hollywood du Maroc et ksar UNESCO en une journée.': { en: 'Morocco\'s Hollywood and UNESCO kasar in one day.', fr: 'Hollywood du Maroc et ksar UNESCO en une journée.' },
   'Agafay Demi-Journée': { en: 'Agafay Half-Day', fr: 'Agafay Demi-Journée' },
+  'Agafay Demi-Journée 9H a 13H30': { en: 'Agafay Half-Day 9:00 AM - 1:30 PM', fr: 'Agafay Demi-Journée 9H a 13H30' },
+  'Agafay Demi-Journée 9H à 13H30': { en: 'Agafay Half-Day 9:00 AM - 1:30 PM', fr: 'Agafay Demi-Journée 9H à 13H30' },
   'Agafay Demi-Journée — 1h Quad + 1h Dromadaire': { en: 'Agafay Half-Day — 1h Quad + 1h Camel Ride', fr: 'Agafay Demi-Journée — 1h Quad + 1h Dromadaire' },
   'Agafay Demi-Journée — 2h Quad + 1h Dromadaire': { en: 'Agafay Half-Day — 2h Quad + 1h Camel Ride', fr: 'Agafay Demi-Journée — 2h Quad + 1h Dromadaire' },
   
@@ -129,12 +131,46 @@ export function useTranslateContent(items) {
     if (!value || typeof value !== 'string') return value;
     const normalized = normalize(value);
     const translation = normalizedMap[normalized] || null;
-    return translation ? translation[locale] : value;
+    if (translation) return translation[locale];
+    const prefixTranslation = translateByPrefix(value);
+    return prefixTranslation || value;
   };
 
   const translateArray = (value) => {
     if (!Array.isArray(value)) return value;
     return value.map((item) => translateValue(item));
+  };
+
+  const translateTimeSuffix = (text) => {
+    if (!text || typeof text !== 'string') return text;
+    return text
+      .replace(/(\d{1,2})[Hh](\d{2})/g, (_, h, m) => {
+        const hour = parseInt(h, 10);
+        const displayHour = hour % 12 === 0 ? 12 : hour % 12;
+        const period = hour >= 12 ? 'PM' : 'AM';
+        return `${displayHour}:${m}${period}`;
+      })
+      .replace(/(\d{1,2})[Hh](?!\d)/g, (_, h) => {
+        const hour = parseInt(h, 10);
+        const displayHour = hour % 12 === 0 ? 12 : hour % 12;
+        const period = hour >= 12 ? 'PM' : 'AM';
+        return `${displayHour}:00${period}`;
+      })
+      .replace(/\b(a|à)\b/gi, ' - ');
+  };
+
+  const translateByPrefix = (value) => {
+    const words = ('' + value).trim().split(/\s+/);
+    for (let len = words.length - 1; len >= 2; len--) {
+      const prefix = words.slice(0, len).join(' ');
+      const normalizedPrefix = normalize(prefix);
+      const translation = normalizedMap[normalizedPrefix];
+      if (translation) {
+        const suffix = words.slice(len).join(' ');
+        return `${translation[locale]}${suffix ? ' ' + (locale === 'en' ? translateTimeSuffix(suffix) : suffix) : ''}`;
+      }
+    }
+    return null;
   };
 
   const findFuzzy = nKey => {
