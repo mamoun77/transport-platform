@@ -32,6 +32,9 @@ const translations = {
   'Immersion complète dans la vallée du Drâa et le désert de Zagora.': { en: 'Complete immersion in the Drâa Valley and Zagora desert.', fr: 'Immersion complète dans la vallée du Drâa et le désert de Zagora.' },
   '1 Jour Ouarzazate & Aït Benhaddou': { en: '1 Day Ouarzazate & Aït Benhaddou', fr: '1 Jour Ouarzazate & Aït Benhaddou' },
   'Hollywood du Maroc et ksar UNESCO en une journée.': { en: 'Morocco\'s Hollywood and UNESCO kasar in one day.', fr: 'Hollywood du Maroc et ksar UNESCO en une journée.' },
+  'Agafay Demi-Journée': { en: 'Agafay Half-Day', fr: 'Agafay Demi-Journée' },
+  'Agafay Demi-Journée — 1h Quad + 1h Dromadaire': { en: 'Agafay Half-Day — 1h Quad + 1h Camel Ride', fr: 'Agafay Demi-Journée — 1h Quad + 1h Dromadaire' },
+  'Agafay Demi-Journée — 2h Quad + 1h Dromadaire': { en: 'Agafay Half-Day — 2h Quad + 1h Camel Ride', fr: 'Agafay Demi-Journée — 2h Quad + 1h Dromadaire' },
   
   // Excursions (Destinations)
   'Vallée de l\'Ourika': { en: 'Ourika Valley', fr: 'Vallée de l\'Ourika' },

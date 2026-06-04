@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Header from '../components/Header';
 import { useCurrency } from '../hooks/useCurrency';
+import { useTranslateContent } from '../hooks/useTranslateContent';
 import ImageGallery from '../components/ImageGallery';
 import { formatDescription } from '../utils/formatDescription';
 
@@ -28,6 +29,7 @@ export default function Activites() {
   const [form, setForm]             = useState({ name: '', phone: '', email: '', date: '', time: '', passengers: 1, type: 'standard', notes: '' });
   const [submitting, setSubmitting] = useState(false);
   const { format } = useCurrency();
+  const translatedActivities = useTranslateContent(activities);
   const { t } = useTranslation(['common', 'pages']);
   const router = useRouter();
 
@@ -97,7 +99,7 @@ export default function Activites() {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-              {activities.map(a => (
+              {translatedActivities.map(a => (
                 <div key={a.id} className="group relative flex flex-col rounded-3xl overflow-hidden border border-white/5 bg-white/[0.03] hover:bg-white/[0.07] transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-violet-900/20 h-full">
                   <div className="relative h-52 overflow-hidden">
                     <img src={(a.images && a.images[0]) || a.image || 'https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=800&q=80'}
