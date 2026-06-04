@@ -28,6 +28,11 @@ const translations = {
   'L\'aventure ultime vers les dunes de l\'Erg Chebbi à Merzouga.': { en: 'The ultimate adventure to the dunes of Erg Chebbi in Merzouga.', fr: 'L\'aventure ultime vers les dunes de l\'Erg Chebbi à Merzouga.' },
   '2 Jours Zagora & Sahara': { en: '2 Days Zagora & Sahara', fr: '2 Jours Zagora & Sahara' },
   'Mini-aventure désertique à Zagora, la porte du Sahara.': { en: 'Mini desert adventure in Zagora, the gateway to the Sahara.', fr: 'Mini-aventure désertique à Zagora, la porte du Sahara.' },
+  '2 Jours Zagora & Désert': { en: '2 Days Zagora & Desert', fr: '2 Jours Zagora & Désert' },
+  'Zagora, surnommée "la porte du Sahara", est accessible en 2 jours depuis Marrakech pour une première expérience désertique authentique. Ce circuit traverse la vallée du Drâa, la plus longue du Maroc, bordée de milliers de palmiers et de kasbahs de pisé. Vous passerez la nuit dans un camp nomade au milieu des dunes, avec dîner berbère, musique gnaoua et ciel étoilé exceptionnel. Une introduction parfaite au désert marocain.': {
+    en: 'Zagora, nicknamed "the gateway to the Sahara", is reachable in 2 days from Marrakech for an authentic desert introduction. This tour crosses the Drâa Valley, Morocco\'s longest valley, lined with thousands of palm trees and adobe kasbahs. You will spend the night in a nomad camp among the dunes, with a Berber dinner, Gnawa music and a spectacular starry sky. A perfect introduction to the Moroccan desert.',
+    fr: 'Zagora, surnommée "la porte du Sahara", est accessible en 2 jours depuis Marrakech pour une première expérience désertique authentique. Ce circuit traverse la vallée du Drâa, la plus longue du Maroc, bordée de milliers de palmiers et de kasbahs de pisé. Vous passerez la nuit dans un camp nomade au milieu des dunes, avec dîner berbère, musique gnaoua et ciel étoilé exceptionnel. Une introduction parfaite au désert marocain.'
+  },
   '3 Jours Zagora & Drâa': { en: '3 Days Zagora & Drâa', fr: '3 Jours Zagora & Drâa' },
   'Immersion complète dans la vallée du Drâa et le désert de Zagora.': { en: 'Complete immersion in the Drâa Valley and Zagora desert.', fr: 'Immersion complète dans la vallée du Drâa et le désert de Zagora.' },
   '1 Jour Ouarzazate & Aït Benhaddou': { en: '1 Day Ouarzazate & Aït Benhaddou', fr: '1 Jour Ouarzazate & Aït Benhaddou' },
