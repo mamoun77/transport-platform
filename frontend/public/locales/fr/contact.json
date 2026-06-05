@@ -14,6 +14,10 @@
   "send_button": "Envoyer le message",
   "success_title": "Message envoyé !",
   "success_subtitle": "Nous vous répondrons dans les plus brefs délais.",
+  "hero_subtitle": "Notre équipe vous répond dans les plus brefs délais.",
+  "address_value": "Marrakech, Maroc",
+  "location": "Médina, Guéliz",
+  "form_title": "Envoyer un message",
   "available_24": "Disponible 24h/24",
   "response_2h": "Réponse sous 2h",
   "instant_response": "Réponse instantanée"
