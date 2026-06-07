@@ -31,10 +31,10 @@
     "empty_sub": "Come back soon, new tours are coming!",
     "reserve_btn": "Book this tour",
     "difficulty": "Difficulty",
-    "program": "Program",
+    "program": "Itinerary",
     "included": "Included",
     "not_included": "Not included",
-    "luxury_advantages": "Luxury package advantages"
+    "luxury_advantages": "Luxury package benefits"
   },
   "activites": {
     "badge": "Our Activities",
@@ -72,9 +72,9 @@
   },
   "detail_modal": {
     "private": "Private",
-    "program": "Program",
-    "included": "✅ Included",
-    "not_included": "❌ Not included",
-    "luxury_advantages": "✨ Luxury package advantages"
+    "program": "Itinerary",
+    "included": "Included",
+    "not_included": "Not included",
+    "luxury_advantages": "Luxury package benefits"
   }
 }
