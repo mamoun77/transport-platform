@@ -220,7 +220,15 @@ export default function Services() {
                 {detail.type && <span className={`px-3 py-1 rounded-full text-xs border ${TYPE_CONFIG[detail.type]?.color || 'bg-slate-500/20 border-slate-500/40 text-slate-400'}`}>{TYPE_CONFIG[detail.type]?.label || detail.type}</span>}
               </div>
 
-              <p className="text-slate-400 text-sm leading-relaxed mb-6 whitespace-pre-wrap">{formatDescription(detail.description || detail.short_description)}</p>
+              <div className="mb-6">
+                {detail.description ? (
+                  <p className="text-slate-400 text-sm leading-relaxed whitespace-pre-wrap">{formatDescription(detail.description)}</p>
+                ) : detail.short_description ? (
+                  <p className="text-slate-400 text-sm leading-relaxed">{detail.short_description}</p>
+                ) : (
+                  <p className="text-slate-500 italic text-xs">Aucune description disponible</p>
+                )}
+              </div>
 
               {detail.program?.length > 0 && (
                 <div className="mb-5">
