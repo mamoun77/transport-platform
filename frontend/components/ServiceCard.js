@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import shareItem from '../utils/share';
 
 export default function ServiceCard({ service }) {
   return (
@@ -30,12 +31,21 @@ export default function ServiceCard({ service }) {
             <span className="text-2xl font-bold text-blue-600">{service.price}</span>
             <p className="text-sm text-gray-500">par personne</p>
           </div>
-          <Link
-            href={`/services/${service.id}`}
-            className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-          >
-            Réserver
-          </Link>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => shareItem({ title: service.title || service.name, text: service.description || '', url: `${typeof window !== 'undefined' ? window.location.origin : ''}/services/${service.id}` })}
+              className="px-3 py-2 rounded-xl text-xs font-semibold border border-white/10 text-slate-300 hover:bg-white/8 transition"
+              aria-label="Partager"
+            >
+              🔗 Partager
+            </button>
+            <Link
+              href={`/services/${service.id}`}
+              className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            >
+              Réserver
+            </Link>
+          </div>
         </div>
       </div>
     </div>
