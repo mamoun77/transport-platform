@@ -9,6 +9,7 @@ import { useTranslateContent } from '../hooks/useTranslateContent';
 import { formatDescription } from '../utils/formatDescription';
 import ImageGallery from '../components/ImageGallery';
 import shareItem from '../utils/share';
+import ShareButton from '../components/ShareButton';
 
 const GRADIENTS = [
   'from-rose-500 to-pink-600', 'from-sky-500 to-blue-600',
@@ -214,10 +215,10 @@ export default function Circuits() {
                   )}
                 </div>
                 <div className="flex items-center gap-3">
-                  <button onClick={() => shareItem({ title: detail.name, text: detail.short_description || detail.description || '', url: typeof window !== 'undefined' ? window.location.href + `?share=${detail.id}` : '' })}
-                    className="px-3 py-2 rounded-xl text-xs font-semibold border border-white/10 text-slate-300 hover:bg-white/8 transition">
-                    🔗 {t('common:common.share') || 'Partager'}
-                  </button>
+                  <ShareButton onClick={() => shareItem({ title: detail.name, text: detail.short_description || detail.description || '', url: typeof window !== 'undefined' ? window.location.href + `?share=${detail.id}` : '' })}
+                    className="px-3 py-2 rounded-xl text-xs font-semibold border border-white/10 text-slate-300 hover:bg-white/8 transition"
+                    label={t('common:common.share') || 'Partager'}
+                  />
                   <button onClick={() => setDetail(null)} className="text-slate-400 hover:text-white text-2xl">×</button>
                 </div>
               </div>

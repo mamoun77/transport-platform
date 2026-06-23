@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useCurrency } from '../../hooks/useCurrency';
 import CurrencySwitcher from '../../components/CurrencySwitcher';
 import shareItem from '../../utils/share';
+import ShareButton from '../../components/ShareButton';
 import ImageGallery from '../../components/ImageGallery';
 
 const FALLBACK_SERVICES = {
@@ -147,8 +148,10 @@ export default function ServiceDetail() {
                 {service.short_description || service.description}
               </p>
               <div className="flex gap-3 mb-6">
-                <button onClick={() => shareItem({ title: service.name, text: service.short_description || service.description || '', url: typeof window !== 'undefined' ? window.location.href : '' })}
-                  className="px-3 py-2 rounded-xl text-sm font-semibold border border-white/10 text-white hover:bg-white/5 transition">🔗 Partager</button>
+                <ShareButton onClick={() => shareItem({ title: service.name, text: service.short_description || service.description || '', url: typeof window !== 'undefined' ? window.location.href : '' })}
+                  className="px-3 py-2 rounded-xl text-sm font-semibold border border-white/10 text-white hover:bg-white/5 transition"
+                  label="Partager"
+                />
               </div>
 
               {/* stats row */}

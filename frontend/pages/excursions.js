@@ -8,6 +8,7 @@ import { useCurrency } from '../hooks/useCurrency';
 import { useTranslateContent } from '../hooks/useTranslateContent';
 import ImageGallery from '../components/ImageGallery';
 import shareItem from '../utils/share';
+import ShareButton from '../components/ShareButton';
 import { formatDescription } from '../utils/formatDescription';
 
 const GRADIENTS = [
@@ -173,10 +174,10 @@ export default function Excursions() {
                   )}
                 </div>
                 <div className="flex items-center gap-3">
-                  <button onClick={() => shareItem({ title: detail.name, text: detail.short_description || detail.description || '', url: typeof window !== 'undefined' ? window.location.href + `?share=${detail.id}` : '' })}
-                    className="px-3 py-2 rounded-xl text-xs font-semibold border border-white/10 text-slate-300 hover:bg-white/8 transition">
-                    🔗 {t('common:common.share') || 'Partager'}
-                  </button>
+                  <ShareButton onClick={() => shareItem({ title: detail.name, text: detail.short_description || detail.description || '', url: typeof window !== 'undefined' ? window.location.href + `?share=${detail.id}` : '' })}
+                    className="px-3 py-2 rounded-xl text-xs font-semibold border border-white/10 text-slate-300 hover:bg-white/8 transition"
+                    label={t('common:common.share') || 'Partager'}
+                  />
                   <button onClick={() => setDetail(null)} className="text-slate-400 hover:text-white text-2xl">×</button>
                 </div>
               </div>
@@ -187,6 +188,7 @@ export default function Excursions() {
                 {detail.difficulty && <span className={`px-3 py-1 rounded-full text-xs border ${DIFFICULTY_COLORS[detail.difficulty]}`}>{detail.difficulty}</span>}
               </div>
               <div className="mb-6">
+                {typeof window !== 'undefined' && console.log('Detail object:', detail)}
                 {detail.description ? (
                   <p className="text-slate-400 text-sm leading-relaxed whitespace-pre-wrap">{formatDescription(detail.description)}</p>
                 ) : detail.short_description ? (
