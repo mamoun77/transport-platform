@@ -3,6 +3,12 @@ import { useRouter } from 'next/router';
 import Header from '../components/Header';
 
 const OWNER_PHONE = '+212662100714'; // Ton numéro WhatsApp
+const PAYPAL_ME = 'https://www.paypal.me/khalidboidane';
+
+const getPayPalUrl = (price) => {
+  const amount = Number(price || 0);
+  return amount > 0 ? `${PAYPAL_ME}/${amount}` : PAYPAL_ME;
+};
 
 export default function BookingConfirmation() {
   const router = useRouter();
@@ -163,15 +169,21 @@ ${b.notes ? `📝 ${b.notes}` : ''}
           )}
 
           {/* Actions */}
-          <div className="flex gap-3">
-            <button onClick={() => router.push('/')}
-              className="flex-1 py-3 rounded-2xl font-bold bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 transition">
-              Accueil
-            </button>
-            <button onClick={() => router.push('/transfert')}
-              className="flex-1 py-3 rounded-2xl font-bold bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:scale-105 transition">
-              Nouvelle réservation
-            </button>
+          <div className="flex flex-col gap-3">
+            <a href={getPayPalUrl(booking.price)} target="_blank" rel="noreferrer"
+              className="w-full py-3 rounded-2xl font-bold bg-yellow-500 hover:bg-yellow-600 text-slate-950 text-center transition">
+              Payer avec PayPal
+            </a>
+            <div className="flex gap-3">
+              <button onClick={() => router.push('/')}
+                className="flex-1 py-3 rounded-2xl font-bold bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 transition">
+                Accueil
+              </button>
+              <button onClick={() => router.push('/transfert')}
+                className="flex-1 py-3 rounded-2xl font-bold bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:scale-105 transition">
+                Nouvelle réservation
+              </button>
+            </div>
           </div>
         </div>
       </div>
