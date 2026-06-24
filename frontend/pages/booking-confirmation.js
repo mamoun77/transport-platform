@@ -168,6 +168,22 @@ ${b.notes ? `📝 ${b.notes}` : ''}
             </button>
           )}
 
+          {/* Conditions d'annulation */}
+          <div className="bg-white/5 border border-white/8 rounded-2xl p-6 mb-6">
+            <h2 className="text-lg font-semibold text-white mb-3">Conditions d'annulation</h2>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Pour les réservations déjà payées :
+            </p>
+            <ul className="mt-4 space-y-2 text-slate-400 text-sm list-disc list-inside">
+              <li>Annulation possible jusqu'à 24h avant le départ.</li>
+              <li>Après ce délai, le montant n'est pas remboursable.</li>
+              <li>Contactez-nous rapidement pour toute demande d'annulation.</li>
+            </ul>
+            <p className="mt-4 text-slate-500 text-xs">
+              Nous vous recommandons de conserver cette page et de nous joindre via WhatsApp pour une réponse rapide.
+            </p>
+          </div>
+
           {/* Actions */}
           <div className="flex flex-col gap-3">
             <a href={getPayPalUrl(booking.price)} target="_blank" rel="noreferrer"
