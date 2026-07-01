@@ -6,7 +6,7 @@ const EMPTY_FORM = {
   name: '', description: '', short_description: '', image: '', images: [],
   price_from: '', price_luxury: '', duration: '', capacity: '', departure_point: '',
   type: 'transfer', features: [], program: [], included: [], not_included: [],
-  luxury_advantages: [], is_featured: false, is_active: true, sort_order: 0
+  luxury_advantages: [], extra_passenger_fee: '', is_featured: false, is_active: true, sort_order: 0
 };
 
 export default function AdminServices() {
@@ -41,6 +41,7 @@ export default function AdminServices() {
       const payload = {
         ...formData,
         image: formData.images[0] || formData.image || '',
+        extra_passenger_fee: formData.extra_passenger_fee === '' ? null : Number(formData.extra_passenger_fee),
         features: formData.features.filter(f => f.trim()),
         program: formData.program.filter(f => f.trim()),
         included: formData.included.filter(f => f.trim()),
@@ -81,6 +82,7 @@ export default function AdminServices() {
       included: service.included || [],
       not_included: service.not_included || [],
       luxury_advantages: service.luxury_advantages || [],
+      extra_passenger_fee: service.extra_passenger_fee != null ? service.extra_passenger_fee : '',
       is_featured: service.is_featured || false,
       is_active: service.is_active,
       sort_order: service.sort_order || 0
@@ -167,6 +169,10 @@ export default function AdminServices() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input type="number" name="price_from" value={formData.price_from} onChange={handleInput} placeholder="Prix standard (€/pers.) *" step="0.01" required className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 <input type="number" name="price_luxury" value={formData.price_luxury} onChange={handleInput} placeholder="Prix luxe (€/pers.) — optionnel" step="0.01" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="number" name="extra_passenger_fee" value={formData.extra_passenger_fee} onChange={handleInput} placeholder="Supplément 4ème personne" step="0.01" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <div className="text-sm text-gray-500 py-2 px-3">Laisser vide pour utiliser le supplément global par défaut.</div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <input type="text" name="duration" value={formData.duration} onChange={handleInput} placeholder="Durée (ex: 3h)" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />

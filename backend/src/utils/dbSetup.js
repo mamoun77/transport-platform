@@ -22,6 +22,7 @@ async function setupTables() {
       id SERIAL PRIMARY KEY, name VARCHAR(200) NOT NULL, slug VARCHAR(250) UNIQUE NOT NULL,
       description TEXT DEFAULT '', short_description VARCHAR(500), image VARCHAR(500),
       price_from DECIMAL(10,2), duration VARCHAR(100), capacity INTEGER,
+      extra_passenger_fee DECIMAL(10,2),
       features JSON DEFAULT '[]', is_active BOOLEAN DEFAULT true, sort_order INTEGER DEFAULT 0,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )`);
@@ -87,6 +88,7 @@ async function setupTables() {
     const alterQueries = [
       `ALTER TABLE services ADD COLUMN IF NOT EXISTS type VARCHAR(50) DEFAULT 'transfer'`,
       `ALTER TABLE services ADD COLUMN IF NOT EXISTS price_luxury DECIMAL(10,2)`,
+      `ALTER TABLE services ADD COLUMN IF NOT EXISTS extra_passenger_fee DECIMAL(10,2)`,
       `ALTER TABLE services ADD COLUMN IF NOT EXISTS departure_point VARCHAR(300)`,
       `ALTER TABLE services ADD COLUMN IF NOT EXISTS program JSON DEFAULT '[]'`,
       `ALTER TABLE services ADD COLUMN IF NOT EXISTS included JSON DEFAULT '[]'`,

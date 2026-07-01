@@ -49,7 +49,7 @@ exports.createService = async (req, res) => {
       }
       if (!serviceData[field]) serviceData[field] = [];
     });
-    ['price_from', 'price_luxury', 'capacity', 'sort_order'].forEach(field => {
+    ['price_from', 'price_luxury', 'extra_passenger_fee', 'capacity', 'sort_order'].forEach(field => {
       if (serviceData[field] === '' || serviceData[field] === undefined) serviceData[field] = null;
     });
     const service = await Service.create(serviceData);
@@ -73,7 +73,7 @@ exports.updateService = async (req, res) => {
     });
 
     // Convertir les champs numériques — string vide → null
-    ['price_from', 'price_luxury', 'capacity', 'sort_order'].forEach(field => {
+    ['price_from', 'price_luxury', 'extra_passenger_fee', 'capacity', 'sort_order'].forEach(field => {
       if (updateData[field] === '' || updateData[field] === undefined) updateData[field] = null;
     });
 

@@ -59,6 +59,10 @@ const Service = sequelize.define('Service', {
     type: DataTypes.DECIMAL(10,2),
     allowNull: true
   },
+  extra_passenger_fee: {
+    type: DataTypes.DECIMAL(10,2),
+    allowNull: true
+  },
   departure_point: {
     type: DataTypes.STRING(300),
     allowNull: true

@@ -49,11 +49,15 @@ export default function ServiceDetail() {
   // Prix fixe jusqu'à 3 personnes, supplément par personne à partir de la 4ème
   const calcPrice = (basePrice, passengers) => {
     if (!basePrice || passengers <= 3) return basePrice;
-    const supplement = extraPassengerFee > 0 ? extraPassengerFee : Math.round(basePrice * 0.25); // 25% du prix de base par personne supplémentaire
+    const serviceFee = service?.extra_passenger_fee;
+    const supplement = serviceFee > 0 ? Number(serviceFee) : extraPassengerFee > 0 ? extraPassengerFee : Math.round(basePrice * 0.25); // 25% du prix de base par personne supplémentaire
     return basePrice + (passengers - 3) * supplement;
   };
 
-  const displaySupplement = (basePrice) => extraPassengerFee > 0 ? extraPassengerFee : Math.round(basePrice * 0.25);
+  const displaySupplement = (basePrice) => {
+    const serviceFee = service?.extra_passenger_fee;
+    return serviceFee > 0 ? Number(serviceFee) : extraPassengerFee > 0 ? extraPassengerFee : Math.round(basePrice * 0.25);
+  };
 
   useEffect(() => {
     if (!id) return;
