@@ -138,7 +138,7 @@ export default function Services() {
                           <span>dès {format(s.price_from || s.price)}</span>
                           {s.capacity > 0 && (
                             <span className="rounded-full bg-white/10 px-2 py-0.5 text-[0.65rem]">
-                              👥 {s.capacity} pers.
+                              👥 {s.capacity > 3 ? '1-3 pers.' : `${s.capacity} pers.`}
                             </span>
                           )}
                         </div>

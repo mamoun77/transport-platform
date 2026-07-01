@@ -130,7 +130,7 @@ export default function Transfert() {
                           <span>{t('common:common.from')} {format(s.price_from || s.price)}</span>
                           {s.capacity > 0 && (
                             <span className="rounded-full bg-white/10 px-2 py-0.5 text-[0.65rem]">
-                              👥 {s.capacity > 0 ? `${s.capacity} ${s.capacity === 1 ? t('common:common.person') : t('common:common.people')}` : t('common:common.max_3_people')}
+                              👥 {s.capacity > 3 ? t('common:common.max_3_people') : `${s.capacity} ${s.capacity === 1 ? t('common:common.person') : t('common:common.people')}`}
                             </span>
                           )}
                         </div>
