@@ -10,6 +10,7 @@ import ImageGallery from '../components/ImageGallery';
 import shareItem from '../utils/share';
 import ShareButton from '../components/ShareButton';
 import { formatDescription } from '../utils/formatDescription';
+import { getExtraPassengerFee } from '../utils/adminSettings';
 
 const GRADIENTS = [
   'from-rose-500 to-pink-600', 'from-sky-500 to-blue-600',
@@ -296,7 +297,7 @@ export default function Excursions() {
                 <label className="text-slate-400 text-sm">{t('pages:booking.passengers')}</label>
                 <button type="button" onClick={() => setForm(p => ({ ...p, passengers: Math.max(1, p.passengers - 1) }))} className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition flex items-center justify-center">−</button>
                 <span className="w-8 text-center text-white font-bold">{form.passengers}</span>
-                <button type="button" onClick={() => setForm(p => ({ ...p, passengers: Math.min(selected.capacity || 20, p.passengers + 1) }))} className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition flex items-center justify-center">+</button>
+                <button type="button" onClick={() => setForm(p => ({ ...p, passengers: Math.min(extraPassengerFee > 0 ? 20 : (selected.capacity || 20), p.passengers + 1) }))} className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition flex items-center justify-center">+</button>
               </div>
               {selected.price > 0 && (() => {
                 const base = form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : selected.price;

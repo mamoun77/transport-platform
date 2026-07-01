@@ -7,6 +7,7 @@ import { useCurrency } from '../hooks/useCurrency';
 import CurrencySwitcher from '../components/CurrencySwitcher';
 import useTranslateContent from '../hooks/useTranslateContent';
 import { formatDescription } from '../utils/formatDescription';
+import { getExtraPassengerFee } from '../utils/adminSettings';
 
 const GRADIENTS = [
   'from-sky-500 to-blue-600', 'from-emerald-500 to-teal-600',
@@ -28,8 +29,14 @@ export default function Services() {
   const [detail, setDetail] = useState(null);
   const [form, setForm] = useState({ name: '', phone: '', email: '', date: '', time: '', passengers: 1, type: 'standard', flight_number: '', notes: '' });
   const [submitting, setSubmitting] = useState(false);
+  const [extraPassengerFee, setExtraPassengerFee] = useState(0);
   const { format } = useCurrency();
   const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    setExtraPassengerFee(getExtraPassengerFee());
+  }, []);
 
   const translatedServices = useTranslateContent(services);
 
@@ -41,10 +48,19 @@ export default function Services() {
       .finally(() => setLoading(false));
   }, []);
 
+  const calcPrice = (basePrice, passengers) => {
+    if (!basePrice || passengers <= 3) return basePrice;
+    const supplement = extraPassengerFee > 0 ? extraPassengerFee : Math.round(basePrice * 0.25);
+    return basePrice + (passengers - 3) * supplement;
+  };
+
+  const supplement = (basePrice) => extraPassengerFee > 0 ? extraPassengerFee : Math.round(basePrice * 0.25);
+
   const handleBooking = (e) => {
     e.preventDefault();
     setSubmitting(true);
-    const price = form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : (selected.price_from || selected.price);
+    const basePrice = form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : (selected.price_from || selected.price);
+    const price = calcPrice(basePrice, form.passengers);
     localStorage.setItem('bookingData', JSON.stringify({
       serviceName: `${selected.name} (${form.type === 'luxury' ? 'Luxe' : 'Standard'})`,
       pickup: selected.departure_point || 'Non précisé',
@@ -335,10 +351,10 @@ export default function Services() {
                 <button type="button" onClick={() => setForm(p => ({ ...p, passengers: Math.max(1, p.passengers - 1) }))}
                   className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition flex items-center justify-center">−</button>
                 <span className="w-8 text-center text-white font-bold">{form.passengers}</span>
-                <button type="button" onClick={() => setForm(p => ({ ...p, passengers: Math.min(selected.capacity || 20, p.passengers + 1) }))}
+                <button type="button" onClick={() => setForm(p => ({ ...p, passengers: Math.min((Number(selected?.extra_passenger_fee) > 0 || extraPassengerFee > 0) ? 20 : (selected.capacity || 20), p.passengers + 1) }))}
                   className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition flex items-center justify-center">+</button>
                 {(selected.price_from || selected.price) > 0 && (
-                  <span className="ml-auto text-slate-400 text-sm">Total : <span className="text-white font-bold">{format((form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : (selected.price_from || selected.price)) * form.passengers)}</span></span>
+                  <span className="ml-auto text-slate-400 text-sm">Total : <span className="text-white font-bold">{format(calcPrice(form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : (selected.price_from || selected.price), form.passengers))}</span></span>
                 )}
               </div>
               <input type="text" placeholder="Numéro de vol (ex: AT204)" value={form.flight_number} onChange={e => setForm(p => ({ ...p, flight_number: e.target.value }))}

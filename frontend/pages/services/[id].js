@@ -88,9 +88,18 @@ export default function ServiceDetail() {
     if (route) calculatePrice(routeId, formData.passengers);
   };
 
+  const getMaxPassengers = () => {
+    if (service?.extra_passenger_fee > 0 || extraPassengerFee > 0) {
+      return 20;
+    }
+    return service?.capacity > 0 ? service.capacity : 20;
+  };
+
   const handlePassengersChange = (val) => {
-    setFormData(p => ({ ...p, passengers: val }));
-    if (selectedRoute) calculatePrice(selectedRoute.id, val);
+    const maxPassengers = getMaxPassengers();
+    const normalized = Math.min(maxPassengers, Math.max(1, val));
+    setFormData(p => ({ ...p, passengers: normalized }));
+    if (selectedRoute) calculatePrice(selectedRoute.id, normalized);
   };
 
   const handleSubmit = (e) => {

@@ -130,7 +130,7 @@ export default function Transfert() {
                           <span>{t('common:common.from')} {format(s.price_from || s.price)}</span>
                           {s.capacity > 0 && (
                             <span className="rounded-full bg-white/10 px-2 py-0.5 text-[0.65rem]">
-                              👥 {s.capacity > 3 ? t('common:common.max_3_people') : `${s.capacity} ${s.capacity === 1 ? t('common:common.person') : t('common:common.people')}`}
+                              👥 {s.capacity > 0 ? `${s.capacity} ${s.capacity === 1 ? t('common:common.person') : t('common:common.people')}` : t('common:common.max_3_people')}
                             </span>
                           )}
                         </div>
@@ -193,7 +193,7 @@ export default function Transfert() {
               </div>
               <div className="flex flex-wrap gap-3 mb-5">
                 {detail.duration && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">⏱ {detail.duration}</span>}
-                {detail.capacity && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">👥 {t('common:common.max_3_people')}</span>}
+                {detail.capacity && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">👥 {detail.capacity} {detail.capacity === 1 ? t('common:common.person') : t('common:common.people')}</span>}
                 {detail.departure_point && <span className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-slate-300">🚌 {detail.departure_point}</span>}
                 {detail.type && <span className={`px-3 py-1 rounded-full text-xs border ${TYPE_CONFIG[detail.type]?.color || 'bg-slate-500/20 border-slate-500/40 text-slate-400'}`}>{TYPE_CONFIG[detail.type]?.label || detail.type}</span>}
               </div>
@@ -285,7 +285,7 @@ export default function Transfert() {
                 <label className="text-slate-400 text-sm">{t('pages:booking.passengers')}</label>
                 <button type="button" onClick={() => setForm(p => ({ ...p, passengers: Math.max(1, p.passengers - 1) }))} className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition flex items-center justify-center">−</button>
                 <span className="w-8 text-center text-white font-bold">{form.passengers}</span>
-                <button type="button" onClick={() => setForm(p => ({ ...p, passengers: Math.min(selected.capacity || 20, p.passengers + 1) }))} className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition flex items-center justify-center">+</button>
+                <button type="button" onClick={() => setForm(p => ({ ...p, passengers: Math.min((Number(selected?.extra_passenger_fee) > 0 || extraPassengerFee > 0) ? 20 : (selected.capacity || 20), p.passengers + 1) }))} className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition flex items-center justify-center">+</button>
               </div>
               {(selected.price_from || selected.price) > 0 && (() => {
                 const base = form.type === 'luxury' && selected.price_luxury > 0 ? selected.price_luxury : (selected.price_from || selected.price);
