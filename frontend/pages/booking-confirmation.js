@@ -184,6 +184,23 @@ ${b.notes ? `📝 ${b.notes}` : ''}
             </p>
           </div>
 
+          {/* Conditions de paiement */}
+          <div className="bg-white/5 border border-white/8 rounded-2xl p-6 mb-6">
+            <h2 className="text-lg font-semibold text-white mb-3">Conditions de paiement</h2>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Merci de régler votre réservation pour finaliser votre confirmation :
+            </p>
+            <ul className="mt-4 space-y-2 text-slate-400 text-sm list-disc list-inside">
+              <li>Le paiement se fait via PayPal en cliquant sur le bouton ci-dessous.</li>
+              <li>La réservation est définitivement confirmée après réception du paiement.</li>
+              <li>Conservez le reçu de paiement et envoyez-le en message WhatsApp si nécessaire.</li>
+              <li>En cas de non-paiement sous 24h, la réservation pourra être annulée.</li>
+            </ul>
+            <p className="mt-4 text-slate-500 text-xs">
+              Vous pouvez également nous contacter sur WhatsApp pour toute question concernant le paiement.
+            </p>
+          </div>
+
           {/* Actions */}
           <div className="flex flex-col gap-3">
             <a href={getPayPalUrl(booking.price)} target="_blank" rel="noreferrer"
