@@ -30,19 +30,25 @@ export default function Excursions() {
   const [detail, setDetail]         = useState(null);
   const [form, setForm]             = useState({ name: '', phone: '', email: '', date: '', time: '', passengers: 1, type: 'standard' });
   const [submitting, setSubmitting] = useState(false);
+  const [extraPassengerFee, setExtraPassengerFee] = useState(0);
   const { format } = useCurrency();
   const translatedExcursions = useTranslateContent(excursions);
   const { t } = useTranslation(['common', 'pages']);
   const router = useRouter();
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    setExtraPassengerFee(getExtraPassengerFee());
+  }, []);
+
   // Prix fixe jusqu'à 3 personnes, supplément par personne à partir de la 4ème
   const calcPrice = (basePrice, passengers) => {
     if (!basePrice || passengers <= 3) return basePrice;
-    const supplement = Math.round(basePrice * 0.25);
+    const supplement = extraPassengerFee > 0 ? extraPassengerFee : Math.round(basePrice * 0.25);
     return basePrice + (passengers - 3) * supplement;
   };
 
-  const displaySupplement = (basePrice) => Math.round(basePrice * 0.25);
+  const displaySupplement = (basePrice) => extraPassengerFee > 0 ? extraPassengerFee : Math.round(basePrice * 0.25);
 
   useEffect(() => {
     fetch('/backend/destinations')
@@ -62,6 +68,14 @@ export default function Excursions() {
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    if (!router.isReady || excursions.length === 0 || detail) return;
+    const shareId = router.query.share ? (Array.isArray(router.query.share) ? router.query.share[0] : router.query.share) : null;
+    if (!shareId) return;
+    const sharedExcursion = excursions.find(e => String(e.id) === String(shareId));
+    if (sharedExcursion) setDetail(sharedExcursion);
+  }, [router.isReady, router.query.share, excursions, detail]);
 
   const handleBooking = (e) => {
     e.preventDefault();

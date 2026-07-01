@@ -8,6 +8,7 @@ import { useCurrency } from '../hooks/useCurrency';
 import { useTranslateContent } from '../hooks/useTranslateContent';
 import { formatDescription } from '../utils/formatDescription';
 import ImageGallery from '../components/ImageGallery';
+import { getExtraPassengerFee } from '../utils/adminSettings';
 
 const GRADIENTS = [
   'from-sky-500 to-blue-600', 'from-emerald-500 to-teal-600',
@@ -29,17 +30,23 @@ export default function Transfert() {
   const [detail, setDetail]         = useState(null);
   const [form, setForm]             = useState({ name: '', phone: '', email: '', date: '', time: '', passengers: 1, type: 'standard', flight_number: '', notes: '' });
   const [submitting, setSubmitting] = useState(false);
+  const [extraPassengerFee, setExtraPassengerFee] = useState(0);
   const { format } = useCurrency();
   const translatedServices = useTranslateContent(services);
   const { t } = useTranslation(['common', 'pages']);
   const router = useRouter();
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    setExtraPassengerFee(getExtraPassengerFee());
+  }, []);
+
   const calcPrice = (basePrice, passengers) => {
     if (!basePrice || passengers <= 3) return basePrice;
-    const supplement = Math.round(basePrice * 0.25);
-    return basePrice + (passengers - 3) * supplement;
+    const fee = extraPassengerFee > 0 ? extraPassengerFee : Math.round(basePrice * 0.25);
+    return basePrice + (passengers - 3) * fee;
   };
-  const supplement = (basePrice) => Math.round(basePrice * 0.25);
+  const supplement = (basePrice) => extraPassengerFee > 0 ? extraPassengerFee : Math.round(basePrice * 0.25);
 
   useEffect(() => {
     fetch('/backend/services')

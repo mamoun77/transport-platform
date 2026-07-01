@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { saveAdminSettings } from '../../utils/adminSettings';
 
 export default function AdminSettings() {
   const [user, setUser] = useState(null);
@@ -12,7 +13,8 @@ export default function AdminSettings() {
     currency: 'MAD',
     language: 'fr',
     enableBookings: true,
-    enablePayments: true
+    enablePayments: true,
+    extraPassengerFee: 0,
   });
   const [vehicles, setVehicles] = useState([
     { id: 1, brand: 'Mercedes', model: 'Classe E', status: 'available' },
@@ -44,7 +46,21 @@ export default function AdminSettings() {
     setUser(user);
   }, []);
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const saved = localStorage.getItem('adminSettings');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        setSettings(prev => ({ ...prev, ...parsed, extraPassengerFee: Number(parsed.extraPassengerFee) || 0 }));
+      } catch {
+        // ignore invalid saved settings
+      }
+    }
+  }, []);
+
   const handleSave = () => {
+    saveAdminSettings(settings);
     alert('Paramètres sauvegardés avec succès !');
   };
 
@@ -129,6 +145,22 @@ export default function AdminSettings() {
                       <option value="EUR">EUR - Euro</option>
                       <option value="USD">USD - Dollar</option>
                     </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Supplément par passager à partir du 4ème</label>
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      value={settings.extraPassengerFee}
+                      onChange={(e) => setSettings({...settings, extraPassengerFee: Number(e.target.value)})}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white"
+                      placeholder="0 = calcul automatique"
+                    />
+                    <p className="text-xs text-gray-500 mt-2">
+                      Laisser à 0 pour utiliser le calcul automatique (25% du prix de base).
+                    </p>
                   </div>
                 </div>
 

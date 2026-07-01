@@ -8,6 +8,7 @@ import CurrencySwitcher from '../../components/CurrencySwitcher';
 import shareItem from '../../utils/share';
 import ShareButton from '../../components/ShareButton';
 import ImageGallery from '../../components/ImageGallery';
+import { getExtraPassengerFee } from '../../utils/adminSettings';
 
 const FALLBACK_SERVICES = {
   default: {
@@ -37,16 +38,22 @@ export default function ServiceDetail() {
   const [calculatedPrice, setCalculatedPrice] = useState(null);
   const [formData, setFormData] = useState({ routeId: '', date: '', time: '', passengers: 1, name: '', phone: '', flightNumber: '', remarks: '' });
   const [activeTab, setActiveTab] = useState('details');
+  const [extraPassengerFee, setExtraPassengerFee] = useState(0);
   const { format, currency, convert } = useCurrency();
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    setExtraPassengerFee(getExtraPassengerFee());
+  }, []);
 
   // Prix fixe jusqu'à 3 personnes, supplément par personne à partir de la 4ème
   const calcPrice = (basePrice, passengers) => {
     if (!basePrice || passengers <= 3) return basePrice;
-    const supplement = Math.round(basePrice * 0.25); // 25% du prix de base par personne supplémentaire
+    const supplement = extraPassengerFee > 0 ? extraPassengerFee : Math.round(basePrice * 0.25); // 25% du prix de base par personne supplémentaire
     return basePrice + (passengers - 3) * supplement;
   };
 
-  const displaySupplement = (basePrice) => Math.round(basePrice * 0.25);
+  const displaySupplement = (basePrice) => extraPassengerFee > 0 ? extraPassengerFee : Math.round(basePrice * 0.25);
 
   useEffect(() => {
     if (!id) return;
