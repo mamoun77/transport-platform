@@ -9,29 +9,30 @@ import { useTranslateContent } from '../hooks/useTranslateContent';
 import { useCurrency } from '../hooks/useCurrency';
 
 const STATS = [
-  { value: '10+', label: 'Années d\'expérience' },
-  { value: '50+', label: 'Véhicules premium' },
-  { value: '10K+', label: 'Clients satisfaits' },
-  { value: '24/7', label: 'Support disponible' },
+  { value: '10+', labelKey: 'home:sections.years_exp' },
+  { value: '50+', labelKey: 'home:sections.premium_vehicles' },
+  { value: '10K+', labelKey: 'home:sections.happy_clients' },
+  { value: '24/7', labelKey: 'home:sections.support' },
 ];
 
 const REVIEWS = [
-  { name: 'Sarah M.', flag: '🇫🇷', rating: 5, comment: 'Service exceptionnel ! Véhicule impeccable et chauffeur très professionnel. Je recommande vivement.' },
-  { name: 'Ahmed K.', flag: '🇲🇦', rating: 5, comment: 'Parfait pour nos transferts. Ponctuel et confortable, Trendy Travel est notre référence.' },
-  { name: 'Maria J.', flag: '🇪🇸', rating: 5, comment: 'Excursion fantastique dans l\'Atlas ! Guide compétent et véhicule confortable. Inoubliable.' },
+  { name: 'Sarah M.', flag: '🇫🇷', rating: 5, commentKey: 'home:review_comments.sarah' },
+  { name: 'Ahmed K.', flag: '🇲🇦', rating: 5, commentKey: 'home:review_comments.ahmed' },
+  { name: 'Maria J.', flag: '🇪🇸', rating: 5, commentKey: 'home:review_comments.maria' },
 ];
 
 const FALLBACK_GALLERY = [
-  { url: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80', alt: 'Transfert aéroport' },
-  { url: 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=800&q=80', alt: 'Marrakech' },
-  { url: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80', alt: 'Fès médina' },
-  { url: 'https://images.unsplash.com/photo-1570829460005-c840387bb1ca?auto=format&fit=crop&w=800&q=80', alt: 'Essaouira' },
-  { url: 'https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=800&q=80', alt: 'Aventure désert' },
-  { url: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80', alt: 'Circuit montagne' },
-  { url: 'https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?auto=format&fit=crop&w=800&q=80', alt: 'Voyage luxe' },
+  { url: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80', altKey: 'home:gallery.alt.airport_transfer' },
+  { url: 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=800&q=80', altKey: 'home:gallery.alt.marrakech' },
+  { url: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80', altKey: 'home:gallery.alt.fes_medina' },
+  { url: 'https://images.unsplash.com/photo-1570829460005-c840387bb1ca?auto=format&fit=crop&w=800&q=80', altKey: 'home:gallery.alt.essaouira' },
+  { url: 'https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=800&q=80', altKey: 'home:gallery.alt.desert_adventure' },
+  { url: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80', altKey: 'home:gallery.alt.mountain_tour' },
+  { url: 'https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?auto=format&fit=crop&w=800&q=80', altKey: 'home:gallery.alt.luxury_travel' },
 ];
 
 function GallerySection() {
+  const { t } = useTranslation(['common', 'home']);
   const [lightbox, setLightbox] = useState(null);
   const [list, setList] = useState(FALLBACK_GALLERY);
   useEffect(() => {
@@ -44,15 +45,15 @@ function GallerySection() {
     <section className="py-24 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-14">
-          <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-400">Galerie</span>
-          <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-white to-pink-300 bg-clip-text text-transparent">Nos Moments</h2>
+          <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-400">{t('home:sections.gallery')}</span>
+          <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-white to-pink-300 bg-clip-text text-transparent">{t('home:gallery.title')}</h2>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 auto-rows-[180px]">
           {list.map((photo, i) => (
             <div key={i} onClick={() => setLightbox(photo.url)}
               className={`relative overflow-hidden rounded-2xl cursor-pointer group border border-white/8 ${i === 0 ? 'col-span-2 row-span-2' : ''}`}>
-              <img src={photo.url} alt={photo.alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img src={photo.url} alt={photo.alt || t(photo.altKey)} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
                 <span className="opacity-0 group-hover:opacity-100 transition-opacity text-white text-3xl">🔍</span>
               </div>
@@ -97,7 +98,7 @@ export default function Home() {
     <>
       <Head>
         <title>Trendy Travel — {t('home:sections.hero_badge')}</title>
-        <meta name="description" content="Réservez vos transferts et excursions touristiques en ligne" />
+        <meta name="description" content={t('home:meta.description')} />
       </Head>
 
       <div className="min-h-screen bg-[#080d1a] text-white">
@@ -132,6 +133,14 @@ export default function Home() {
                   `✓ ${t('home:hero.support_24_7')}`,
                 ].map(b => (
                   <span key={b} className="flex items-center gap-1">{b}</span>
+                ))}
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm text-slate-400 mb-6">
+                {STATS.map(stat => (
+                  <div key={stat.value} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-center">
+                    <div className="text-2xl font-bold text-white">{stat.value}</div>
+                    <div className="text-xs text-slate-400 mt-1">{t(stat.labelKey)}</div>
+                  </div>
                 ))}
               </div>
 
@@ -295,7 +304,7 @@ export default function Home() {
         <section className="py-24 px-6 bg-white/[0.02]">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-14">
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400">Avis clients</span>
+              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400">{t('home:reviews.badge')}</span>
               <h2 className="text-4xl font-extrabold bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">{t('home:testimonials.title')}</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
@@ -308,7 +317,7 @@ export default function Home() {
                       </svg>
                     ))}
                   </div>
-                  <p className="text-slate-300 text-sm leading-relaxed mb-5 italic">"{r.comment}"</p>
+                  <p className="text-slate-300 text-sm leading-relaxed mb-5 italic">"{t(r.commentKey)}"</p>
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-sm font-bold">{r.name[0]}</div>
                     <div>

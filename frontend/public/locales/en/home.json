@@ -61,6 +61,27 @@
     "title": "What Our Clients Say",
     "view_all": "View all our reviews on TripAdvisor"
   },
+  "review_comments": {
+    "sarah": "Exceptional service! Impeccable vehicle and very professional driver. I highly recommend them.",
+    "ahmed": "Perfect for our transfers. Punctual and comfortable, Trendy Travel is our reference.",
+    "maria": "Fantastic excursion in the Atlas! Skilled guide and comfortable vehicle. Unforgettable."
+  },
+  "gallery": {
+    "title": "Our Moments",
+    "alt": {
+      "airport_transfer": "Airport transfer",
+      "marrakech": "Marrakech",
+      "fes_medina": "Fes medina",
+      "essaouira": "Essaouira",
+      "desert_adventure": "Desert adventure",
+      "mountain_tour": "Mountain tour",
+      "luxury_travel": "Luxury travel"
+    },
+    "empty": "No photos available"
+  },
+  "meta": {
+    "description": "Book your transfers and tourist excursions online."
+  },
   "contact": {
     "title": "Ready for Adventure?",
     "subtitle": "Contact our experts to create your custom travel experience",
@@ -98,10 +119,14 @@
     "about": "About",
     "hero_badge": "Premium Transport in Morocco",
     "depart_from": "Departing from:",
+    "gallery": "Gallery",
     "years_exp": "Years of experience",
     "premium_vehicles": "Premium vehicles",
     "happy_clients": "Happy clients",
     "support": "Support available",
+    "meta_description": "Book your transfers and tourist excursions online.",
+    "gallery_title": "Our Moments",
+    "gallery_empty": "No photos available",
     "per_person": "per person",
     "per_person_home": "1-3"
   }
