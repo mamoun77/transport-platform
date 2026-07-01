@@ -118,7 +118,7 @@ function bookingEmailTemplate(booking) {
           <tr>
             <td style="background:#0f172a;padding:24px 40px;text-align:center;">
               <p style="margin:0;color:#475569;font-size:12px;">© ${new Date().getFullYear()} Trendy Travel Marrakech — Tous droits réservés</p>
-              <p style="margin:6px 0 0;color:#334155;font-size:12px;">contact@trendytravel.ma | +212 662 100 714</p>
+              <p style="margin:6px 0 0;color:#334155;font-size:12px;">contact@trendytravelmarrakech.ma | +212 662 100 714</p>
             </td>
           </tr>
 

@@ -371,7 +371,7 @@ export default function Home() {
                     <span className="text-2xl">✉️</span>
                     <div className="text-left min-w-0">
                       <p className="text-xs text-slate-400">{t('home:contact.write_us')}</p>
-                      <a href="mailto:contact@trendytravel.ma" className="block max-w-full text-sm font-bold text-white hover:text-blue-400 transition truncate">contact@trendytravel.ma</a>
+                      <a href="mailto:contact@trendytravelmarrakech.ma" className="block max-w-full text-sm font-bold text-white hover:text-blue-400 transition truncate">contact@trendytravelmarrakech.ma</a>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/10">

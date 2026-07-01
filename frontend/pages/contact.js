@@ -40,7 +40,7 @@ export default function Contact() {
             <div className="space-y-5">
               {[
               { icon: '📞', label: t('contact:phone'), value: '+212 6 62 10 07 14', sub: t('contact:available_24'), href: 'tel:+212662100714' },
-              { icon: '✉️', label: t('contact:email'), value: 'contact@trendytravel.ma', sub: t('contact:response_2h'), href: 'mailto:contact@trendytravel.ma' },
+              { icon: '✉️', label: t('contact:email'), value: 'contact@trendytravelmarrakech.ma', sub: t('contact:response_2h'), href: 'mailto:contact@trendytravelmarrakech.ma' },
                 { icon: '📍', label: t('contact:address'), value: t('contact:address_value'), sub: t('contact:location') },
                 { icon: '💬', label: t('contact:whatsapp'), value: '+212 6 62 10 07 14', sub: t('contact:instant_response'), href: 'https://wa.me/212662100714' },
               ].map((item, i) => (
