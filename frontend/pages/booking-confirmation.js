@@ -168,37 +168,23 @@ ${b.notes ? `📝 ${b.notes}` : ''}
             </button>
           )}
 
-          {/* Conditions d'annulation */}
+          {/* Payment Policy */}
           <div className="bg-white/5 border border-white/8 rounded-2xl p-6 mb-6">
-            <h2 className="text-lg font-semibold text-white mb-3">Conditions d'annulation</h2>
-            <p className="text-slate-400 text-sm leading-relaxed">
-              Pour les réservations déjà payées :
-            </p>
+            <h2 className="text-lg font-semibold text-white mb-3">Payment Policy</h2>
             <ul className="mt-4 space-y-2 text-slate-400 text-sm list-disc list-inside">
-              <li>Annulation possible jusqu'à 24h avant le départ.</li>
-              <li>Après ce délai, le montant n'est pas remboursable.</li>
-              <li>Contactez-nous rapidement pour toute demande d'annulation.</li>
+              <li>A 30% deposit is required to confirm any booking.</li>
+              <li>The remaining 70% balance must be paid in person on the day of the service.</li>
             </ul>
-            <p className="mt-4 text-slate-500 text-xs">
-              Nous vous recommandons de conserver cette page et de nous joindre via WhatsApp pour une réponse rapide.
-            </p>
           </div>
 
-          {/* Conditions de paiement */}
+          {/* Cancellation Policy */}
           <div className="bg-white/5 border border-white/8 rounded-2xl p-6 mb-6">
-            <h2 className="text-lg font-semibold text-white mb-3">Conditions de paiement</h2>
-            <p className="text-slate-400 text-sm leading-relaxed">
-              Merci de régler votre réservation pour finaliser votre confirmation :
-            </p>
+            <h2 className="text-lg font-semibold text-white mb-3">Cancellation Policy</h2>
             <ul className="mt-4 space-y-2 text-slate-400 text-sm list-disc list-inside">
-              <li>Le paiement se fait via PayPal en cliquant sur le bouton ci-dessous.</li>
-              <li>La réservation est définitivement confirmée après réception du paiement.</li>
-              <li>Conservez le reçu de paiement et envoyez-le en message WhatsApp si nécessaire.</li>
-              <li>En cas de non-paiement sous 24h, la réservation pourra être annulée.</li>
+              <li>Free cancellation up to 48 hours before the service.</li>
+              <li>Cancellations made less than 24 hours before the service are non-refundable.</li>
+              <li>No-show bookings are charged 100%.</li>
             </ul>
-            <p className="mt-4 text-slate-500 text-xs">
-              Vous pouvez également nous contacter sur WhatsApp pour toute question concernant le paiement.
-            </p>
           </div>
 
           {/* Actions */}
