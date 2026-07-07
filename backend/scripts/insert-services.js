@@ -10,7 +10,7 @@ const services = [
     slug: 'transfert-aeroport',
     price_from: 15.00,
     duration: '20-30 min',
-    capacity: 4,
+    capacity: 3,
     short_description: 'Transfert rapide depuis/vers l\'aéroport de Marrakech-Menara.',
     description: 'Profitez d\'un transfert confortable et ponctuel depuis ou vers l\'aéroport Marrakech-Menara. Nos chauffeurs professionnels vous accueillent à la sortie des arrivées avec un panneau à votre nom, s\'occupent de vos bagages et vous conduisent à destination en toute sérénité. Véhicule climatisé, Wi-Fi gratuit à bord. Disponible 24h/24, 7j/7.',
     features: JSON.stringify(['Accueil personnalisé', 'Prise en charge des bagages', 'Véhicule climatisé', 'Wi-Fi gratuit', 'Chauffeur professionnel', 'Disponible 24h/24'])

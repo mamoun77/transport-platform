@@ -17,7 +17,7 @@ const FALLBACK_SERVICES = {
     price_from: 250,
     image: '/images/mercedes-fleet.png',
     duration: '30-60 min',
-    capacity: 4,
+    capacity: 3,
     features: ['Chauffeur professionnel certifié', 'Véhicule Mercedes climatisé', 'Suivi GPS en temps réel', 'Wi-Fi gratuit', 'Eau et rafraîchissements', 'Service 24h/24'],
   }
 };
