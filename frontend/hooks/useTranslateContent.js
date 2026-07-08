@@ -253,6 +253,12 @@ const translations = {
   // Activities
   'Quad Bike in the Palmeraie': { en: 'Quad Bike in the Palmeraie', fr: 'Quad Bike in the Palmeraie' },
   'Thrilling quad adventure through palm groves, desert tracks and Berber villages just outside Marrakech.': { en: 'Thrilling quad adventure through palm groves, desert tracks and Berber villages just outside Marrakech.', fr: 'Thrilling quad adventure through palm groves, desert tracks and Berber villages just outside Marrakech.' },
+  'Half Day quad bike & Camel Ride in the Palmeraie': { en: 'Half Day quad bike & Camel Ride in the Palmeraie', fr: 'Demi-journée quad & balade à dos de dromadaire dans la Palmeraie' },
+  'just outside Marrakech. Perfect for adventure lovers, families, and anyone looking for a unique outdoor activity during their stay in Marrakech.': { en: 'just outside Marrakech. Perfect for adventure lovers, families, and anyone looking for a unique outdoor activity during their stay in Marrakech.', fr: "Juste à l'extérieur de Marrakech. Parfait pour les amateurs d'aventure, les familles et tous ceux qui recherchent une activité en plein air unique pendant leur séjour à Marrakech." },
+  'a private 45–60 minute sunrise balloon': { en: 'a private 45–60 minute sunrise balloon', fr: 'Montgolfière privée 45–60 minutes au lever du soleil' },
+  'an early pickup from your accommodation in Marrakech. arrival at the site': { en: 'an early pickup from your accommodation in Marrakech. arrival at the site', fr: "Prise en charge tôt depuis votre hébergement à Marrakech. Arrivée sur le site" },
+  'Camel Ride in the Palmeraie of Marrakech': { en: 'Camel Ride in the Palmeraie of Marrakech', fr: 'Balade à dos de dromadaire dans la Palmeraie de Marrakech' },
+  'Experience a relaxing camel ride through the beautiful palm groves and discover the authentic Moroccan atmosphere.': { en: 'Experience a relaxing camel ride through the beautiful palm groves and discover the authentic Moroccan atmosphere.', fr: "Vivez une balade à dos de dromadaire relaxante à travers les magnifiques palmeraies et découvrez l'authentique atmosphère marocaine." },
 };
 
 export function useTranslateContent(items) {
