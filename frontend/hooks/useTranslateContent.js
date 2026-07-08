@@ -347,3 +347,5 @@ export function useTranslateContent(items) {
     };
   });
 }
+
+export default useTranslateContent;

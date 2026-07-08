@@ -81,11 +81,19 @@ export default function Home() {
   const router = useRouter();
   const { t } = useTranslation(['common', 'home']);
   const { format } = useCurrency();
+  const isFrench = router.locale === 'fr';
+  const activitiesLabel = t('home:sections.activities', { defaultValue: isFrench ? 'Activités' : 'Activities' });
+  const activitiesTitle = t('home:sections.activities_title', { defaultValue: isFrench ? 'Vivez l’aventure' : 'Live the Adventure' });
+  const seeAllActivitiesLabel = t('home:sections.see_all_activities', { defaultValue: isFrench ? 'Voir toutes les activités' : 'See all activities' });
 
   const tServices = useTranslateContent(services);
   const tCircuits = useTranslateContent(circuits);
   const tExcursions = useTranslateContent(excursions);
   const tActivities = useTranslateContent(activities);
+
+  const activitiesBadge = isFrench ? 'Activités' : t('home:sections.activities', { defaultValue: 'Activities' });
+  const activitiesHeading = isFrench ? 'Vivez l’aventure' : t('home:sections.activities_title', { defaultValue: 'Live the Adventure' });
+  const activitiesCta = isFrench ? 'Voir toutes les activités' : t('home:sections.see_all_activities', { defaultValue: 'See all activities' });
 
   useEffect(() => {
     fetch('/backend/services').then(r => r.json()).then(d => { if (d.success) setServices(d.services.slice(0, 4)); }).catch(() => {});
@@ -272,8 +280,8 @@ export default function Home() {
         <section className="py-24 px-6 bg-white/[0.02]">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-14">
-              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase rounded-full bg-violet-500/10 border border-violet-500/30 text-violet-400">{t('home:sections.activities')}</span>
-              <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-white to-violet-300 bg-clip-text text-transparent mb-4">{t('home:sections.activities_title')}</h2>
+              <span className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-widest uppercase rounded-full bg-violet-500/10 border border-violet-500/30 text-violet-400">{activitiesBadge}</span>
+              <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-white to-violet-300 bg-clip-text text-transparent mb-4">{activitiesHeading}</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {tActivities.map((a) => (
@@ -292,7 +300,7 @@ export default function Home() {
               ))}
             </div>
             <div className="text-center mt-10">
-              <a href="/activites" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold bg-gradient-to-r from-violet-500 to-purple-600 shadow-lg hover:scale-105 transition-transform">{t('home:sections.see_all_activities')} →</a>
+              <a href="/activites" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold bg-gradient-to-r from-violet-500 to-purple-600 shadow-lg hover:scale-105 transition-transform">{activitiesCta} →</a>
             </div>
           </div>
         </section>
