@@ -256,7 +256,7 @@ const translations = {
 };
 
 export function useTranslateContent(items) {
-  const { locale = 'fr' } = useRouter();
+  const { locale = 'en' } = useRouter();
   if (!items || !Array.isArray(items)) return [];
   // Build a normalized lookup to tolerate small differences (arrows, punctuation)
   const normalize = str => ('' + (str || '')).toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/[^a-z0-9]+/g, ' ').trim();
