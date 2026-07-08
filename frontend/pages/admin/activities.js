@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import MultiImageUpload from '../../components/MultiImageUpload';
 import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const EMPTY = {
   name: '', short_description: '', description: '', image: '', images: [],
@@ -272,4 +271,9 @@ export default function AdminActivities() {
       </div>
     </>
   );
+}
+
+export async function getServerSideProps({ locale }) {
+  const { serverSideTranslations } = await import('next-i18next/serverSideTranslations');
+  return { props: { ...(await serverSideTranslations(locale, ['common', 'admin'])) } };
 }
