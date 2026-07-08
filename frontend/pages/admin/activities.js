@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import MultiImageUpload from '../../components/MultiImageUpload';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const EMPTY = {
   name: '', short_description: '', description: '', image: '', images: [],
@@ -17,6 +19,7 @@ export default function AdminActivities() {
   const [editing, setEditing]       = useState(null);
   const [form, setForm]             = useState(EMPTY);
   const router = useRouter();
+  const { t } = useTranslation(['common', 'admin']);
 
   const token = () => typeof window !== 'undefined' ? localStorage.getItem('token') : '';
 
@@ -32,8 +35,8 @@ export default function AdminActivities() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.name.trim()) { alert('Le nom de l\'activité est requis'); return; }
-    if (!form.description.trim()) { alert('La description est requise'); return; }
+    if (!form.name.trim()) { alert(t('admin:activities.errors.name_required')); return; }
+    if (!form.description.trim()) { alert(t('admin:activities.errors.description_required')); return; }
     const url    = editing ? `/backend/activities/admin/${editing.id}` : '/backend/activities/admin';
     const method = editing ? 'PUT' : 'POST';
     const payload = {
@@ -59,7 +62,7 @@ export default function AdminActivities() {
   };
 
   const handleDelete = async (id) => {
-    if (!confirm('Supprimer cette activité ?')) return;
+    if (!confirm(t('admin:activities.confirm_delete'))) return;
     await fetch(`/backend/activities/admin/${id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token()}` } });
     fetchAll();
   };
@@ -72,7 +75,7 @@ export default function AdminActivities() {
       <div className="flex justify-between items-center mb-2">
         <label className="text-sm font-semibold text-gray-700">{label}</label>
         <button type="button" onClick={() => setForm(p => ({ ...p, [key]: [...p[key], ''] }))}
-          className="text-xs bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">+ Ajouter</button>
+          className="text-xs bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">{t('admin:activities.add')}</button>
       </div>
       {form[key].map((v, i) => (
         <div key={i} className="flex gap-2 mb-2">
@@ -85,7 +88,7 @@ export default function AdminActivities() {
     </div>
   );
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center">Chargement...</div>;
+  if (loading) return <div className="min-h-screen flex items-center justify-center">{t('admin:activities.loading')}</div>;
 
   return (
     <>
@@ -100,13 +103,13 @@ export default function AdminActivities() {
                 <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"/></svg>
               </div>
               <div>
-                <h1 className="text-xl sm:text-2xl font-bold text-gray-800">Gestion des Activités</h1>
-                <p className="text-gray-500 text-xs sm:text-sm">{activities.length} activité(s)</p>
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-800">{t('admin:activities.title')}</h1>
+                <p className="text-gray-500 text-xs sm:text-sm">{t('admin:activities.activities_count', { count: activities.length })}</p>
               </div>
             </div>
             <div className="flex gap-2">
-              <button onClick={() => router.push('/admin')} className="bg-gray-500 text-white px-3 py-2 rounded-xl hover:bg-gray-600 text-sm font-semibold">← Retour</button>
-              <button onClick={() => { closeForm(); setShowForm(true); }} className="bg-gradient-to-r from-violet-500 to-purple-600 text-white px-3 py-2 rounded-xl hover:scale-105 transition text-sm font-semibold">+ Nouvelle activité</button>
+              <button onClick={() => router.push('/admin')} className="bg-gray-500 text-white px-3 py-2 rounded-xl hover:bg-gray-600 text-sm font-semibold">{t('admin:activities.back')}</button>
+              <button onClick={() => { closeForm(); setShowForm(true); }} className="bg-gradient-to-r from-violet-500 to-purple-600 text-white px-3 py-2 rounded-xl hover:scale-105 transition text-sm font-semibold">{t('admin:activities.new_activity_btn')}</button>
             </div>
           </div>
         </div>
@@ -116,30 +119,30 @@ export default function AdminActivities() {
           {/* Formulaire */}
           {showForm && (
             <div className="bg-white rounded-3xl shadow-xl p-8 mb-8 border border-violet-100">
-              <h2 className="text-xl font-bold text-gray-800 mb-6">{editing ? 'Modifier l\'activité' : 'Nouvelle activité'}</h2>
+              <h2 className="text-xl font-bold text-gray-800 mb-6">{editing ? t('admin:activities.edit_activity') : t('admin:activities.new_activity_form')}</h2>
               <form onSubmit={handleSubmit} className="space-y-5">
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Nom *</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">{t('admin:activities.form.name')} *</label>
                     <input required value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} placeholder="Ex: Quad dans le désert d'Agafay"
                       className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-violet-500" />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Localisation</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">{t('admin:activities.form.location')}</label>
                     <input value={form.location} onChange={e => setForm(p => ({ ...p, location: e.target.value }))} placeholder="Ex: Agafay, Marrakech"
                       className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-violet-500" />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">Description courte</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">{t('admin:activities.form.short_description')}</label>
                   <input value={form.short_description} onChange={e => setForm(p => ({ ...p, short_description: e.target.value }))} placeholder="Résumé en une phrase"
                     className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-violet-500" />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">Description complète *</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">{t('admin:activities.form.description')} *</label>
                   <textarea required rows={4} value={form.description} onChange={e => setForm(p => ({ ...p, description: e.target.value }))} placeholder="Description détaillée de l'activité"
                     className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-violet-500 resize-none" />
                 </div>
@@ -153,22 +156,22 @@ export default function AdminActivities() {
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Prix standard (€)</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">{t('admin:activities.form.price_standard')}</label>
                     <input type="number" step="0.01" value={form.price} onChange={e => setForm(p => ({ ...p, price: e.target.value }))}
                       className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-violet-500" />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Prix luxe (€)</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">{t('admin:activities.form.price_luxury')}</label>
                     <input type="number" step="0.01" value={form.price_luxury} onChange={e => setForm(p => ({ ...p, price_luxury: e.target.value }))}
                       className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-violet-500" />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Durée</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">{t('admin:activities.form.duration')}</label>
                     <input value={form.duration} onChange={e => setForm(p => ({ ...p, duration: e.target.value }))} placeholder="Ex: 2h, 1 journée"
                       className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-violet-500" />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Capacité max</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">{t('admin:activities.form.capacity')}</label>
                     <input type="number" value={form.capacity} onChange={e => setForm(p => ({ ...p, capacity: e.target.value }))}
                       className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-violet-500" />
                   </div>
@@ -176,12 +179,12 @@ export default function AdminActivities() {
 
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Difficulté</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">{t('admin:activities.form.difficulty')}</label>
                     <select value={form.difficulty} onChange={e => setForm(p => ({ ...p, difficulty: e.target.value }))}
                       className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-violet-500">
-                      <option value="facile">Facile</option>
-                      <option value="modere">Modéré</option>
-                      <option value="difficile">Difficile</option>
+                      <option value="facile">{t('admin:activities.difficulty.facile')}</option>
+                      <option value="modere">{t('admin:activities.difficulty.modere')}</option>
+                      <option value="difficile">{t('admin:activities.difficulty.difficile')}</option>
                     </select>
                   </div>
                   <div>
@@ -192,27 +195,27 @@ export default function AdminActivities() {
                   <div className="flex flex-col gap-3 pt-6">
                     <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" checked={form.is_active} onChange={e => setForm(p => ({ ...p, is_active: e.target.checked }))} className="w-4 h-4 accent-violet-500" />
-                      <span className="text-sm font-semibold text-gray-700">Actif</span>
+                      <span className="text-sm font-semibold text-gray-700">{t('admin:activities.form.active')}</span>
                     </label>
                     <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" checked={form.is_featured} onChange={e => setForm(p => ({ ...p, is_featured: e.target.checked }))} className="w-4 h-4 accent-yellow-500" />
-                      <span className="text-sm font-semibold text-gray-700">⭐ Vedette</span>
+                      <span className="text-sm font-semibold text-gray-700">{t('admin:activities.form.featured')}</span>
                     </label>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {listField('program', 'Programme / Étapes', 'Ex: Accueil et briefing sécurité')}
-                  {listField('included', '✅ Inclus', 'Ex: Équipement de sécurité')}
-                  {listField('not_included', '❌ Non inclus', 'Ex: Transport depuis hôtel')}
-                  {listField('luxury_advantages', '✨ Avantages Luxe', 'Ex: Guide privé dédié')}
+                  {listField('program', t('admin:activities.form.program'), t('admin:activities.form.program_placeholder'))}
+                  {listField('included', t('admin:activities.form.included'), t('admin:activities.form.included_placeholder'))}
+                  {listField('not_included', t('admin:activities.form.not_included'), t('admin:activities.form.not_included_placeholder'))}
+                  {listField('luxury_advantages', t('admin:activities.form.luxury_advantages'), t('admin:activities.form.luxury_advantages_placeholder'))}
                 </div>
 
                 <div className="flex gap-3 pt-2">
                   <button type="submit" className="bg-gradient-to-r from-violet-500 to-purple-600 text-white px-8 py-3 rounded-xl font-bold hover:scale-105 transition">
-                    {editing ? 'Mettre à jour' : 'Créer l\'activité'}
+                    {editing ? t('admin:activities.form.update') : t('admin:activities.form.create')}
                   </button>
-                  <button type="button" onClick={closeForm} className="bg-gray-200 text-gray-700 px-8 py-3 rounded-xl font-bold hover:bg-gray-300 transition">Annuler</button>
+                  <button type="button" onClick={closeForm} className="bg-gray-200 text-gray-700 px-8 py-3 rounded-xl font-bold hover:bg-gray-300 transition">{t('admin:activities.form.cancel')}</button>
                 </div>
               </form>
             </div>
@@ -229,8 +232,8 @@ export default function AdminActivities() {
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute top-3 right-3 flex gap-2">
-                    {a.is_featured && <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-yellow-400/90 text-yellow-900">⭐ Vedette</span>}
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${a.is_active ? 'bg-green-400/90 text-green-900' : 'bg-red-400/90 text-red-900'}`}>{a.is_active ? 'Actif' : 'Inactif'}</span>
+                    {a.is_featured && <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-yellow-400/90 text-yellow-900">{t('admin:activities.form.featured_badge')}</span>}
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${a.is_active ? 'bg-green-400/90 text-green-900' : 'bg-red-400/90 text-red-900'}`}>{a.is_active ? t('admin:activities.status.active') : t('admin:activities.status.inactive')}</span>
                   </div>
                   <div className="absolute bottom-3 left-3">
                     <h3 className="text-white font-bold text-lg leading-tight">{a.name}</h3>
@@ -241,17 +244,17 @@ export default function AdminActivities() {
                   <p className="text-gray-500 text-sm line-clamp-2 mb-4">{a.short_description || a.description}</p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {a.duration && <span className="px-2 py-1 bg-violet-50 text-violet-700 rounded-lg text-xs font-semibold">⏱ {a.duration}</span>}
-                    {a.capacity && <span className="px-2 py-1 bg-blue-50 text-blue-700 rounded-lg text-xs font-semibold">👥 {a.capacity} pers.</span>}
-                    {a.difficulty && <span className="px-2 py-1 bg-gray-100 text-gray-700 rounded-lg text-xs font-semibold">{a.difficulty}</span>}
+                    {a.capacity && <span className="px-2 py-1 bg-blue-50 text-blue-700 rounded-lg text-xs font-semibold">👥 {a.capacity} {t('admin:activities.form.people')}</span>}
+                    {a.difficulty && <span className="px-2 py-1 bg-gray-100 text-gray-700 rounded-lg text-xs font-semibold">{t(`admin:activities.difficulty.${a.difficulty}`) || a.difficulty}</span>}
                   </div>
                   <div className="flex justify-between items-center">
                     <div>
-                      <p className="text-xl font-bold text-violet-600">{a.price > 0 ? `€${a.price}` : 'Sur demande'}</p>
-                      {a.price_luxury > 0 && <p className="text-sm text-yellow-600 font-semibold">✨ €${a.price_luxury} luxe</p>}
+                      <p className="text-xl font-bold text-violet-600">{a.price > 0 ? `€${a.price}` : t('admin:activities.request_price')}</p>
+                      {a.price_luxury > 0 && <p className="text-sm text-yellow-600 font-semibold">✨ €${a.price_luxury} {t('admin:activities.form.luxury')}</p>}
                     </div>
                     <div className="flex gap-2">
-                      <button onClick={() => openEdit(a)} className="bg-blue-500 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-blue-600 transition">Modifier</button>
-                      <button onClick={() => handleDelete(a.id)} className="bg-red-500 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-red-600 transition">Supprimer</button>
+                      <button onClick={() => openEdit(a)} className="bg-blue-500 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-blue-600 transition">{t('admin:activities.actions.edit')}</button>
+                      <button onClick={() => handleDelete(a.id)} className="bg-red-500 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-red-600 transition">{t('admin:activities.actions.delete')}</button>
                     </div>
                   </div>
                 </div>
@@ -261,8 +264,8 @@ export default function AdminActivities() {
 
           {activities.length === 0 && !showForm && (
             <div className="text-center py-20 text-gray-400">
-              <p className="text-xl mb-2">Aucune activité</p>
-              <button onClick={() => setShowForm(true)} className="mt-4 bg-gradient-to-r from-violet-500 to-purple-600 text-white px-6 py-3 rounded-xl font-bold hover:scale-105 transition">Créer la première activité</button>
+              <p className="text-xl mb-2">{t('admin:activities.empty.title')}</p>
+              <button onClick={() => setShowForm(true)} className="mt-4 bg-gradient-to-r from-violet-500 to-purple-600 text-white px-6 py-3 rounded-xl font-bold hover:scale-105 transition">{t('admin:activities.empty.cta')}</button>
             </div>
           )}
         </div>

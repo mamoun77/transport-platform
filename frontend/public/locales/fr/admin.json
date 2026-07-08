@@ -1,0 +1,62 @@
+{
+  "activities": {
+    "loading": "Chargement...",
+    "title": "Gestion des Activités",
+    "activities_count": "{{count}} activité(s)",
+    "back": "← Retour",
+    "new_activity_btn": "+ Nouvelle activité",
+    "edit_activity": "Modifier l'activité",
+    "new_activity_form": "Nouvelle activité",
+    "add": "+ Ajouter",
+    "empty": {
+      "title": "Aucune activité",
+      "cta": "Créer la première activité"
+    },
+    "actions": {
+      "edit": "Modifier",
+      "delete": "Supprimer"
+    },
+    "request_price": "Sur demande",
+    "confirm_delete": "Supprimer cette activité ?",
+    "errors": {
+      "name_required": "Le nom de l'activité est requis",
+      "description_required": "La description est requise"
+    },
+    "status": {
+      "active": "Actif",
+      "inactive": "Inactif"
+    },
+    "form": {
+      "name": "Nom",
+      "location": "Localisation",
+      "short_description": "Description courte",
+      "description": "Description complète",
+      "price_standard": "Prix standard (€)",
+      "price_luxury": "Prix luxe (€)",
+      "duration": "Durée",
+      "capacity": "Capacité max",
+      "difficulty": "Difficulté",
+      "people": "pers.",
+      "luxury": "luxe",
+      "program": "Programme / Étapes",
+      "program_placeholder": "Ex: Accueil et briefing sécurité",
+      "included": "✅ Inclus",
+      "included_placeholder": "Ex: Équipement de sécurité",
+      "not_included": "❌ Non inclus",
+      "not_included_placeholder": "Ex: Transport depuis hôtel",
+      "luxury_advantages": "✨ Avantages Luxe",
+      "luxury_advantages_placeholder": "Ex: Guide privé dédié",
+      "update": "Mettre à jour",
+      "create": "Créer l'activité",
+      "cancel": "Annuler",
+      "active": "Actif",
+      "featured": "⭐ Vedette",
+      "featured_badge": "⭐ Vedette"
+    },
+    "difficulty": {
+      "facile": "Facile",
+      "modere": "Modéré",
+      "difficile": "Difficile"
+    }
+  }
+}

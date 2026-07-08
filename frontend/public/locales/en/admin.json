@@ -1,0 +1,62 @@
+{
+  "activities": {
+    "loading": "Loading...",
+    "title": "Activities Management",
+    "activities_count": "{{count}} activities",
+    "back": "← Back",
+    "new_activity_btn": "+ New activity",
+    "edit_activity": "Edit activity",
+    "new_activity_form": "New activity",
+    "add": "+ Add",
+    "empty": {
+      "title": "No activities",
+      "cta": "Create the first activity"
+    },
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "request_price": "On request",
+    "confirm_delete": "Delete this activity?",
+    "errors": {
+      "name_required": "Activity name is required",
+      "description_required": "Description is required"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "form": {
+      "name": "Name",
+      "location": "Location",
+      "short_description": "Short description",
+      "description": "Full description",
+      "price_standard": "Standard price (€)",
+      "price_luxury": "Luxury price (€)",
+      "duration": "Duration",
+      "capacity": "Max capacity",
+      "difficulty": "Difficulty",
+      "people": "people",
+      "luxury": "luxury",
+      "program": "Program / Steps",
+      "program_placeholder": "Ex: Welcome and safety briefing",
+      "included": "✅ Included",
+      "included_placeholder": "Ex: Safety equipment",
+      "not_included": "❌ Not included",
+      "not_included_placeholder": "Ex: Transfer from hotel",
+      "luxury_advantages": "✨ Luxury advantages",
+      "luxury_advantages_placeholder": "Ex: Dedicated private guide",
+      "update": "Update",
+      "create": "Create activity",
+      "cancel": "Cancel",
+      "active": "Active",
+      "featured": "⭐ Featured",
+      "featured_badge": "⭐ Featured"
+    },
+    "difficulty": {
+      "facile": "Easy",
+      "modere": "Moderate",
+      "difficile": "Difficult"
+    }
+  }
+}
